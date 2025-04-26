@@ -28,3 +28,12 @@ Step 4:
     4.) Ongoing
 
 // Tested by ed 5:51pm, comment "Ang angas"
+
+# 26/04/2025
+- re assembled the necessary files
+- added demo python file necessary for registering student info for generating qr code
+- need to fix the appearance and make a class instance for it
+- lacks of util or have gaps when it comes to fill outing
+- please be guided with the ongoing progress of the project
+
+// Tested by Ed 9:10, comment "Cooperation and iniatives is required"
