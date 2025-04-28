@@ -1,9 +1,11 @@
 from customtkinter import *
+from PIL import Image
 
 #Window kung saan dito magrergeister ang mga students para sa qr code
-
 mainWindow = CTk()
 mainWindow.geometry("400x400")
+mainWindow.title("Attendance Fill Out Window")
+mainWindow.iconbitmap('icon.ico')
 
 set_appearance_mode("dark")
 set_default_color_theme("dark-blue")
