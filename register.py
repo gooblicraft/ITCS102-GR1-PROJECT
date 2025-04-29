@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 registerWindow = Tk()
 registerWindow.geometry("639x639")
 registerWindow.title("Attendance Fill Out Window")
-registerWindow.iconbitmap('icon.ico')
+registerWindow.iconbitmap('materials\\images\\icon.ico')
 registerWindow.resizable(False, False)
 
 # --- Background Image ---
@@ -21,11 +21,11 @@ canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, anchor='nw', image=bg_photo)
 
 # Create Floating Title Text
-canvas.create_text(320, 50, text="Create Account", font=("Helvetica", 28, "bold"), fill="white")
+canvas.create_text(320, 50, text="Create Account", font=("Mokoto", 28, "bold"), fill="white")
 
 # --- Transparent Entries ---
 def create_transparent_entry(x, y, width=220, height=30):
-    entry_bg = Entry(registerWindow, font=("Helvetica", 12), fg="white",
+    entry_bg = Entry(registerWindow, font=("Mokoto", 12), fg="white",
                         bg="#1a1a1a", bd=0, insertbackground="white",
                         highlightthickness=2, highlightbackground="#bb6ef1", highlightcolor="#bb6ef1")
     entry_bg.place(x=x, y=y, width=width, height=height)
@@ -60,7 +60,7 @@ sectionVar = create_transparent_combobox(["A", "B", "C", "D", "E"], 310, 250)
 courseVar = create_transparent_combobox(["BSIT", "BSA", "BTVTED", "BSSW", "DHRS", "ABELS", "BSBA", "BSPA"], 410, 250)
 
 # --- Register Button ---
-register_btn = Button(registerWindow, text="Register", font=("Helvetica", 14, "bold"),
+register_btn = Button(registerWindow, text="Register", font=("Mokoto", 14, "bold"),
                         fg="white", bg="#bb6ef1", activebackground="#a45de7",
                         activeforeground="white", borderwidth=0, relief="flat")
 register_btn.place(x=210, y=320, width=220, height=40)
