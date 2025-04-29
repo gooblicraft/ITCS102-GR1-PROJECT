@@ -8,7 +8,7 @@ main.geometry("960x540")
 main.resizable(False,False)
 
 
-bg_image = Image.open('tkinterrrrr\\tikintir\\Copy of design progress ver.2 (960 x 540 px).png')
+bg_image = Image.open('ITCS102-GR1-PROJECT\Copy of design progress ver.2 (960 x 540 px).png')
 
 bg_photo = ImageTk.PhotoImage(bg_image)
 

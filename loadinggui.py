@@ -7,7 +7,7 @@ loadingWindow.title("loading by bestfriend")
 loadingWindow.geometry("960x540")
 
 # Load the GIF
-gif = Image.open("tkinterrrrr\\tikintir\\Copy of design progress ver.2 (960 x 540 px) (1).gif")
+gif = Image.open("ITCS102-GR1-PROJECT\loading ni bestfriend.gif")
 
 frames = []
 try:
