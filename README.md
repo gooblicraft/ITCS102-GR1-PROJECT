@@ -38,5 +38,10 @@ Step 4:
 
 // Tested by Ed 9:10, comment "Cooperation and iniatives is required"
 
-# 29/04/2025 Changelogs
--
+# 29/04/2025 
+- Updated the background with a higher-quality version that fits the window better
+- Switched codebase from customtkinter to standard tkinter
+- Bug on some widgets where the edge have transparent white lines that needs to be fixed 
+- Conclusion added for Canvas use for fixing the background bug
+- 
+// Tested by Savannah 3:08, comment "Looks much better"
