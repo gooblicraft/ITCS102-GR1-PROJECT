@@ -25,11 +25,12 @@ def qr_code_ver1():
         qr.make(fit=True)
 
         img = qr.make_image(fill="black", back_color="white")
-        img.save(f"{student_name.replace(' ', '_')}.png")
+        img.save(f"{student_name.replace(' ', '_')}.png")           #Soon to add specific directory for created qr codes -ed
         pop_up.configure(text = ("Generated Successfully"))
     else: 
         pop_up.configure(text = ("Failed to Generate, Missing a field."))
     print("QR Code Generated")
+    
 header = ctk.CTkLabel(window, text = "QR CODE", font = ("Arial", 15))
 header.grid(row = 0, column = 2)
 header.grid(row = 0, column = 2)
