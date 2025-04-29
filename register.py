@@ -10,7 +10,7 @@ registerWindow.iconbitmap('icon.ico')
 registerWindow.resizable(False, False)
 
 # --- Background Image ---
-bg_image = Image.open('background.jpg')
+bg_image = Image.open('materials\\images\\background.jpg')
 bg_photo = ImageTk.PhotoImage(bg_image)
 
 # --- Canvas for Background and Floating Text ---

@@ -11,7 +11,7 @@ main.geometry("960x540")
 main.resizable(False,False)
 
 
-bg_image = Image.open('tkinterrrrr\\tikintir\\qrscannibal.png')
+bg_image = Image.open('materials\\images\\scanWindow.png')
 
 bg_photo = ImageTk.PhotoImage(bg_image)
 

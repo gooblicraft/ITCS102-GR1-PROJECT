@@ -7,7 +7,7 @@ loadingWindow.title("loading by bestfriend")
 loadingWindow.geometry("960x540")
 
 # Load the GIF
-gif = Image.open("ITCS102-GR1-PROJECT\loading ni bestfriend.gif")
+gif = Image.open("materials\\images\\window2.gif")
 
 frames = []
 try:
