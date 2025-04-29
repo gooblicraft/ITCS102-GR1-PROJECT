@@ -43,5 +43,6 @@ Step 4:
 - Switched codebase from customtkinter to standard tkinter
 - Bug on some widgets where the edge have transparent white lines that needs to be fixed 
 - Conclusion added for Canvas use for fixing the background bug
-- 
+- Window has been added in the system
+
 // Tested by Savannah 3:08, comment "Looks much better"
