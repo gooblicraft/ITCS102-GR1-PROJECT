@@ -5,4 +5,5 @@ logWindow = Tk()
 logWindow.title("Log In Window")
 logWindow.geometry("1080x600")
 
+# Widgets
 logWindow.mainloop()
