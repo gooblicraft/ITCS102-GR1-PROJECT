@@ -19,7 +19,7 @@ canvas = Canvas(
 
 canvas.place(x = 0, y = 0)
 button_image_1 = PhotoImage(
-    file="assets\\frame0\\button_1.png")
+    file="beta 0.1\\assets\\frame0\\button_1.png")
 button_1 = Button(
     image=button_image_1,
     borderwidth=0,
@@ -62,7 +62,7 @@ canvas.create_text(
 )
 
 image_image_1 = PhotoImage(
-    file="assets\\frame0\\image_1.png")
+    file="beta 0.1\\assets\\frame0\\image_1.png")
 image_1 = canvas.create_image(
     525.0,
     147.0,
@@ -70,7 +70,7 @@ image_1 = canvas.create_image(
 )
 
 entry_image_1 = PhotoImage(
-    file="assets\\frame0\\entry_1.png")
+    file="beta 0.1\\assets\\frame0\\entry_1.png")
 entry_bg_1 = canvas.create_image(
     512.0,
     147.0,
@@ -90,7 +90,7 @@ entry_1.place(
 )
 
 image_image_2 = PhotoImage(
-    file="assets\\frame0\\image_2.png")
+    file="beta 0.1\\assets\\frame0\\image_2.png")
 image_2 = canvas.create_image(
     525.0,
     211.0,
@@ -98,7 +98,7 @@ image_2 = canvas.create_image(
 )
 
 entry_image_2 = PhotoImage(
-    file="assets\\frame0\\entry_2.png")
+    file="beta 0.1\\assets\\frame0\\entry_2.png")
 entry_bg_2 = canvas.create_image(
     512.0,
     209.0,
@@ -118,7 +118,7 @@ entry_2.place(
 )
 
 button_image_2 = PhotoImage(
-    file="assets\\frame0\\button_2.png")
+    file="beta 0.1\\assets\\frame0\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
@@ -134,7 +134,7 @@ button_2.place(
 )
 
 image_image_3 = PhotoImage(
-    file="assets\\frame0\\image_3.png")
+    file="beta 0.1\\assets\\frame0\\image_3.png")
 image_3 = canvas.create_image(
     160.0,
     180.0,

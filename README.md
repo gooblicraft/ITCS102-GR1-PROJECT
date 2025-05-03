@@ -19,6 +19,10 @@ Step 4:
         pip install openpyxl
 
 Step 5:
+    Install necessary fonts in your computer to show the text properly.
+        // Website link soon to be added
+
+Step 6:
     Make sure you have github desktop, then sign in your github account to github desktop and vs code.
         You can ask our group members or leader for this.
 
