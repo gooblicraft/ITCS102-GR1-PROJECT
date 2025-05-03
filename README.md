@@ -15,6 +15,10 @@ Step 3:
         pip install customtkinter
 
 Step 4:
+    Install openpyxl module in your cmd.
+        pip install openpyxl
+
+Step 5:
     Make sure you have github desktop, then sign in your github account to github desktop and vs code.
         You can ask our group members or leader for this.
 
@@ -46,3 +50,14 @@ Step 4:
 - Window has been added in the system
 
 // Tested by Savannah 3:08, comment "Looks much better"
+
+# 04/05/2025 
+- Updated the gui layout into more formal and modern
+- Use of figma to layout design
+- Implement the first window figma design (log in)
+- Temporary added a lambda function for clicking the button
+- Move the older files in temporary folder (soon to dispatch)
+- new formatting and naming of files (use beta as the guide)
+- Conclusion, functions for the entry and buttons for log in are not done yet
+
+// Tested by Ed 12:08am, comment "Please take iniative naman"
