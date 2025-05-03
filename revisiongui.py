@@ -1,22 +1,18 @@
 from tkinter import *
 from tkinter import ttk
-from PIL import Image, ImageTk
 
-main = Tk()
-main.title("HABLOS MO AY RAMDAM PARIN SA DILIM")
-main.geometry("960x540")
-main.resizable(False,False)
+window = Tk()
 
+notebook = ttk.Notebook(window) #widget that manages a collection of windows/displays
 
-bg_image = Image.open('materials\\images\\window1.png')
-bg_photo = ImageTk.PhotoImage(bg_image)
+tab1 = Frame(notebook) #new frame for tab 1
+tab2 = Frame(notebook) #new frame for tab 2
 
-# --- Canvas for Background and Floating Text ---
-canvas = Canvas(main, width=639, height=639, highlightthickness=0, bd=0)
-canvas.pack(fill="both", expand=True)
+notebook.add(tab1,text="Tab 1")
+notebook.add(tab2,text="Tab 2")
+notebook.pack(expand=True,fill="both")  #expand = expand to fill any space not otherwise used
+                                    #fill = fill space on x and y axis
+Label(tab1,text="Hello, this is tab#1",width=50,height=25).pack()
+Label(tab2,text="Goodbye, this is tab#2",width=50,height=25).pack()
 
-# Place Background Image on Canvas
-canvas.create_image(0, 0, anchor='nw', image=bg_photo)
-
-
-main.mainloop() 
+window.mainloop()
