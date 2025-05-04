@@ -3,8 +3,8 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 window = Tk()
 
 window.geometry("665x410")
-window.title("Window 1")
 window.configure(bg = "#FFFFFF")
+window.title("Window 1")
 
 
 canvas = Canvas(
@@ -28,92 +28,82 @@ button_1 = Button(
     relief="flat"
 )
 button_1.place(
-    x=408.0,
-    y=245.0,
+    x=402.0,
+    y=224.0,
     width=234.0,
     height=59.0
 )
 
 canvas.create_text(
-    449.0,
-    307.0,
+    450.0,
+    286.0,
     anchor="nw",
     text="Forgot Username/Password",
     fill="#757575",
-    font=("JetBrainsMono Bold", 10 * -1)
+    font=("JetBrains Mono", 10 * -1)
 )
 
 canvas.create_text(
-    472.0,
-    97.0,
+    466.0,
+    76.0,
     anchor="nw",
     text="Sign in your account",
     fill="#757575",
-    font=("JetBrainsMono Bold", 10 * -1)
+    font=("JetBrains Mono", 10 * -1)
 )
 
 canvas.create_text(
-    425.0,
-    59.0,
+    419.0,
+    38.0,
     anchor="nw",
     text="ScanTracker",
     fill="#060606",
-    font=("JetBrainsMono Bold", 32 * -1)
+    font= ("JetBrains Mono", 24, "bold")
 )
 
 image_image_1 = PhotoImage(
     file="beta 0.1\\assets\\frame0\\image_1.png")
 image_1 = canvas.create_image(
-    525.0,
-    147.0,
+    519.0,
+    126.0,
     image=image_image_1
 )
 
-entry_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\entry_1.png")
-entry_bg_1 = canvas.create_image(
-    512.0,
-    147.0,
-    image=entry_image_1
-)
 entry_1 = Entry(
     bd=0,
     bg="#AEAEAE",
     fg="#767676",
-    highlightthickness=0
+    highlightthickness=0,
+    font= ("JetBrains Mono", 10, "bold")
 )
+entry_1.insert(0, "Student ID")
 entry_1.place(
-    x=470.0,
-    y=139.0,
-    width=84.0,
+    x=464.0,
+    y=118.0,
+    width=152.0,
     height=14.0
 )
 
 image_image_2 = PhotoImage(
     file="beta 0.1\\assets\\frame0\\image_2.png")
 image_2 = canvas.create_image(
-    525.0,
-    211.0,
+    519.0,
+    190.0,
     image=image_image_2
 )
 
-entry_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\entry_2.png")
-entry_bg_2 = canvas.create_image(
-    512.0,
-    209.0,
-    image=entry_image_2
-)
 entry_2 = Entry(
     bd=0,
     bg="#AEAEAE",
     fg="#767676",
-    highlightthickness=0
+    highlightthickness=0,
+    font= ("JetBrains Mono", 10, "bold")
 )
+entry_2.insert(0, "Password")
 entry_2.place(
-    x=470.0,
-    y=201.0,
-    width=84.0,
+    x=464.0,
+    y=182.0,
+    width=152.0,
     height=14.0
 )
 
@@ -127,16 +117,16 @@ button_2 = Button(
     relief="flat"
 )
 button_2.place(
-    x=446.0,
-    y=350.0,
-    width=151.0,
-    height=48.0
+    x=402.0,
+    y=325.0,
+    width=234.0,
+    height=57.0
 )
 
 image_image_3 = PhotoImage(
     file="beta 0.1\\assets\\frame0\\image_3.png")
 image_3 = canvas.create_image(
-    160.0,
+    140.0,
     180.0,
     image=image_image_3
 )
