@@ -1,10 +1,10 @@
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import *
+from tkinter import ttk
 
 window = Tk()
 window.title("Window 2 Create Account")
-window.geometry("665x410")
+window.geometry("670x410")
 window.configure(bg = "#FFFFFF")
-
 
 canvas = Canvas(
     window,
@@ -13,10 +13,15 @@ canvas = Canvas(
     width = 665,
     bd = 0,
     highlightthickness = 0,
-    relief = "ridge"
+    relief = "ridge", 
+    scrollregion=(0, 0, 670, 500)
 )
 
 canvas.place(x = 0, y = 0)
+y_scroll = Scrollbar(window, orient="vertical", command=canvas.yview)
+canvas.config(yscrollcommand=y_scroll.set)
+y_scroll.place(x=651, y=0, height=410)
+
 button_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_1.png")
 button_1 = Button(
     image=button_image_1,
@@ -25,12 +30,13 @@ button_1 = Button(
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
-button_1.place(
-    x=536.0,
-    y=16.0,
-    width=103.0,
-    height=31.0
-)
+canvas.create_window(595, 32, window=button_1, width=103, height=31)
+# button_1.place(
+#     x=536.0,
+#     y=16.0,
+#     width=103.0,
+#     height=31.0
+# )
 
 image_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_1.png")
 image_1 = canvas.create_image(
@@ -133,12 +139,13 @@ button_2 = Button(
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
-    x=251.0,
-    y=346.0,
-    width=177.0,
-    height=45.0
-)
+canvas.create_window(336, 369, window=button_2, width=177, height=45)
+# button_2.place(
+#     x=251.0,
+#     y=346.0,
+#     width=177.0,
+#     height=45.0
+# )
 
 image_image_13 =PhotoImage(file="beta 0.2\\assets\\frame0\\image_13.png")
 image_13 = canvas.create_image(
@@ -168,12 +175,14 @@ entry_1 = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-entry_1.place(
-    x=249.0,
-    y=199.0,
-    width=170.0,
-    height=12.0
-)
+
+canvas.create_window(334, 205, window=entry_1, width=165, height=12)
+# entry_1.place(
+#     x=249.0,
+#     y=199.0,
+#     width=170.0,
+#     height=12.0
+# )
 entry_2 = Entry(
     bd=0,
     bg="#FFFFFF",
@@ -181,12 +190,13 @@ entry_2 = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-entry_2.place(
-    x=466.0,
-    y=198.0,
-    width=170.0,
-    height=12.0
-)
+canvas.create_window(551, 204, window=entry_2, width=165, height=12)
+# entry_2.place(
+#     x=466.0,
+#     y=198.0,
+#     width=170.0,
+#     height=12.0
+# )
 
 entry_4 = Entry(
     bd=0,
@@ -195,12 +205,13 @@ entry_4 = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-entry_4.place(
-    x=249.0,
-    y=312.0,
-    width=170.0,
-    height=12.0
-)
+canvas.create_window(334, 318, window=entry_4, width=165, height=12)
+# entry_4.place(
+#     x=249.0,
+#     y=312.0,
+#     width=170.0,
+#     height=12.0
+# )
 
 entry_5 = Entry(
     bd=0,
@@ -209,12 +220,13 @@ entry_5 = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-entry_5.place(
-    x=464.0,
-    y=312.0,
-    width=170.0,
-    height=12.0
-)
+canvas.create_window(549, 318, window=entry_5, width=165, height=12)
+# entry_5.place(
+#     x=464.0,
+#     y=312.0,
+#     width=170.0,
+#     height=12.0
+# )
 
 button_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_3.png")
 button_3 = Button(
@@ -225,12 +237,13 @@ button_3 = Button(
     command=lambda: print("button_3 clicked"),
     relief="flat"
 )
-button_3.place(
-    x=450.0,
-    y=346.0,
-    width=177.0,
-    height=45.0
-)
+canvas.create_window(545, 369, window=button_3, width=177, height=45)
+# button_3.place(
+#     x=450.0,
+#     y=346.0,
+#     width=177.0,
+#     height=45.0
+# )
 
 image_image_16 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_16.png")
 image_16 = canvas.create_image(
