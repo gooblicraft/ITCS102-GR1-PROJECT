@@ -42,28 +42,28 @@ image_1 = canvas.create_image(
 image_image_2 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_2.png")
 image_2 = canvas.create_image(
     276.0,
-    177.0,
+    180.0,
     image=image_image_2
 )
 
 image_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_3.png")
 image_3 = canvas.create_image(
-    345.0,
-    294.0,
+    285.0,
+    295.0,
     image=image_image_3
 )
 
 image_image_4 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_4.png")
 image_4 = canvas.create_image(
     261.0,
-    233.0,
+    237.0,
     image=image_image_4
 )
 
 image_image_5 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_5.png")
 image_5 = canvas.create_image(
-    503.0,
-    181.0,
+    485.0,
+    180.0,
     image=image_image_5
 )
 
@@ -76,7 +76,7 @@ image_6 = canvas.create_image(
 
 image_image_7 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_7.png")
 image_7 = canvas.create_image(
-    589.0,
+    569.0,
     237.0,
     image=image_image_7
 )
@@ -161,23 +161,59 @@ image_15 = canvas.create_image(
     image=image_image_15
 )
 
-entry_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\entry_1.png")
-entry_bg_1 = canvas.create_image(
-    583.0,
-    264.5,
-    image=entry_image_1
-)
 entry_1 = Entry(
     bd=0,
     bg="#FFFFFF",
-    fg="#000716",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
 entry_1.place(
-    x=535.0,
-    y=255.0,
-    width=96.0,
-    height=17.0
+    x=249.0,
+    y=199.0,
+    width=170.0,
+    height=12.0
+)
+entry_2 = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+entry_2.place(
+    x=466.0,
+    y=198.0,
+    width=170.0,
+    height=12.0
+)
+
+entry_4 = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+entry_4.place(
+    x=249.0,
+    y=312.0,
+    width=170.0,
+    height=12.0
+)
+
+entry_5 = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+entry_5.place(
+    x=464.0,
+    y=312.0,
+    width=170.0,
+    height=12.0
 )
 
 button_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_3.png")
