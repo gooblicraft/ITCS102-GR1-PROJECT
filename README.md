@@ -65,3 +65,11 @@ Step 6:
 - Conclusion, functions for the entry and buttons for log in are not done yet
 
 // Tested by Ed 12:08am, comment "Please take iniative naman"
+
+# 05/05/2025 
+- added new window for create account
+- Use of figma to layout design
+- need to connect the widgets from window 1
+- Conclusion, functions for the entry and buttons for log in are not done yet
+
+// Tested by Ed 11:31am, comment "Wala na indibidwal na HAHAHAA chawot"
