@@ -82,7 +82,7 @@ image_6 = canvas.create_image(
 
 image_image_7 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_7.png")
 image_7 = canvas.create_image(
-    569.0,
+    538.0,
     237.0,
     image=image_image_7
 )
@@ -149,7 +149,7 @@ canvas.create_window(336, 369, window=button_2, width=177, height=45)
 
 image_image_13 =PhotoImage(file="beta 0.2\\assets\\frame0\\image_13.png")
 image_13 = canvas.create_image(
-    365.0,
+    352.0,
     260.0,
     image=image_image_13
 )
@@ -163,8 +163,8 @@ image_14 = canvas.create_image(
 
 image_image_15 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_15.png")
 image_15 = canvas.create_image(
-    583.0,
-    260.0,
+    570.0,
+    263.0,
     image=image_image_15
 )
 
@@ -197,6 +197,14 @@ canvas.create_window(551, 204, window=entry_2, width=165, height=12)
 #     width=170.0,
 #     height=12.0
 # )
+entry_3 = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(350, 260, window=entry_3, width=212, height=12)
 
 entry_4 = Entry(
     bd=0,
@@ -205,13 +213,7 @@ entry_4 = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(334, 318, window=entry_4, width=165, height=12)
-# entry_4.place(
-#     x=249.0,
-#     y=312.0,
-#     width=170.0,
-#     height=12.0
-# )
+canvas.create_window(570, 260, window=entry_4, width=122, height=12)
 
 entry_5 = Entry(
     bd=0,
@@ -220,7 +222,22 @@ entry_5 = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(549, 318, window=entry_5, width=165, height=12)
+canvas.create_window(334, 318, window=entry_5, width=165, height=12)
+# entry_4.place(
+#     x=249.0,
+#     y=312.0,
+#     width=170.0,
+#     height=12.0
+# )
+
+entry_6 = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(549, 318, window=entry_6, width=165, height=12)
 # entry_5.place(
 #     x=464.0,
 #     y=312.0,
