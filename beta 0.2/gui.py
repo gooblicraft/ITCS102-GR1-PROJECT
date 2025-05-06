@@ -168,7 +168,7 @@ image_15 = canvas.create_image(
     image=image_image_15
 )
 
-entry_1 = Entry(
+firstName = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
@@ -176,44 +176,44 @@ entry_1 = Entry(
     highlightthickness=0
 )
 
-canvas.create_window(334, 205, window=entry_1, width=165, height=12)
+canvas.create_window(334, 205, window=firstName, width=165, height=12)
 # entry_1.place(
 #     x=249.0,
 #     y=199.0,
 #     width=170.0,
 #     height=12.0
 # )
-entry_2 = Entry(
+lastName = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(551, 204, window=entry_2, width=165, height=12)
+canvas.create_window(551, 204, window=lastName, width=165, height=12)
 # entry_2.place(
 #     x=466.0,
 #     y=198.0,
 #     width=170.0,
 #     height=12.0
 # )
-entry_3 = Entry(
+email = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(350, 260, window=entry_3, width=212, height=12)
+canvas.create_window(350, 260, window=email, width=212, height=12)
 
-entry_4 = Entry(
+contactNo = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(570, 260, window=entry_4, width=122, height=12)
+canvas.create_window(570, 260, window=contactNo, width=122, height=12)
 
 entry_5 = Entry(
     bd=0,

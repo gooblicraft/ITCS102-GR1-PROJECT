@@ -1,4 +1,5 @@
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, BooleanVar
+import tkinter.messagebox as messagebox
 
 window = Tk()
 
@@ -17,31 +18,40 @@ canvas = Canvas(
 )
 
 canvas.place(x=0, y=0)
-button_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\button_1.png")
+
+# Button 1
+button_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_1.png")
 button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
+    cursor="hand2",
     relief="flat"
 )
-button_1.place(
-    x=402.0,
-    y=224.0,
-    width=234.0,
-    height=59.0
-)
+button_1.place(x=402.0, y=224.0, width=234.0, height=59.0)
 
-canvas.create_text(
-    450.0,
-    286.0,
-    anchor="nw",
-    text="          Forgot Password?",
-    fill="#757575",
-    font=("JetBrains Mono", 10 * -1)
-)
+# Forgot Password Action
+def forgot_password_action():
+    messagebox.showinfo("Forgot Password", "Password reset instructions have been sent to your email.")
 
+# Forgot Password Label (Clickable)
+forgot_password_label = Button(
+    window,
+    text="       Forgot Password?",
+    font=("JetBrains Mono", 9),
+    fg="#757575",
+    bg="#FFFFFF",
+    bd=0,
+    highlightthickness=0,
+    activebackground="#FFFFFF",
+    activeforeground="gray33",
+    cursor="hand2",
+    command=forgot_password_action
+)
+forgot_password_label.place(x=455, y=286)
+
+# Texts
 canvas.create_text(
     466.0,
     76.0,
@@ -60,13 +70,9 @@ canvas.create_text(
     font=("JetBrains Mono", 24, "bold")
 )
 
-image_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_1.png")
-image_1 = canvas.create_image(
-    519.0,
-    126.0,
-    image=image_image_1
-)
+# Image 1
+image_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_1.png")
+image_1 = canvas.create_image(519.0, 126.0, image=image_image_1)
 
 # Student ID Entry
 entry_1 = Entry(
@@ -77,20 +83,11 @@ entry_1 = Entry(
     font=("JetBrains Mono", 10, "bold")
 )
 entry_1.insert(0, "Student ID")
-entry_1.place(
-    x=464.0,
-    y=118.0,
-    width=152.0,
-    height=14.0
-)
+entry_1.place(x=464.0, y=118.0, width=152.0, height=14.0)
 
-image_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_2.png")
-image_2 = canvas.create_image(
-    519.0,
-    190.0,
-    image=image_image_2
-)
+# Image 2
+image_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_2.png")
+image_2 = canvas.create_image(519.0, 190.0, image=image_image_2)
 
 # Password Entry
 entry_2 = Entry(
@@ -101,14 +98,9 @@ entry_2 = Entry(
     font=("JetBrains Mono", 10, "bold")
 )
 entry_2.insert(0, "Password")
-entry_2.place(
-    x=464.0,
-    y=182.0,
-    width=152.0,
-    height=14.0
-)
+entry_2.place(x=464.0, y=182.0, width=152.0, height=14.0)
 
-# Show/Hide password logic via embedded button
+# Show/Hide Password Logic
 password_visible = False
 
 def toggle_password_button():
@@ -123,7 +115,7 @@ def toggle_password_button():
             show_button.config(text="Hide")
             password_visible = True
 
-# Button inside the password entry area
+# Show/Hide Button
 show_button = Button(
     window,
     text="Show",
@@ -137,7 +129,7 @@ show_button = Button(
 )
 show_button.place(x=568, y=180, width=40, height=18)
 
-# Placeholder Handling Functions
+# Placeholder Handling
 def on_entry_click(entry, placeholder, is_password=False):
     if entry.get() == placeholder:
         entry.delete(0, "end")
@@ -155,17 +147,15 @@ def on_focusout(entry, placeholder, is_password=False):
         if is_password:
             entry.config(show="")
 
-# Bindings for Student ID
+# Bindings
 entry_1.bind("<FocusIn>", lambda event: on_entry_click(entry_1, "Student ID"))
 entry_1.bind("<FocusOut>", lambda event: on_focusout(entry_1, "Student ID"))
 
-# Bindings for Password (with hiding)
 entry_2.bind("<FocusIn>", lambda event: on_entry_click(entry_2, "Password", is_password=True))
 entry_2.bind("<FocusOut>", lambda event: on_focusout(entry_2, "Password", is_password=True))
 
-# Buttons
-button_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\button_2.png")
+# Button 2
+button_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
@@ -173,20 +163,11 @@ button_2 = Button(
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
-    x=402.0,
-    y=325.0,
-    width=234.0,
-    height=57.0
-)
+button_2.place(x=402.0, y=325.0, width=234.0, height=57.0)
 
-image_image_3 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_3.png")
-image_3 = canvas.create_image(
-    140.0,
-    180.0,
-    image=image_image_3
-)
+# Image 3
+image_image_3 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_3.png")
+image_3 = canvas.create_image(140.0, 180.0, image=image_image_3)
 
 window.resizable(False, False)
 window.mainloop()
