@@ -73,3 +73,12 @@ Step 6:
 - Conclusion, functions for the entry and buttons for log in are not done yet
 
 // Tested by Ed 11:31am, comment "Wala na indibidwal na HAHAHAA chawot"
+
+# 05/06/2025
+- The layout and color have been changed as requested by the professor.
+- Added additional sections for Disability, Civil Status, Religion, and Contact Number.
+- The layout for creating an account is complete.
+- Conclusion,these changes aim to improve accessibility and overall user experience.
+- 
+
+// Tested by Althea 2:04, comment "yung iba po sanang documentation dyan"
