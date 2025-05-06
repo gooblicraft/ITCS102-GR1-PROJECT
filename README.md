@@ -79,6 +79,5 @@ Step 6:
 - Added additional sections for Disability, Civil Status, Religion, and Contact Number.
 - The layout for creating an account is complete.
 - Conclusion,these changes aim to improve accessibility and overall user experience.
-- 
 
 // Tested by Althea 2:04, comment "yung iba po sanang documentation dyan"
