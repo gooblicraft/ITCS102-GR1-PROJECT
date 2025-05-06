@@ -81,18 +81,19 @@ entry_bg_1 = canvas.create_image(
     318.0,
     image=entry_image_1
 )
-# Type (Facilitator or Attendee)
+# Type (Name)
 entry_1 = Entry(
     bd=0,
-    bg="#FFFFFF",
-    fg="#000716",
+    bg="#0E3269",
+    fg="#FFFFFF",
+    font= ("JetBrains Mono", 7),
     highlightthickness=0
 )
 entry_1.place(
-    x=46.0,
-    y=312.0,
-    width=85.0,
-    height=10.0
+    x=32.0,
+    y=287.0,
+    width=121.0,
+    height=13.0
 )
 
 button_image_4 = PhotoImage(file="beta 0.3\\assets\\frame0\\button_4.png")
@@ -112,29 +113,24 @@ button_4.place(
 
 image_image_3 = PhotoImage(file="beta 0.3\\assets\\frame0\\image_3.png")
 image_3 = canvas.create_image(
-    334.0,
+    331.0,
     303.0,
     image=image_image_3
 )
 
-entry_image_2 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_2.png")
-entry_bg_2 = canvas.create_image(
-    87.5,
-    292.5,
-    image=entry_image_2
-)
-# Entry Name near at profile
+# Entry attendee or facilitator
 entry_2 = Entry(
     bd=0,
-    bg="#EEE9E9",
-    fg="#000716",
+    bg="#9F26C7",
+    fg="#FFFFFF",
+    font= ("JetBrains Mono", 6),
     highlightthickness=0
 )
 entry_2.place(
-    x=27.0,
-    y=285.0,
-    width=121.0,
-    height=13.0
+    x=49.0,
+    y=312.0,
+    width=85.0,
+    height=10.0
 )
 
 entry_image_3 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_3.png")
