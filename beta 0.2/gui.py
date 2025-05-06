@@ -30,6 +30,13 @@ button_1 = Button(
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
+# variableYN = IntVar()
+# checkButton = Checkbutton(
+#     text="Yes",
+#     variable=variableYN,
+#     image=button_image_1
+# ).place(x=90,y=90)
+
 canvas.create_window(595, 32, window=button_1, width=103, height=31)
 # button_1.place(
 #     x=536.0,
