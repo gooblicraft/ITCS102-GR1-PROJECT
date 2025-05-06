@@ -12,9 +12,9 @@ style.theme_use('clam')
 
 # Define custom layout without border
 style.layout('Custom.TCombobox',
-             [('Combobox.downarrow', {'side': 'right', 'sticky': ''}),
-              ('Combobox.padding', {'expand': '1', 'sticky': 'nswe',
-                'children': [('Combobox.textarea', {'sticky': 'nswe'})]})])
+            [('Combobox.downarrow', {'side': 'right', 'sticky': ''}),
+            ('Combobox.padding', {'expand': '1', 'sticky': 'nswe',
+            'children': [('Combobox.textarea', {'sticky': 'nswe'})]})])
 
 # Configure background and remove border
 style.configure('Custom.TCombobox',
@@ -40,16 +40,16 @@ y_scroll = Scrollbar(window, orient="vertical", command=canvas.yview)
 canvas.config(yscrollcommand=y_scroll.set)
 y_scroll.place(x=651, y=0, height=410)
 
-button_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_1.png")
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat"
+canvas.create_text(
+    76.0,
+    22.0,
+    anchor="nw",
+    text="// Our Logo here",
+    fill="#000716",
+    font=("JetBrainsMono Bold", 12 * -1)
 )
 
-canvas.create_window(595, 32, window=button_1, width=103, height=31)
+# ======== IMAGES =========
 
 image_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_1.png")
 image_1 = canvas.create_image(
@@ -84,15 +84,6 @@ image_7 = canvas.create_image(
     538.0,
     237.0,
     image=image_image_7
-)
-
-canvas.create_text(
-    76.0,
-    22.0,
-    anchor="nw",
-    text="// Our Logo here",
-    fill="#000716",
-    font=("JetBrainsMono Bold", 12 * -1)
 )
 
 image_image_8 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_8.png")
@@ -133,22 +124,12 @@ image_3 = canvas.create_image(
 )
 image_image_12 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_12.png")
 
-# imAGE entry SET PASSWORD
+# image entry SET PASSWORD
 image_12 = canvas.create_image(
     330.0,
     470.0,
     image=image_image_12
 )
-
-# entry SET PASSOWRD
-entry_setPassword = Entry(
-    bd=0,
-    bg="#FFFFFF",
-    fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
-)
-canvas.create_window(330, 470, window=entry_setPassword, width=165, height=12)
 
 # ============ Confirm password ===========
 
@@ -160,16 +141,6 @@ image_6 = canvas.create_image(
     image=image_image_6
 )
 
-# entry confirm password
-entry_6 = Entry(
-    bd=0,
-    bg="#FFFFFF",
-    fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
-)
-canvas.create_window(540, 470, window=entry_6, width=165, height=12)
-
 # Border confirm password
 image_image_14 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_14.png")
 image_14 = canvas.create_image(
@@ -179,7 +150,7 @@ image_14 = canvas.create_image(
 )
 
 # ======== Whole Mid code =====
-# Image
+# Image MID
 image_image_17 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_17.png")
 image_17 = canvas.create_image(
     434.0,
@@ -187,18 +158,9 @@ image_17 = canvas.create_image(
     image=image_image_17
 )
 
-# Entry nationality
-nationality = Entry(
-    bd=0,
-    bg="#FFFFFF",
-    fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
-)
-canvas.create_window(325, 316, window=nationality, width=160, height=12)
+# ==================== COMBOBOX AND RADIO BUTTON =========================
 
 # Combobox religion
-
 cb_religion = ttk.Combobox(values=["Catholic", "INC", "Muslim"], style='Custom.TCombobox', width=25)
 cb_religion.set("Select")
 canvas.create_window(540, 316, window=cb_religion)
@@ -212,26 +174,6 @@ canvas.create_window(310, 370, window=cb_sex)
 cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20)
 cb_civil_status.set("Select")
 canvas.create_window(470, 370, window=cb_civil_status)
-
-# Entry nationality
-age = Entry(
-    bd=0,
-    bg="#FFFFFF",
-    fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
-)
-canvas.create_window(595, 370, window=age, width=60, height=12)
-
-# Entry nationality
-permanent_address = Entry(
-    bd=0,
-    bg="#FFFFFF",
-    fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
-)
-canvas.create_window(480, 422, window=permanent_address, width=276, height=12)
 
 # Disability Radio Button
 disability = IntVar()
@@ -258,6 +200,8 @@ rb_no_disable = Radiobutton(
     bd=0)
 canvas.create_window(300, 422, window=rb_no_disable)
 
+# ============== BUTTONS ===============
+
 # Button Facilitator
 button_image_2 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_2.png")
 button_facilitator = Button(
@@ -282,6 +226,17 @@ button_attendee = Button(
 )
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
 
+# Button log im
+button_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_1.png")
+button_logIn = Button(
+    image=button_image_1,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("button_1 clicked"),
+    relief="flat"
+)
+canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
+
 image_image_13 =PhotoImage(file="beta 0.2\\assets\\frame0\\image_13.png")
 image_13 = canvas.create_image(
     352.0,
@@ -296,6 +251,9 @@ image_15 = canvas.create_image(
     image=image_image_15
 )
 
+# ====================== ENTRY ======================
+
+# Firstname entry
 firstName = Entry(
     bd=0,
     bg="#FFFFFF",
@@ -303,9 +261,9 @@ firstName = Entry(
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-
 canvas.create_window(334, 205, window=firstName, width=165, height=12)
 
+# Lastname entry
 lastName = Entry(
     bd=0,
     bg="#FFFFFF",
@@ -315,6 +273,7 @@ lastName = Entry(
 )
 canvas.create_window(551, 204, window=lastName, width=165, height=12)
 
+# Email Entry
 email = Entry(
     bd=0,
     bg="#FFFFFF",
@@ -324,6 +283,7 @@ email = Entry(
 )
 canvas.create_window(350, 260, window=email, width=212, height=12)
 
+# Contact Number entry
 contactNo = Entry(
     bd=0,
     bg="#FFFFFF",
@@ -333,6 +293,55 @@ contactNo = Entry(
 )
 canvas.create_window(570, 260, window=contactNo, width=122, height=12)
 
+# Entry nationality
+permanent_address = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(480, 422, window=permanent_address, width=276, height=12)
+
+# Entry Age
+age = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(595, 370, window=age, width=60, height=12)
+
+# Entry nationality
+nationality = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(325, 316, window=nationality, width=160, height=12)
+
+# entry confirm password
+confirm_pass = Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(540, 470, window=confirm_pass, width=165, height=12)
+
+# entry SET PASSOWRD
+set_pass= Entry(
+    bd=0,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("JetBrains Mono", 10 * -1),
+    highlightthickness=0
+)
+canvas.create_window(330, 470, window=set_pass, width=165, height=12)
 
 image_image_16 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_16.png")
 image_16 = canvas.create_image(
