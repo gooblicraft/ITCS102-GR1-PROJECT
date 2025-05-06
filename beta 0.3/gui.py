@@ -1,10 +1,9 @@
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import *
 
 window = Tk()
 
 window.geometry("665x640")
 window.configure(bg = "#FFFFFF")
-
 
 canvas = Canvas(
     window,
