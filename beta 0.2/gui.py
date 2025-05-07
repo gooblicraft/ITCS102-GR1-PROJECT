@@ -3,13 +3,26 @@ from tkinter import messagebox
 from tkinter import ttk
 import os
 from openpyxl import *
-import openpyxl
+import random
 from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter    
 
-def inClick():
+account_set = None
+def in_facilitator():
+    global account_set
+    account_set = "Facilitator"
     createExcel()
+    get_pass()
     submit_data()
+    return account_set
+
+def in_attendee():
+    global account_set
+    account_set = "Attendee"
+    createExcel()
+    get_pass()
+    submit_data()
+    return account_set
 
 #<===================================================== OPENPYXL===================================================>
 
@@ -30,6 +43,9 @@ def submit_data():
     workbook = load_workbook(path)
     sheet = workbook.active
 
+    account_id = str(random.randint(10**5, 10**6 -1))
+    print(account_id)
+    account_type = account_set
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
     email = email_entry.get()
@@ -43,27 +59,16 @@ def submit_data():
     permanent_address = address_entry.get()
     password = real_pass
     
-    row_values = [first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
+    row_values = [account_id, account_type, first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
     sheet.append(row_values)
     workbook.save(path)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 real_pass = None
 # real password (TRIGGER WINDOW SWITCH)
 def get_pass():
+    global real_pass
     pass1 = confirm_pass.get()
     pass2 = set_pass.get()
 
@@ -255,7 +260,7 @@ rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
     variable=disability_RB, 
-    value=1,
+    value="yes",
     bg="#ffffff", 
     activebackground="#ffffff", 
     highlightthickness=0, 
@@ -266,7 +271,7 @@ rb_no_disable = Radiobutton(
     window, 
     text="no", 
     variable=disability_RB, 
-    value=0,
+    value="no",
     bg="#ffffff", 
     activebackground="#ffffff",
     highlightthickness=0, 
@@ -380,7 +385,7 @@ button_facilitator = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command= inClick,
+    command= in_facilitator,
     relief="flat"
 )
 canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
@@ -393,7 +398,7 @@ button_attendee = Button(
     borderwidth=0,
     border=0,
     highlightthickness=0,
-    command= inClick,
+    command= in_attendee,
     relief="flat"
 )
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
