@@ -84,9 +84,9 @@ Step 6:
 
 # 05/07/2025
 - added hide and show password feature.
-- The format has been devided into different region types.
+- The format has been divided into different region types.
 - Files have been categorized for organizational purposes.
 - added confirmation of password on create account ui.
-- created exel file for create account ui inputs and for user data management.
+- created excel file for create account ui inputs and for user data management.
 
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
