@@ -47,8 +47,7 @@ def submit_data():
     workbook = load_workbook(path)
     sheet = workbook.active
 
-    account_id = str(random.randint(10**5, 10**6 -1))
-    print(account_id)
+    account_id = str(random.randint(10**5, 10**6 - 1))
     account_type = account_set
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
@@ -62,12 +61,22 @@ def submit_data():
     disability = disability_RB.get()
     permanent_address = address_entry.get()
     password = real_pass
-    
-    row_values = [account_id, account_type, first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
-    sheet.append(row_values)
-    workbook.save(path)
-    messagebox.showinfo("Info", "Successfully created account")
-    login()
+
+    # Combine all fields to check for emptiness
+    required_fields = [
+        account_id, account_type, first_name, last_name, email,
+        contact_num, nationality, religion, sex, civil_status,
+        age, disability, permanent_address, password
+    ]
+
+    if all(required_fields):
+        row_values = required_fields
+        sheet.append(row_values)
+        workbook.save(path)
+        messagebox.showinfo("Info", "Successfully created account")
+        login()
+    else:
+        messagebox.showerror("Error", "Please fill in all fields before submitting.")
 
 real_pass = None
 # real password (TRIGGER WINDOW SWITCH)
@@ -254,12 +263,13 @@ canvas.create_window(310, 370, window=cb_sex)
 
 # Combobox Civil Satus
 cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20, state="readonly")
+cb_civil_status.set("null")
 cb_civil_status.set("Select")
 canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
 disability_RB = StringVar()
-disability_RB.set("N/A")
+disability_RB.set("null")
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
