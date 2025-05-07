@@ -88,4 +88,4 @@ Beta 0.1
 - The format has been devided into different region types.
 - Files have been categorized for organizational purposes. 
 
-// Tested by Rafael & endozo 4:15 comment "ambot"
+// Tested by Rafael & endozo 4:15 comment "Hello world!"
