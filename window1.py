@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from openpyxl import Workbook, load_workbook
+import subprocess
 
 file_path = "AccountDatabase.xlsx"
 def load_credentials(path):
@@ -39,7 +40,11 @@ def validate_login():
 
     except FileNotFoundError:
         messagebox.showerror("File Error", "The file 'AccountDatabase.xlsx' was not found.")
-
+        
+def open_window2():
+    subprocess.Popen(['python', 'window2.py'])
+    window.destroy()
+    
 # Show/Hide password logic via embedded button
 password_visible = False
 def toggle_password_button():
@@ -83,8 +88,6 @@ def entry_validation():
     else:
         messagebox.showinfo("Great!", "You have successfully logged in to your account")
         new_window()
-
-
 
 window = Tk()
 window.geometry("665x410")
@@ -194,11 +197,7 @@ password_entry.place(
 password_entry.bind("<FocusIn>", lambda event: on_entry_click(password_entry, "Password", is_password=True))
 password_entry.bind("<FocusOut>", lambda event: on_focusout(password_entry, "Password", is_password=True))
 
-
 #New Window <<<<<<<<<<
-
-
-
 # ================= BUTTONS ================
 
 # Log in Submit Button
@@ -239,7 +238,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=open_window2,
     relief="flat"
 )
 button_2.place(
@@ -249,15 +248,10 @@ button_2.place(
     height=57.0
 )
 
-
-
-
 #New window (log in page) <<<<<<<<<< 
 def new_window():
     man = Tk()
     man.mainloop()
-
-
 
 window.resizable(False, False)
 window.mainloop()

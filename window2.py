@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 import os
+import subprocess
 from openpyxl import *
 import random
 from openpyxl.styles import Font
@@ -24,6 +25,10 @@ def in_attendee():
     submit_data()
     return account_set
 
+def login():
+    subprocess.Popen(['python', 'window1.py'])
+    window.destroy()
+
 #<===================================================== OPENPYXL===================================================>
 
 filename = "AccountDatabase.xlsx"
@@ -38,7 +43,6 @@ def createExcel():
         workbook.save(filename)
 
 def submit_data():
-
     path = filename
     workbook = load_workbook(path)
     sheet = workbook.active
@@ -62,8 +66,6 @@ def submit_data():
     row_values = [account_id, account_type, first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
     sheet.append(row_values)
     workbook.save(path)
-
-
 
 real_pass = None
 # real password (TRIGGER WINDOW SWITCH)
@@ -426,7 +428,7 @@ button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=get_pass,
+    command=login,
     relief="flat"
 )
 canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
