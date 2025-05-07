@@ -5,8 +5,8 @@ import os
 import subprocess
 from openpyxl import *
 import random
-from openpyxl.styles import Font
-from openpyxl.utils import get_column_letter    
+from openpyxl import styles
+from openpyxl import utils    
 
 account_set = None
 def in_facilitator():
@@ -66,6 +66,8 @@ def submit_data():
     row_values = [account_id, account_type, first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
     sheet.append(row_values)
     workbook.save(path)
+    messagebox.showinfo("Info", "Successfully created account")
+    login()
 
 real_pass = None
 # real password (TRIGGER WINDOW SWITCH)
@@ -73,7 +75,6 @@ def get_pass():
     global real_pass
     pass1 = confirm_pass.get()
     pass2 = set_pass.get()
-
 
     if pass1 == pass2:
         real_pass = pass1
@@ -446,7 +447,6 @@ image_15 = canvas.create_image(
     263.0,
     image=image_image_15
 )
-
 
 window.resizable(False, False)
 window.mainloop()
