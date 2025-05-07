@@ -67,7 +67,7 @@ canvas.place(x=0, y=0)
 
 # ================= IMAGES =================
 image_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_1.png")
+    file="assets\\window1\\image_1.png")
 image_1 = canvas.create_image(
     519.0,
     126.0,
@@ -75,7 +75,7 @@ image_1 = canvas.create_image(
 )
 
 image_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_2.png")
+    file="assets\\window1\\image_2.png")
 image_2 = canvas.create_image(
     519.0,
     190.0,
@@ -83,7 +83,7 @@ image_2 = canvas.create_image(
 )
 
 image_image_3 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_3.png")
+    file="assets\\window1\\image_3.png")
 image_3 = canvas.create_image(
     140.0,
     180.0,
@@ -166,7 +166,7 @@ entry_2.bind("<FocusOut>", lambda event: on_focusout(entry_2, "Password", is_pas
 
 # Log in Submit Button
 button_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\button_1.png")
+    file="assets\\window1\\button_1.png")
 button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
@@ -197,7 +197,7 @@ show_button.place(x=568, y=180, width=40, height=18)
 
 # Button Create Account
 button_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\button_2.png")
+    file="assets\\window1\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
