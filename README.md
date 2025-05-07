@@ -90,3 +90,10 @@ Step 6:
 - created excel file for create account ui inputs and for user data management.
 
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
+
+# 05/08/2025
+- fix minimal bugs
+- added function in log in
+- added restriction in age
+
+// Tested by Garcia, comment "sakit mo sa ulo log in"
