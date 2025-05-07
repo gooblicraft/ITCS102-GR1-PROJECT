@@ -1,18 +1,36 @@
 from tkinter import *
 from tkinter import messagebox
+from openpyxl import Workbook, load_workbook
+
+file_path = "AccountDatabase.xlsx"
+def load_credentials(path):
+    wb = load_workbook(path)
+    ws = wb.active
+    
+    return {row[0]: row[1] for row in ws.iter_rows(min_row=2, values_only=True)}
+
+credentials = load_credentials(file_path)
+
+def validate_login():
+    username = username_entry.get()
+    password = password_entry.get()
+    if credentials.get(username) == password:
+        messagebox.showinfo("Login", "Login successful!")
+        window.destroy()
+    else:
+        messagebox.showerror("Login", "Invalid username or password.")
 
 # Show/Hide password logic via embedded button
 password_visible = False
-
 def toggle_password_button():
     global password_visible
-    if entry_2.get() != "Password":
+    if password_entry.get() != "Password":
         if password_visible:
-            entry_2.config(show="*")
+            password_entry.config(show="*")
             show_button.config(text="Show")
             password_visible = False
         else:
-            entry_2.config(show="")
+            password_entry.config(show="")
             show_button.config(text="Hide")
             password_visible = True
             
@@ -37,8 +55,8 @@ def on_focusout(entry, placeholder, is_password=False):
 
 # Entry error for empty space
 def entry_validation():
-    student_id = entry_1.get().strip()
-    password = entry_2.get().strip()
+    student_id = username_entry.get().strip()
+    password = password_entry.get().strip()
 
     if student_id == "" or student_id == "Student ID" or password == "" or password == "Password":
         messagebox.showerror("Input Error", "Please fill up all the boxes.")
@@ -120,42 +138,42 @@ canvas.create_text(
 
 # ================= ENTRY ==================
 # Student ID Entry
-entry_1 = Entry(
+username_entry = Entry(
     bd=0,
     bg="#AEAEAE",
     fg="#767676",
     highlightthickness=0,
     font=("JetBrains Mono", 10, "bold")
 )
-entry_1.insert(0, "Student ID")
-entry_1.place(
+username_entry.insert(0, "Student ID")
+username_entry.place(
     x=464.0,
     y=118.0,
     width=152.0,
     height=14.0
 )
 # Bindings for Student ID
-entry_1.bind("<FocusIn>", lambda event: on_entry_click(entry_1, "Student ID"))
-entry_1.bind("<FocusOut>", lambda event: on_focusout(entry_1, "Student ID"))
+username_entry.bind("<FocusIn>", lambda event: on_entry_click(username_entry, "Student ID"))
+username_entry.bind("<FocusOut>", lambda event: on_focusout(username_entry, "Student ID"))
 
 # Password Entry
-entry_2 = Entry(
+password_entry = Entry(
     bd=0,
     bg="#AEAEAE",
     fg="#767676",
     highlightthickness=0,
     font=("JetBrains Mono", 10, "bold")
 )
-entry_2.insert(0, "Password")
-entry_2.place(
+password_entry.insert(0, "Password")
+password_entry.place(
     x=464.0,
     y=182.0,
     width=152.0,
     height=14.0
 )
 # Bindings for Password (with hiding)
-entry_2.bind("<FocusIn>", lambda event: on_entry_click(entry_2, "Password", is_password=True))
-entry_2.bind("<FocusOut>", lambda event: on_focusout(entry_2, "Password", is_password=True))
+password_entry.bind("<FocusIn>", lambda event: on_entry_click(password_entry, "Password", is_password=True))
+password_entry.bind("<FocusOut>", lambda event: on_focusout(password_entry, "Password", is_password=True))
 
 
 #New Window <<<<<<<<<<
@@ -171,7 +189,7 @@ button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=entry_validation,
+    command=validate_login,
     relief="flat"
 )
 button_logIn.place(
