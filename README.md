@@ -21,7 +21,7 @@ Step 4:
 Step 5:
     Install necessary fonts in your computer to show the text properly.
         // Website link soon to be added
-
+        - jetbrains mono
 Step 6:
     Make sure you have github desktop, then sign in your github account to github desktop and vs code.
         You can ask our group members or leader for this.
@@ -73,3 +73,21 @@ Step 6:
 - Conclusion, functions for the entry and buttons for log in are not done yet
 
 // Tested by Ed 11:31am, comment "Wala na indibidwal na HAHAHAA chawot"
+
+# 05/06/2025
+- The layout and color have been changed as requested by the professor.
+- Added additional sections for Disability, Civil Status, Religion, and Contact Number.
+- The layout for creating an account is complete.
+- Conclusion,these changes aim to improve accessibility and overall user experience.
+
+// Tested by Althea 2:04, comment "yung iba po sanang documentation dyan"
+
+# 05/07/2025
+Beta 0.1
+- added hide and show password feature.
+- The format has been devided into different region types.
+- Files have been categorized for organizational purposes.
+- added confirmation of password on create account ui.
+- 
+
+// Tested by Rafael & endozo 4:15 comment "Hello world!"

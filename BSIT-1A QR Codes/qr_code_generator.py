@@ -12,8 +12,9 @@ window.title("QR CODE GENERATOR BY KYLA PINEDA")
 def qr_code_ver1():
     student_id = ID_entry.get().strip()
     student_name = Name_entry.get().strip()
+    student_age = age_entry.get().strip()
     if student_id and student_name:
-        qr_data = f"Student ID: {student_id} Student Name: {student_name}"
+        qr_data = f"Student ID: {student_id} Student Name: {student_name} Student Age: {student_age}"
 
         qr = qrcode.QRCode(
             version=1,
@@ -43,6 +44,8 @@ ID_entry = ctk.CTkEntry(window)
 ID_entry.grid(row = 1, column = 2, pady = 5)
 Name_entry = ctk.CTkEntry(window)
 Name_entry.grid(row = 2, column = 2, pady = 5)
+age_entry = ctk.CTkEntry(window)
+age_entry.grid(row = 3, column = 2, pady = 5)
 
 Create_qr = ctk.CTkButton(window, width = 15, text = "Create Qr", command= qr_code_ver1)
 Create_qr.grid(row = 3, column = 2, pady = 5)
