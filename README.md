@@ -92,7 +92,7 @@ Step 6:
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
 
 # 05/08/2025
-- fix minimal visual bugs
+- fix minimal bugs and visual bugs
 - added restriction in age
 - added function in log in that is connected to the excel file
 - log in bug fixed
