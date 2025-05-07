@@ -86,6 +86,8 @@ Step 6:
 Beta 0.1
 - added hide and show password feature.
 - The format has been devided into different region types.
-- Files have been categorized for organizational purposes. 
+- Files have been categorized for organizational purposes.
+- added confirmation of password on create account ui.
+- 
 
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
