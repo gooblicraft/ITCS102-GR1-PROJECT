@@ -1,4 +1,28 @@
 from tkinter import *
+from openpyxl import *
+from openpyxl.styles import Font
+from openpyxl.utils import get_column_letter 
+from openpyxl import load_workbook
+
+
+def check_name_credentials(file_path, input_first_name, input_last_name):
+    wb = load_workbook(file_path)
+    ws = wb.active
+
+    for row in ws.iter_rows(min_row=2, values_only=True):  # Skip header
+        first_name = row[2]  # Column C
+        last_name = row[3]   # Column D
+
+        if first_name == input_first_name and last_name == input_last_name:
+            print("✔ Match found:")
+            print(row)  # Print the full row
+            return row
+
+    print("✖ No matching credentials found.")
+    return None
+
+# Example usage:
+check_name_credentials("AccountDatabase.xlsx", "Edriane", "Domanico")
 
 window = Tk()
 

@@ -3,14 +3,13 @@ from tkinter import messagebox
 from openpyxl import Workbook, load_workbook
 import subprocess
 
-file_path = "AccountDatabase.xlsx"
-def load_credentials(path):
-    wb = load_workbook(path)
-    ws = wb.active
+def open_window2():
+    subprocess.Popen(['python', 'window2.py'])
+    window.destroy()
     
-    return {row[0]: row[1] for row in ws.iter_rows(min_row=2, values_only=True)}
+def logged_in():
+    subprocess.Popen(['python', 'window3.py']) 
 
-credentials = load_credentials(file_path)
 
 def validate_login():
     input_username = username_entry.get().strip().lower()
@@ -33,17 +32,13 @@ def validate_login():
 
             if input_username == full_name and input_password == password:
                 messagebox.showinfo("Login", f"Welcome,{account_type.capitalize()} {first_name.capitalize()}!")
+                logged_in()
                 window.destroy()
                 return
-
         messagebox.showerror("Login Failed", "Invalid username or password.")
 
     except FileNotFoundError:
         messagebox.showerror("File Error", "The file 'AccountDatabase.xlsx' was not found.")
-        
-def open_window2():
-    subprocess.Popen(['python', 'window2.py'])
-    window.destroy()
     
 # Show/Hide password logic via embedded button
 password_visible = False
