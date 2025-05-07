@@ -240,22 +240,23 @@ image_17 = canvas.create_image(
 # ==================== COMBOBOX AND RADIO BUTTON =========================
 
 # Combobox religion
-cb_religion = ttk.Combobox(values=["Catholic", "INC", "Muslim"], style='Custom.TCombobox', width=25)
+cb_religion = ttk.Combobox(values=["Catholic", "INC", "Muslim"], style='Custom.TCombobox', width=25, state="readonly")
 cb_religion.set("Select")
 canvas.create_window(540, 316, window=cb_religion)
 
 # Combobox Sex
-cb_sex = ttk.Combobox(values=["Male", "Female"], style='Custom.TCombobox', width=20)
+cb_sex = ttk.Combobox(values=["Male", "Female"], style='Custom.TCombobox', width=20, state="readonly")
 cb_sex.set("Select")
 canvas.create_window(310, 370, window=cb_sex)
 
 # Combobox Civil Satus
-cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20)
+cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20, state="readonly")
 cb_civil_status.set("Select")
 canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
 disability_RB = StringVar()
+disability_RB.set("N/A")
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
@@ -311,12 +312,19 @@ email_entry = Entry(
 canvas.create_window(350, 260, window=email_entry, width=212, height=12)
 
 # Contact Number entry
+def limited_numbers(new_char, full_text_after):
+    return new_char.isdigit() and len(full_text_after) <= 11
+
+limited_num = window.register(limited_numbers)
+
 contact_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    highlightthickness=0,
+    validate="key",
+    validatecommand=(limited_num , "%S", "%P")
 )
 canvas.create_window(570, 260, window=contact_entry, width=122, height=12)
 
@@ -330,15 +338,24 @@ address_entry = Entry(
 )
 canvas.create_window(480, 422, window=address_entry, width=276, height=12)
 
-# Entry Age
+# Age Entry
+def limit_age(new_char, full_text_after):
+    return new_char.isdigit() and len(full_text_after) <= 3
+
+limited_age = window.register(limit_age)
+
 age_entry = Entry(
+    window,
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    font=("JetBrains Mono", 10 * -1),
+    highlightthickness=0,
+    validate="key",
+    validatecommand=(limited_age, "%S", "%P")  
 )
 canvas.create_window(595, 370, window=age_entry, width=60, height=12)
+
 
 # Entry nationality
 nationality_entry = Entry(
