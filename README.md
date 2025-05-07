@@ -81,3 +81,8 @@ Step 6:
 - Conclusion,these changes aim to improve accessibility and overall user experience.
 
 // Tested by Althea 2:04, comment "yung iba po sanang documentation dyan"
+
+#09/07/25
+beta 0.1
+-Hide and show of password 
+-format devided into different region types 
