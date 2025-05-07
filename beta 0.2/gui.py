@@ -1,5 +1,49 @@
 from tkinter import *
+from tkinter import messagebox
 from tkinter import ttk
+import os
+from openpyxl import Workbook
+
+#<===================================================== OPENPYXL===================================================>
+
+filename = "student_scores.xlsx"
+
+def createExcel():
+    if not os.path.exists(filename):
+        wb = Workbook()
+        ws = wb.active
+        ws.append(["Name", "Score", "Result"])  
+        wb.save(filename)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+real_pass = None
+# real password (TRIGGER WINDOW SWITCH)
+def get_pass():
+    pass1 = confirm_pass.get()
+    pass2 = set_pass.get()
+
+
+    if pass1 == pass2:
+        real_pass = pass1
+        print(real_pass)
+        return real_pass
+    else:
+        messagebox.showerror("Error", "Your password doesn't match")
 
 window = Tk()
 window.title("Window 2 Create Account")
@@ -232,7 +276,7 @@ button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=get_pass,
     relief="flat"
 )
 canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
@@ -253,75 +297,75 @@ image_15 = canvas.create_image(
 
 # ====================== ENTRY ======================
 
-# Firstname entry
-firstName = Entry(
+# First Name entry
+Fname_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(334, 205, window=firstName, width=165, height=12)
+canvas.create_window(334, 205, window=Fname_entry, width=165, height=12)
 
 # Lastname entry
-lastName = Entry(
+Lname_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(551, 204, window=lastName, width=165, height=12)
+canvas.create_window(551, 204, window=Lname_entry, width=165, height=12)
 
 # Email Entry
-email = Entry(
+email_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(350, 260, window=email, width=212, height=12)
+canvas.create_window(350, 260, window=email_entry, width=212, height=12)
 
 # Contact Number entry
-contactNo = Entry(
+contact_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(570, 260, window=contactNo, width=122, height=12)
+canvas.create_window(570, 260, window=contact_entry, width=122, height=12)
 
 # Entry nationality
-permanent_address = Entry(
+address_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(480, 422, window=permanent_address, width=276, height=12)
+canvas.create_window(480, 422, window=address_entry, width=276, height=12)
 
 # Entry Age
-age = Entry(
+age_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(595, 370, window=age, width=60, height=12)
+canvas.create_window(595, 370, window=age_entry, width=60, height=12)
 
 # Entry nationality
-nationality = Entry(
+nationality_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
     highlightthickness=0
 )
-canvas.create_window(325, 316, window=nationality, width=160, height=12)
+canvas.create_window(325, 316, window=nationality_entry, width=160, height=12)
 
 # entry confirm password
 confirm_pass = Entry(
