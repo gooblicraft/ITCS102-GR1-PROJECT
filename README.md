@@ -87,6 +87,5 @@ Step 6:
 - The format has been devided into different region types.
 - Files have been categorized for organizational purposes.
 - added confirmation of password on create account ui.
-- 
 
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
