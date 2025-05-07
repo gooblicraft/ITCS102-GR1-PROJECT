@@ -96,4 +96,4 @@ Step 6:
 - added function in log in
 - added restriction in age
 
-// Tested by Garcia, comment "sakit mo sa ulo log in"
+// Tested by Garcia, 12:21 comment "sakit mo sa ulo log in"
