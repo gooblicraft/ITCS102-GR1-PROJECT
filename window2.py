@@ -33,8 +33,8 @@ def createExcel():
         workbook = Workbook()
         ws = workbook.active
         ws.append(["ID Number","Account Type","First Name", "Last Name", 
-                   "Email","Contact Number", "Nationality", "Religion", 
-                   "Sex", "Civil Status", "Age", "Disability", "Permanent Address","Password"])  
+                "Email","Contact Number", "Nationality", "Religion", 
+                "Sex", "Civil Status", "Age", "Disability", "Permanent Address","Password"])  
         workbook.save(filename)
 
 def submit_data():
@@ -130,63 +130,63 @@ canvas.create_text(
 
 # ======== IMAGES =========
 
-image_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_1.png")
+image_image_1 = PhotoImage(file="assets\\window2\\image_1.png")
 image_1 = canvas.create_image(
     444.0,
     33.0,
     image=image_image_1
 )
 
-image_image_2 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_2.png")
+image_image_2 = PhotoImage(file="assets\\window2\\image_2.png")
 image_2 = canvas.create_image(
     276.0,
     180.0,
     image=image_image_2
 )
 
-image_image_4 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_4.png")
+image_image_4 = PhotoImage(file="assets\\window2\\image_4.png")
 image_4 = canvas.create_image(
     261.0,
     237.0,
     image=image_image_4
 )
 
-image_image_5 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_5.png")
+image_image_5 = PhotoImage(file="assets\\window2\\image_5.png")
 image_5 = canvas.create_image(
     485.0,
     180.0,
     image=image_image_5
 )
 
-image_image_7 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_7.png")
+image_image_7 = PhotoImage(file="assets\\window2\\image_7.png")
 image_7 = canvas.create_image(
     538.0,
     237.0,
     image=image_image_7
 )
 
-image_image_8 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_8.png")
+image_image_8 = PhotoImage(file="assets\\window2\\image_8.png")
 image_8 = canvas.create_image(
     39.0,
     33.0,
     image=image_image_8
 )
 
-image_image_9 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_9.png")
+image_image_9 = PhotoImage(file="assets\\window2\\image_9.png")
 image_9 = canvas.create_image(
     436.0,
     110.0,
     image=image_image_9
 )
 # Image Entry FIRST NAME
-image_image_10 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_10.png")
+image_image_10 = PhotoImage(file="assets\\window2\\image_10.png")
 image_10 = canvas.create_image(
     333.0,
     203.0,
     image=image_image_10
 )
 
-image_image_11 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_11.png")
+image_image_11 = PhotoImage(file="assets\\window2\\image_11.png")
 image_11 = canvas.create_image(
     548.0,
     203.0,
@@ -195,13 +195,13 @@ image_11 = canvas.create_image(
 
 # ========  Set Password ========= 
 # Entry set password
-image_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_3.png")
+image_image_3 = PhotoImage(file="assets\\window2\\image_3.png")
 image_3 = canvas.create_image(
     280.0,
     450.0,
     image=image_image_3
 )
-image_image_12 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_12.png")
+image_image_12 = PhotoImage(file="assets\\window2\\image_12.png")
 
 # image entry SET PASSWORD
 image_12 = canvas.create_image(
@@ -213,7 +213,7 @@ image_12 = canvas.create_image(
 # ============ Confirm password ===========
 
 # image confirm password
-image_image_6 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_6.png")
+image_image_6 = PhotoImage(file="assets\\window2\\image_6.png")
 image_6 = canvas.create_image(
     500.0,
     450.0,
@@ -221,7 +221,7 @@ image_6 = canvas.create_image(
 )
 
 # Border confirm password
-image_image_14 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_14.png")
+image_image_14 = PhotoImage(file="assets\\window2\\image_14.png")
 image_14 = canvas.create_image(
     540.0,
     470.0,
@@ -230,7 +230,7 @@ image_14 = canvas.create_image(
 
 # ======== Whole Mid code =====
 # Image MID
-image_image_17 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_17.png")
+image_image_17 = PhotoImage(file="assets\\window2\\image_17.png")
 image_17 = canvas.create_image(
     434.0,
     360.0,
@@ -370,7 +370,7 @@ set_pass= Entry(
 )
 canvas.create_window(330, 470, window=set_pass, width=165, height=12)
 
-image_image_16 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_16.png")
+image_image_16 = PhotoImage(file="assets\\window2\\image_16.png")
 image_16 = canvas.create_image(
     108.0,
     216.0,
@@ -380,7 +380,7 @@ image_16 = canvas.create_image(
 # ============== BUTTONS ===============
 
 # Button Facilitator
-button_image_2 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_2.png")
+button_image_2 = PhotoImage(file="assets\\window2\\button_2.png")
 button_facilitator = Button(
     image=button_image_2,
     borderwidth=0,
@@ -392,7 +392,7 @@ canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
 
 
 # Button Attendee
-button_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_3.png")
+button_image_3 = PhotoImage(file="assets\\window2\\button_3.png")
 button_attendee = Button(
     image=button_image_3,
     borderwidth=0,
@@ -404,7 +404,7 @@ button_attendee = Button(
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
 
 # Button log im
-button_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_1.png")
+button_image_1 = PhotoImage(file="assets\\window2\\button_1.png")
 button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
@@ -414,14 +414,14 @@ button_logIn = Button(
 )
 canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
 
-image_image_13 =PhotoImage(file="beta 0.2\\assets\\frame0\\image_13.png")
+image_image_13 =PhotoImage(file="assets\\window2\\image_13.png")
 image_13 = canvas.create_image(
     352.0,
     260.0,
     image=image_image_13
 )
 
-image_image_15 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_15.png")
+image_image_15 = PhotoImage(file="assets\\window2\\image_15.png")
 image_15 = canvas.create_image(
     570.0,
     263.0,
