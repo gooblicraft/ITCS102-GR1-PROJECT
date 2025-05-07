@@ -95,6 +95,7 @@ Step 6:
 - fix minimal visual bugs
 - added restriction in age
 - added function in log in that is connected to the excel file
+- log in bug fixed
 
 
-// Tested by Garcia, 12:23 comment "sakit mo sa ulo log in"
+// Tested by Garcia, 1:38 comment "sakit mo sa ulo log in"
