@@ -92,8 +92,9 @@ Step 6:
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
 
 # 05/08/2025
-- fix minimal bugs
-- added function in log in
+- fix minimal visual bugs
 - added restriction in age
+- added function in log in that is connected to the excel file
 
-// Tested by Garcia, 12:21 comment "sakit mo sa ulo log in"
+
+// Tested by Garcia, 12:23 comment "sakit mo sa ulo log in"
