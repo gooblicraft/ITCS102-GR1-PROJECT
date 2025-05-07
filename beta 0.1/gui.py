@@ -34,10 +34,6 @@ def on_focusout(entry, placeholder, is_password=False):
         if is_password:
             entry.config(show="")
 
-#New Window <<<<<<<<<<
-def new_window():
-    man = Tk()
-    man.mainloop()
 
 # Entry error for empty space
 def entry_validation():
@@ -215,6 +211,16 @@ button_2.place(
     width=234.0,
     height=57.0
 )
+
+
+
+
+#New window (log in page) <<<<<<<<<< 
+def new_window():
+    man = Tk()
+    man.mainloop()
+
+
 
 window.resizable(False, False)
 window.mainloop()
