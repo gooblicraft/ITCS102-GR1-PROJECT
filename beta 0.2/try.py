@@ -32,7 +32,7 @@ def addInfo():
 
 mainWindow = Tk()
 mainWindow.title("Try")
-mainWindow.geometry("500x400")
+mainWindow.geometry("500x700")
 mainWindow.resizable(False, False)
 
 text1  = Label(mainWindow, text="first name")
@@ -73,13 +73,13 @@ text6.pack()
 religion= Entry(mainWindow)
 religion.pack()
 
-text7  = Label(mainWindow, text="nationality")
+text7  = Label(mainWindow, text="sex")
 text7.pack()
 
 sex= Entry(mainWindow)
 sex.pack()
 
-text8  = Label(mainWindow, text="nationality")
+text8  = Label(mainWindow, text="civil status")
 text8.pack()
 
 civilStatus= Entry(mainWindow)

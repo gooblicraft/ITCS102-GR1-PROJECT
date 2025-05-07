@@ -1,4 +1,4 @@
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, BooleanVar
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, BooleanVar, Toplevel, Label
 import tkinter.messagebox as messagebox
 
 window = Tk()
@@ -31,9 +31,37 @@ button_1 = Button(
 )
 button_1.place(x=402.0, y=224.0, width=234.0, height=59.0)
 
-# Forgot Password Action
+# Forgot Password Action with new window
 def forgot_password_action():
-    messagebox.showinfo("Forgot Password", "Password reset instructions have been sent to your email.")
+    def submit_new_password():
+        new_password = new_password_entry.get()
+        confirm_password = confirm_password_entry.get()
+
+        if new_password == "" or confirm_password == "":
+            messagebox.showwarning("Input Error", "Please fill in all fields.")
+        elif new_password != confirm_password:
+            messagebox.showerror("Mismatch", "Passwords do not match.")
+        else:
+            # TODO: Add logic to store or update the password securely
+            messagebox.showinfo("Success", "Password has been changed successfully.")
+            change_password_window.destroy()
+
+    # Create new top-level window
+    change_password_window = Toplevel(window)
+    change_password_window.title("Change Password")
+    change_password_window.geometry("300x200")
+    change_password_window.configure(bg="#FFFFFF")
+    change_password_window.resizable(False, False)
+
+    Label(change_password_window, text="New Password:", bg="#FFFFFF").pack(pady=(20, 5))
+    new_password_entry = Entry(change_password_window, show="*", width=25)
+    new_password_entry.pack()
+
+    Label(change_password_window, text="Confirm Password:", bg="#FFFFFF").pack(pady=(10, 5))
+    confirm_password_entry = Entry(change_password_window, show="*", width=25)
+    confirm_password_entry.pack()
+
+    Button(change_password_window, text="Submit", command=submit_new_password, bg="#4CAF50", fg="white").pack(pady=20)
 
 # Forgot Password Label (Clickable)
 forgot_password_label = Button(
