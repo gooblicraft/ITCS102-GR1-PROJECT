@@ -12,13 +12,33 @@ def load_credentials(path):
 credentials = load_credentials(file_path)
 
 def validate_login():
-    username = username_entry.get()
-    password = password_entry.get()
-    if credentials.get(username) == password:
-        messagebox.showinfo("Login", "Login successful!")
-        window.destroy()
-    else:
-        messagebox.showerror("Login", "Invalid username or password.")
+    input_username = username_entry.get().strip()
+    input_password = password_entry.get().strip()
+
+    try:
+        wb = load_workbook("AccountDatabase.xlsx")
+        ws = wb.active
+
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            first_name = str(row[2]).strip().lower() if row[2] else ""
+            last_name = str(row[3]).strip().lower() if row[3] else ""
+            password = str(row[-1]).strip() if len(row) > -1 and row[-1] else ""
+
+            full_name = f"{first_name} {last_name}".strip() 
+            
+            # debugging
+            # print(f"Checking: '{full_name}' with password '{password}'")
+
+            if input_username == full_name and input_password == password:
+                messagebox.showinfo("Login", f"Welcome, {first_name.capitalize()}!")
+                window.destroy()
+                return
+
+        messagebox.showerror("Login Failed", "Invalid username or password.")
+
+    except FileNotFoundError:
+        messagebox.showerror("File Error", "The file 'AccountDatabase.xlsx' was not found.")
+
 
 # Show/Hide password logic via embedded button
 password_visible = False
