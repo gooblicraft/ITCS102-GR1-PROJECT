@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
 
 # Show/Hide password logic via embedded button
 password_visible = False
@@ -34,19 +33,30 @@ def on_focusout(entry, placeholder, is_password=False):
         if is_password:
             entry.config(show="")
 
-
-# Entry error for empty space
-def entry_validation():
-    student_id = entry_1.get().strip()
-    password = entry_2.get().strip()
-
-    if student_id == "" or student_id == "Student ID" or password == "" or password == "Password":
-        messagebox.showerror("Input Error", "Please fill up all the boxes.")
+def handle_login():
+    student_id = entry_1.get()
+    password = entry_2.get()
+    
+    if student_id == "Student ID" or student_id.strip() == "":
+        if password == "Password" or password.strip() == "":
+            warning_label.config(text="Please fill up both forms.")
+        else:
+            warning_label.config(text="Please fill up the Student ID form.")
+    elif password == "Password" or password.strip() == "":
+        warning_label.config(text="Please fill up the Password form.")
     else:
-        messagebox.showinfo("Great!", "You have successfully logged in to your account")
-        new_window()
+        warning_label.config(text="")  # Clear warning
+        print("Logging in...")  # Replace with actual login logic
+
+#for the create account 
+# def open_create_account():
+#     create_accW = Toplevel(window)
+#     create_accW.title("Create Account")
+#     create_accW.geometry(500x500)
+#     create_accW.config(bg= "white")
 
 
+# ================= NEW FUNCTION =================
 
 window = Tk()
 
@@ -66,60 +76,21 @@ canvas = Canvas(
 canvas.place(x=0, y=0)
 
 # ================= IMAGES =================
-image_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_1.png")
-image_1 = canvas.create_image(
-    519.0,
-    126.0,
-    image=image_image_1
-)
+image_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_1.png")
+image_1 = canvas.create_image(519.0, 126.0, image=image_image_1)
 
-image_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_2.png")
-image_2 = canvas.create_image(
-    519.0,
-    190.0,
-    image=image_image_2
-)
+image_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_2.png")
+image_2 = canvas.create_image(519.0, 190.0, image=image_image_2)
 
-image_image_3 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\image_3.png")
-image_3 = canvas.create_image(
-    140.0,
-    180.0,
-    image=image_image_3
-)
+image_image_3 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_3.png")
+image_3 = canvas.create_image(140.0, 180.0, image=image_image_3)
 
 # ================= LABEL TEXTS =================
-canvas.create_text(
-    450.0,
-    286.0,
-    anchor="nw",
-    text="          Forgot Password?",
-    fill="#757575",
-    font=("JetBrains Mono", 10 * -1)
-)
-
-canvas.create_text(
-    466.0,
-    76.0,
-    anchor="nw",
-    text="Sign in your account",
-    fill="#757575",
-    font=("JetBrains Mono", 10 * -1)
-)
-
-canvas.create_text(
-    419.0,
-    38.0,
-    anchor="nw",
-    text="ScanTracker",
-    fill="#060606",
-    font=("JetBrains Mono", 24, "bold")
-)
+canvas.create_text(450.0, 286.0, anchor="nw", text="          Forgot Password?", fill="#757575", font=("JetBrains Mono", 10 * -1))
+canvas.create_text(466.0, 76.0, anchor="nw", text="Sign in your account", fill="#757575", font=("JetBrains Mono", 10 * -1))
+canvas.create_text(419.0, 38.0, anchor="nw", text="ScanTracker", fill="#060606", font=("JetBrains Mono", 24, "bold"))
 
 # ================= ENTRY ==================
-# Student ID Entry
 entry_1 = Entry(
     bd=0,
     bg="#AEAEAE",
@@ -128,17 +99,10 @@ entry_1 = Entry(
     font=("JetBrains Mono", 10, "bold")
 )
 entry_1.insert(0, "Student ID")
-entry_1.place(
-    x=464.0,
-    y=118.0,
-    width=152.0,
-    height=14.0
-)
-# Bindings for Student ID
+entry_1.place(x=464.0, y=118.0, width=152.0, height=14.0)
 entry_1.bind("<FocusIn>", lambda event: on_entry_click(entry_1, "Student ID"))
 entry_1.bind("<FocusOut>", lambda event: on_focusout(entry_1, "Student ID"))
 
-# Password Entry
 entry_2 = Entry(
     bd=0,
     bg="#AEAEAE",
@@ -147,39 +111,26 @@ entry_2 = Entry(
     font=("JetBrains Mono", 10, "bold")
 )
 entry_2.insert(0, "Password")
-entry_2.place(
-    x=464.0,
-    y=182.0,
-    width=152.0,
-    height=14.0
-)
-# Bindings for Password (with hiding)
+entry_2.place(x=464.0, y=182.0, width=152.0, height=14.0)
 entry_2.bind("<FocusIn>", lambda event: on_entry_click(entry_2, "Password", is_password=True))
 entry_2.bind("<FocusOut>", lambda event: on_focusout(entry_2, "Password", is_password=True))
 
-
-#New Window <<<<<<<<<<
-
-
+# ================= NEW: WARNING LABEL =================
+warning_label = Label(window, text="", fg="red", bg="#FFFFFF", font=("JetBrains Mono", 9, "bold"))
+warning_label.place(x=402, y=290)
 
 # ================= BUTTONS ================
-
 # Log in Submit Button
-button_image_1 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\button_1.png")
+button_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_1.png")
 button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=entry_validation,
-    relief="flat"
+    command=handle_login,  # <--- CHANGED FROM lambda TO FUNCTION
+    relief="flat",
+    cursor="hand2"
 )
-button_logIn.place(
-    x=402.0,
-    y=224.0,
-    width=234.0,
-    height=59.0
-)
+button_logIn.place(x=402.0, y=224.0, width=234.0, height=59.0)
 
 # Button inside the password entry area
 show_button = Button(
@@ -196,31 +147,18 @@ show_button = Button(
 show_button.place(x=568, y=180, width=40, height=18)
 
 # Button Create Account
-button_image_2 = PhotoImage(
-    file="beta 0.1\\assets\\frame0\\button_2.png")
+button_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_2 clicked"),
-    relief="flat"
+    relief="flat",
+    cursor="hand2"
 )
-button_2.place(
-    x=402.0,
-    y=325.0,
-    width=234.0,
-    height=57.0
-)
-
-
-
-
-#New window (log in page) <<<<<<<<<< 
-def new_window():
-    man = Tk()
-    man.mainloop()
-
-
+button_2.place(x=402.0, y=325.0, width=234.0, height=57.0)
 
 window.resizable(False, False)
 window.mainloop()
+
+#hhhhhhhhhhhhhhhhh
