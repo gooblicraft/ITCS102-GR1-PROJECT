@@ -311,13 +311,20 @@ email_entry = Entry(
 )
 canvas.create_window(350, 260, window=email_entry, width=212, height=12)
 
+def limited_numbers(new_char, full_text_after):
+    return new_char.isdigit() and len(full_text_after) <= 11
+
+limited_num = window.register(limited_numbers)
+
 # Contact Number entry
 contact_entry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    highlightthickness=0,
+    validate="key",
+    validatecommand=(limited_num , "%S", "%P")
 )
 canvas.create_window(570, 260, window=contact_entry, width=122, height=12)
 
@@ -331,15 +338,24 @@ address_entry = Entry(
 )
 canvas.create_window(480, 422, window=address_entry, width=276, height=12)
 
-# Entry Age
+# Age Entry
+def only_numbers(char):
+    return char.isdigit()
+
+num_only = window.register(only_numbers)
+
 age_entry = Entry(
+    window,
     bd=0,
     bg="#FFFFFF",
     fg="#767676",
-    font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    font=("JetBrains Mono", 10 * -1),
+    highlightthickness=0,
+    validate="key",
+    validatecommand=(num_only, "%S")  
 )
 canvas.create_window(595, 370, window=age_entry, width=60, height=12)
+
 
 # Entry nationality
 nationality_entry = Entry(
