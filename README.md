@@ -83,7 +83,6 @@ Step 6:
 // Tested by Althea 2:04, comment "yung iba po sanang documentation dyan"
 
 # 05/07/2025
-Beta 0.1
 - added hide and show password feature.
 - The format has been devided into different region types.
 - Files have been categorized for organizational purposes.
