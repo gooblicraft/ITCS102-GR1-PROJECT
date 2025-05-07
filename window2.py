@@ -240,17 +240,17 @@ image_17 = canvas.create_image(
 # ==================== COMBOBOX AND RADIO BUTTON =========================
 
 # Combobox religion
-cb_religion = ttk.Combobox(values=["Catholic", "INC", "Muslim"], style='Custom.TCombobox', width=25)
+cb_religion = ttk.Combobox(values=["Catholic", "INC", "Muslim"], style='Custom.TCombobox', width=25, state="readonly")
 cb_religion.set("Select")
 canvas.create_window(540, 316, window=cb_religion)
 
 # Combobox Sex
-cb_sex = ttk.Combobox(values=["Male", "Female"], style='Custom.TCombobox', width=20)
+cb_sex = ttk.Combobox(values=["Male", "Female"], style='Custom.TCombobox', width=20, state="readonly")
 cb_sex.set("Select")
 canvas.create_window(310, 370, window=cb_sex)
 
 # Combobox Civil Satus
-cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20)
+cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20, state="readonly")
 cb_civil_status.set("Select")
 canvas.create_window(470, 370, window=cb_civil_status)
 
