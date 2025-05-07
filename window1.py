@@ -31,7 +31,7 @@ def validate_login():
             print(f" Account Type:'{account_type}' Username: '{full_name}' Password '{password}'")
 
             if input_username == full_name and input_password == password:
-                messagebox.showinfo("Login", f"Welcome, {first_name.capitalize()}! You are logged in as a {account_type.capitalize()}.")
+                messagebox.showinfo("Login", f"Welcome,{account_type.capitalize()} {first_name.capitalize()}!")
                 window.destroy()
                 return
 
