@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 # Show/Hide password logic via embedded button
 password_visible = False
@@ -32,6 +33,24 @@ def on_focusout(entry, placeholder, is_password=False):
         entry.config(fg="#767676")
         if is_password:
             entry.config(show="")
+
+#New Window <<<<<<<<<<
+def new_window():
+    man = Tk()
+    man.mainloop()
+
+# Entry error for empty space
+def entry_validation():
+    student_id = entry_1.get().strip()
+    password = entry_2.get().strip()
+
+    if student_id == "" or student_id == "Student ID" or password == "" or password == "Password":
+        messagebox.showerror("Input Error", "Please fill up all the boxes.")
+    else:
+        messagebox.showinfo("Great!", "You have successfully logged in to your account")
+        new_window()
+
+
 
 window = Tk()
 
@@ -142,6 +161,11 @@ entry_2.place(
 entry_2.bind("<FocusIn>", lambda event: on_entry_click(entry_2, "Password", is_password=True))
 entry_2.bind("<FocusOut>", lambda event: on_focusout(entry_2, "Password", is_password=True))
 
+
+#New Window <<<<<<<<<<
+
+
+
 # ================= BUTTONS ================
 
 # Log in Submit Button
@@ -151,7 +175,7 @@ button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=entry_validation,
     relief="flat"
 )
 button_logIn.place(
