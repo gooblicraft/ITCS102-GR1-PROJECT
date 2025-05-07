@@ -256,7 +256,7 @@ canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
 disability_RB = StringVar()
-disability_RB.set("unset")
+disability_RB.set("N/A")
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
