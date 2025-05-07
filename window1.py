@@ -40,7 +40,6 @@ def validate_login():
     except FileNotFoundError:
         messagebox.showerror("File Error", "The file 'AccountDatabase.xlsx' was not found.")
 
-
 # Show/Hide password logic via embedded button
 password_visible = False
 def toggle_password_button():
@@ -88,7 +87,6 @@ def entry_validation():
 
 
 window = Tk()
-
 window.geometry("665x410")
 window.configure(bg="#FFFFFF")
 window.title("Window 1")
