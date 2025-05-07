@@ -12,14 +12,15 @@ def load_credentials(path):
 credentials = load_credentials(file_path)
 
 def validate_login():
-    input_username = username_entry.get().strip()
+    input_username = username_entry.get().strip().lower()
     input_password = password_entry.get().strip()
-
+    
     try:
         wb = load_workbook("AccountDatabase.xlsx")
         ws = wb.active
 
         for row in ws.iter_rows(min_row=2, values_only=True):
+            account_type = str(row[1]).strip() if row[1] else ""
             first_name = str(row[2]).strip().lower() if row[2] else ""
             last_name = str(row[3]).strip().lower() if row[3] else ""
             password = str(row[-1]).strip() if len(row) > -1 and row[-1] else ""
@@ -27,10 +28,10 @@ def validate_login():
             full_name = f"{first_name} {last_name}".strip() 
             
             # debugging
-            # print(f"Checking: '{full_name}' with password '{password}'")
+            # print(f"Checking: '{accoount_type}' '{full_name}' with password '{password}'")
 
             if input_username == full_name and input_password == password:
-                messagebox.showinfo("Login", f"Welcome, {first_name.capitalize()}!")
+                messagebox.showinfo("Login", f"Welcome, {first_name.capitalize()}! You are logged in as a {account_type.capitalize()}.")
                 window.destroy()
                 return
 
