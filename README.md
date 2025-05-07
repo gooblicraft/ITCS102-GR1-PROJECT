@@ -84,5 +84,8 @@ Step 6:
 
 # 05/07/2025
 Beta 0.1
-- Hide and showing of password feature has been added.
-- The format has been devided into different region types. 
+- added hide and show password feature.
+- The format has been devided into different region types.
+- Files have been categorized for organizational purposes. 
+
+// Tested by Rafael & endozo 4:15 comment "ambot"
