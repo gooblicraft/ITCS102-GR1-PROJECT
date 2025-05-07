@@ -83,11 +83,10 @@ Step 6:
 // Tested by Althea 2:04, comment "yung iba po sanang documentation dyan"
 
 # 05/07/2025
-Beta 0.1
 - added hide and show password feature.
 - The format has been devided into different region types.
 - Files have been categorized for organizational purposes.
 - added confirmation of password on create account ui.
-- 
+- created exel file for create account ui inputs and for user data management.
 
 // Tested by Rafael & endozo 4:15 comment "Hello world!"
