@@ -1,46 +1,64 @@
 from tkinter import *
-from openpyxl import *
-from openpyxl.styles import Font
-from openpyxl.utils import get_column_letter 
-from openpyxl import load_workbook
-
-
-def check_name_credentials(file_path, input_first_name, input_last_name):
-    wb = load_workbook(file_path)
-    ws = wb.active
-
-    for row in ws.iter_rows(min_row=2, values_only=True):  # Skip header
-        first_name = row[2]  # Column C
-        last_name = row[3]   # Column D
-
-        if first_name == input_first_name and last_name == input_last_name:
-            print("✔ Match found:")
-            print(row)  # Print the full row
-            return row
-
-    print("✖ No matching credentials found.")
-    return None
-
-# Example usage:
-check_name_credentials("AccountDatabase.xlsx", "Edriane", "Domanico")
+from tkinter import ttk
 
 window = Tk()
 
 window.geometry("665x640")
 window.configure(bg = "#FFFFFF")
 
+# =========== SECTION FOR STYLING TTK ==============
+
+style = ttk.Style()
+style.theme_use('default')
+
+# Change the tab background color
+bold_font = ("Helvetica", 10, "bold")
+style.configure("TNotebook", background="#FFFFFF", borderwidth=0)
+style.configure("TNotebook.Tab",
+                background="#FFFFFF",
+                foreground="#000000",
+                padding=10,
+                font=bold_font)
+
+# Remove focus highlight (the dashed box)
+style.layout("TNotebook.Tab",
+            [('Notebook.tab', {'sticky': 'nswe', 'children':
+                [('Notebook.padding', {'side': 'top', 'sticky': 'nswe', 'children':
+                    [('Notebook.label', {'side': 'top', 'sticky': ''})],
+                })],
+            })])
+
+# Optional: active tab background
+style.map("TNotebook.Tab",
+        background=[("selected", "#0E3269")],
+        foreground=[("selected", "#FFFFFF")])
+
+# ============ SECTION FOR TABS ============
+
+notebook = ttk.Notebook(window, style='TNotebook')
+tab1 = Frame(notebook,bg="#FFFFFF", width=600, height=460)
+tab2 = Frame(notebook, bg="#0E3269")
+tab3 = Frame(notebook, bg= "#FFFFFF")
+
+notebook.add(tab1, text="Account tab")
+notebook.add(tab2, text="Scan tab")
+notebook.add(tab3, text="QR tab")
+notebook.place(x=32, y=120)
 canvas = Canvas(
-    window,
+    tab1,
     bg = "#FFFFFF",
-    height = 640,
-    width = 665,
+    height = 460,
+    width = 600,
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
 )
 
 canvas.place(x = 0, y = 0)
-button_image_1 = PhotoImage(file="assets\\window3\\button_1.png")
+
+# ========= SECTION FOR BUTTONS IN WINDOW =============
+
+button_image_1 = PhotoImage(file="beta 0.4\\assets\\frame0\\button_1.png")
 button_1 = Button(
     image=button_image_1,
     borderwidth=0,
@@ -55,7 +73,7 @@ button_1.place(
     height=30.0
 )
 
-button_image_2 = PhotoImage(file="assets\\window3\\button_2.png")
+button_image_2 = PhotoImage(file="beta 0.4\\assets\\frame0\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
@@ -70,7 +88,7 @@ button_2.place(
     height=30.0
 )
 
-button_image_3 = PhotoImage(file="assets\\window3\\button_3.png")
+button_image_3 = PhotoImage(file="beta 0.4\\assets\\frame0\\button_3.png")
 button_3 = Button(
     image=button_image_3,
     borderwidth=0,
@@ -85,314 +103,229 @@ button_3.place(
     height=30.0
 )
 
-image_image_1 = PhotoImage(file="assets\\window3\\image_1.png")
-image_1 = canvas.create_image(
-    175.0,
-    87.0,
-    image=image_image_1
-)
+# ============ SECTION FOR IMAGES =============
 
-image_image_2 = PhotoImage(file="assets\\window3\\image_2.png")
+image_image_1 = PhotoImage(file="beta 0.4\\assets\\frame0\\image_1.png")
+image_1 = Label(window, image=image_image_1, bg="white").place(x=-2, y=2)
+
+image_image_2 = PhotoImage(file="beta 0.4\\assets\\frame0\\image_2.png")
 image_2 = canvas.create_image(
-    208.0,
-    140.0,
+    300,
+    230,
     image=image_image_2
 )
 
-entry_image_1 = PhotoImage(file="assets\\window3\\entry_1.png")
-entry_bg_1 = canvas.create_image(
-    88.5,
-    318.0,
-    image=entry_image_1
-)
-# Type (Name)
-entry_1 = Entry(
+# Type (full_name)
+full_name = Entry(
+    tab1,
     bd=0,
     bg="#0E3269",
     fg="#FFFFFF",
-    font= ("JetBrains Mono", 7),
-    highlightthickness=0
+    font= ("JetBrains Mono", 9),
+    highlightthickness=0,
+    width=155
 )
-entry_1.place(
-    x=32.0,
-    y=287.0,
+full_name.place(
+    x= 7.0,
+    y=130.0,
     width=121.0,
     height=13.0
 )
 
-button_image_4 = PhotoImage(file="assets\\window3\\button_4.png")
-button_4 = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
-button_4.place(
-    x=487.0,
-    y=565.0,
-    width=106.0,
-    height=38.0
-)
-
-image_image_3 = PhotoImage(file="assets\\window3\\image_3.png")
-image_3 = canvas.create_image(
-    331.0,
-    303.0,
-    image=image_image_3
-)
-
 # Entry attendee or facilitator
-entry_2 = Entry(
+user_type = Entry(
+    tab1,
     bd=0,
     bg="#9F26C7",
     fg="#FFFFFF",
     font= ("JetBrains Mono", 6),
     highlightthickness=0
 )
-entry_2.place(
-    x=49.0,
-    y=312.0,
+user_type.place(
+    x=25.0,
+    y=158.0,
     width=85.0,
     height=10.0
 )
 
-entry_image_3 = PhotoImage(file="assets\\window3\\entry_3.png")
-entry_bg_3 = canvas.create_image(
-    298.5,
-    252.5,
-    image=entry_image_3
-)
 # Entry First Name
-entry_3 = Entry(
+first_name = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    state="readonly",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+first_name.place(
+    x=169.0,
+    y=88.0,
+    width=190.0,
+    height=13.0
+)
+first_name.config(state="normal", bg="#EEE9E9")
+first_name.insert(0, "Test")
+first_name.config(state="readonly", bg="#EEE9E9")
+
+# Entry Last Name
+last_name = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
-entry_3.place(
-    x=203.0,
-    y=245.0,
+last_name.place(
+    x=385.0,
+    y=88.0,
     width=191.0,
     height=13.0
 )
+# Entry Nationality
+nationality = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+nationality.place(
+    x=170.0,
+    y=155.0,
+    width=129.0,
+    height=13.0
+)
 
-entry_image_4 = PhotoImage(file="assets\\window3\\entry_4.png")
-entry_bg_4 = canvas.create_image(
-    299.5,
-    519.5,
-    image=entry_image_4
+# Entry religion
+religion = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+religion.place(
+    x=340.0,
+    y=155.0,
+    width=108.0,
+    height=13.0
 )
 
 # Entry Last Name
-entry_4 = Entry(
+age = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
-entry_4.place(
-    x=204.0,
-    y=512.0,
-    width=191.0,
+age.place(
+    x=485.0,
+    y=155.0,
+    width = 78.0,
     height=13.0
 )
 
-entry_image_5 = PhotoImage(file="assets\\window3\\entry_5.png")
-entry_bg_5 = canvas.create_image(
-    531.5,
-    519.5,
-    image=entry_image_5
-)
-
-# Entry Nationality
-entry_5 = Entry(
+# Entry Last Name
+sex = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
-entry_5.place(
-    x=436.0,
-    y=512.0,
-    width=191.0,
+sex.place(
+    x=169.0,
+    y=223.0,
+    width=78.0,
     height=13.0
 )
 
-entry_image_6 = PhotoImage(file="assets\\window3\\entry_6.png")
-entry_bg_6 = canvas.create_image(
-    299.5,
-    586.5,
-    image=entry_image_6
-)
-
-# Entry Religion
-entry_6 = Entry(
-    bd=0,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0
-)
-entry_6.place(
-    x=204.0,
-    y=579.0,
-    width=191.0,
-    height=13.0
-)
-
-entry_image_7 = PhotoImage(file="assets\\window3\\entry_7.png")
-entry_bg_7 = canvas.create_image(
-    524.5,
-    252.5,
-    image=entry_image_7
-)
-
-# Entry Age
-entry_7 = Entry(
-    bd=0,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0
-)
-entry_7.place(
-    x=429.0,
-    y=245.0,
-    width=191.0,
-    height=13.0
-)
-
-entry_image_8 = PhotoImage(file="assets\\window3\\entry_8.png")
-entry_bg_8 = canvas.create_image(
-    268.0,
-    316.5,
-    image=entry_image_8
-)
-
-# Entry Sex
-entry_8 = Entry(
-    bd=0,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0
-)
-entry_8.place(
-    x=201.0,
-    y=309.0,
-    width=134.0,
-    height=13.0
-)
-
-entry_image_9 = PhotoImage(file="assets\\window3\\entry_9.png")
-entry_bg_9 = canvas.create_image(
-    241.5,
-    383.5,
-    image=entry_image_9
-)
-
-# Entry Civil Status
-entry_9 = Entry(
-    bd=0,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0
-)
-entry_9.place(
-    x=201.0,
-    y=376.0,
-    width=81.0,
-    height=13.0
-)
-
-entry_image_10 = PhotoImage(file="assets\\window3\\entry_10.png")
-entry_bg_10 = canvas.create_image(
-    386.0,
-    383.5,
-    image=entry_image_10
-)
-# Entry Disability
-entry_10 = Entry(
-    bd=0,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0
-)
-entry_10.place(
-    x=333.0,
-    y=376.0,
-    width=106.0,
-    height=13.0
-)
-
-entry_image_11 = PhotoImage(file="assets\\window3\\entry_11.png")
-entry_bg_11 = canvas.create_image(
-    518.0,
-    383.5,
-    image=entry_image_11
-)
-
-# Entry Contact
-entry_11 = Entry(
-    bd=0,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0
-)
-entry_11.place(
-    x=486.0,
-    y=376.0,
-    width=64.0,
-    height=13.0
-)
-
-entry_image_12 = PhotoImage(file="assets\\window3\\entry_12.png")
-entry_bg_12 = canvas.create_image(
-    435.5,
-    316.5,
-    image=entry_image_12
-)
 # Entry Email
-entry_12 = Entry(
+email = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
-entry_12.place(
-    x=378.0,
-    y=309.0,
-    width=115.0,
+email.place(
+    x=392.0,
+    y=365.0,
+    width=188.0,
     height=13.0
 )
 
-entry_image_13 = PhotoImage(file="assets\\window3\\entry_13.png")
-entry_bg_13 = canvas.create_image(
-    571.5,
-    314.5,
-    image=entry_image_13
-)
-# Entry Permanent Password
-entry_13 = Entry(
+# civil Stats entry
+civil_stats = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
-entry_13.place(
-    x=532.0,
-    y=307.0,
-    width=79.0,
+civil_stats.place(
+    x=300.0,
+    y=223.0,
+    width=91.0,
     height=13.0
 )
+
+# Entry Disability
+disability = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+disability.place(
+    x=442.0,
+    y=223.0,
+    width=63.0,
+    height=13.0
+)
+
+# Entry Contact Number
+contact_number = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+contact_number.place(
+    x=172.0,
+    y=365.0,
+    width=186.0,
+    height=13.0
+)
+
+# Entry Permanent Address
+permanent_adress = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+permanent_adress.place(
+    x=172.0,
+    y=435.0,
+    width=186.0,
+    height=13.0
+)
+
 window.resizable(False, False)
 window.mainloop()

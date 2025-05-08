@@ -10,7 +10,6 @@ def open_window2():
 def logged_in():
     subprocess.Popen(['python', 'window3.py']) 
 
-
 def validate_login():
     input_username = username_entry.get().strip().lower()
     input_password = password_entry.get().strip()
@@ -20,18 +19,18 @@ def validate_login():
         ws = wb.active
 
         for row in ws.iter_rows(min_row=2, values_only=True):
-            account_type = str(row[1]).strip() if row[1] else ""
-            first_name = str(row[2]).strip().lower() if row[2] else ""
-            last_name = str(row[3]).strip().lower() if row[3] else ""
-            password = str(row[-1]).strip() if len(row) > -1 and row[-1] else ""
+            account_types = str(row[1]).strip() if row[1] else ""
+            first_names = str(row[2]).strip().lower() if row[2] else ""
+            last_names = str(row[3]).strip().lower() if row[3] else ""
+            data_passwords = str(row[-1]).strip() if len(row) > -1 and row[-1] else ""
 
-            full_name = f"{first_name} {last_name}".strip() 
+            full_name = f"{first_names} {last_names}".strip() 
             
             # debugging
-            print(f" Account Type:'{account_type}' Username: '{full_name}' Password '{password}'")
+            print(f" Account Type:'{account_types}' Username: '{full_name}' Password '{data_passwords}'")
 
-            if input_username == full_name and input_password == password:
-                messagebox.showinfo("Login", f"Welcome,{account_type.capitalize()} {first_name.capitalize()}!")
+            if input_username == full_name and input_password == data_passwords:
+                messagebox.showinfo("Login", f"Welcome,{account_types.capitalize()} {first_names.capitalize()}!")
                 logged_in()
                 window.destroy()
                 return
