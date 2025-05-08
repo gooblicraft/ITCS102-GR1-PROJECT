@@ -1,4 +1,28 @@
 from tkinter import *
+from openpyxl import *
+from openpyxl.styles import Font
+from openpyxl.utils import get_column_letter 
+from openpyxl import load_workbook
+
+
+def check_name_credentials(file_path, input_first_name, input_last_name):
+    wb = load_workbook(file_path)
+    ws = wb.active
+
+    for row in ws.iter_rows(min_row=2, values_only=True):  # Skip header
+        first_name = row[2]  # Column C
+        last_name = row[3]   # Column D
+
+        if first_name == input_first_name and last_name == input_last_name:
+            print("✔ Match found:")
+            print(row)  # Print the full row
+            return row
+
+    print("✖ No matching credentials found.")
+    return None
+
+# Example usage:
+check_name_credentials("AccountDatabase.xlsx", "Edriane", "Domanico")
 
 window = Tk()
 
@@ -16,7 +40,7 @@ canvas = Canvas(
 )
 
 canvas.place(x = 0, y = 0)
-button_image_1 = PhotoImage(file="beta 0.3\\assets\\frame0\\button_1.png")
+button_image_1 = PhotoImage(file="assets\\window3\\button_1.png")
 button_1 = Button(
     image=button_image_1,
     borderwidth=0,
@@ -31,7 +55,7 @@ button_1.place(
     height=30.0
 )
 
-button_image_2 = PhotoImage(file="beta 0.3\\assets\\frame0\\button_2.png")
+button_image_2 = PhotoImage(file="assets\\window3\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
@@ -46,7 +70,7 @@ button_2.place(
     height=30.0
 )
 
-button_image_3 = PhotoImage(file="beta 0.3\\assets\\frame0\\button_3.png")
+button_image_3 = PhotoImage(file="assets\\window3\\button_3.png")
 button_3 = Button(
     image=button_image_3,
     borderwidth=0,
@@ -61,21 +85,21 @@ button_3.place(
     height=30.0
 )
 
-image_image_1 = PhotoImage(file="beta 0.3\\assets\\frame0\\image_1.png")
+image_image_1 = PhotoImage(file="assets\\window3\\image_1.png")
 image_1 = canvas.create_image(
     175.0,
     87.0,
     image=image_image_1
 )
 
-image_image_2 = PhotoImage(file="beta 0.3\\assets\\frame0\\image_2.png")
+image_image_2 = PhotoImage(file="assets\\window3\\image_2.png")
 image_2 = canvas.create_image(
     208.0,
     140.0,
     image=image_image_2
 )
 
-entry_image_1 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_1.png")
+entry_image_1 = PhotoImage(file="assets\\window3\\entry_1.png")
 entry_bg_1 = canvas.create_image(
     88.5,
     318.0,
@@ -96,7 +120,7 @@ entry_1.place(
     height=13.0
 )
 
-button_image_4 = PhotoImage(file="beta 0.3\\assets\\frame0\\button_4.png")
+button_image_4 = PhotoImage(file="assets\\window3\\button_4.png")
 button_4 = Button(
     image=button_image_4,
     borderwidth=0,
@@ -111,7 +135,7 @@ button_4.place(
     height=38.0
 )
 
-image_image_3 = PhotoImage(file="beta 0.3\\assets\\frame0\\image_3.png")
+image_image_3 = PhotoImage(file="assets\\window3\\image_3.png")
 image_3 = canvas.create_image(
     331.0,
     303.0,
@@ -133,7 +157,7 @@ entry_2.place(
     height=10.0
 )
 
-entry_image_3 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_3.png")
+entry_image_3 = PhotoImage(file="assets\\window3\\entry_3.png")
 entry_bg_3 = canvas.create_image(
     298.5,
     252.5,
@@ -154,7 +178,7 @@ entry_3.place(
     height=13.0
 )
 
-entry_image_4 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_4.png")
+entry_image_4 = PhotoImage(file="assets\\window3\\entry_4.png")
 entry_bg_4 = canvas.create_image(
     299.5,
     519.5,
@@ -176,7 +200,7 @@ entry_4.place(
     height=13.0
 )
 
-entry_image_5 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_5.png")
+entry_image_5 = PhotoImage(file="assets\\window3\\entry_5.png")
 entry_bg_5 = canvas.create_image(
     531.5,
     519.5,
@@ -198,7 +222,7 @@ entry_5.place(
     height=13.0
 )
 
-entry_image_6 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_6.png")
+entry_image_6 = PhotoImage(file="assets\\window3\\entry_6.png")
 entry_bg_6 = canvas.create_image(
     299.5,
     586.5,
@@ -220,7 +244,7 @@ entry_6.place(
     height=13.0
 )
 
-entry_image_7 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_7.png")
+entry_image_7 = PhotoImage(file="assets\\window3\\entry_7.png")
 entry_bg_7 = canvas.create_image(
     524.5,
     252.5,
@@ -242,7 +266,7 @@ entry_7.place(
     height=13.0
 )
 
-entry_image_8 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_8.png")
+entry_image_8 = PhotoImage(file="assets\\window3\\entry_8.png")
 entry_bg_8 = canvas.create_image(
     268.0,
     316.5,
@@ -264,7 +288,7 @@ entry_8.place(
     height=13.0
 )
 
-entry_image_9 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_9.png")
+entry_image_9 = PhotoImage(file="assets\\window3\\entry_9.png")
 entry_bg_9 = canvas.create_image(
     241.5,
     383.5,
@@ -286,7 +310,7 @@ entry_9.place(
     height=13.0
 )
 
-entry_image_10 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_10.png")
+entry_image_10 = PhotoImage(file="assets\\window3\\entry_10.png")
 entry_bg_10 = canvas.create_image(
     386.0,
     383.5,
@@ -307,7 +331,7 @@ entry_10.place(
     height=13.0
 )
 
-entry_image_11 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_11.png")
+entry_image_11 = PhotoImage(file="assets\\window3\\entry_11.png")
 entry_bg_11 = canvas.create_image(
     518.0,
     383.5,
@@ -329,7 +353,7 @@ entry_11.place(
     height=13.0
 )
 
-entry_image_12 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_12.png")
+entry_image_12 = PhotoImage(file="assets\\window3\\entry_12.png")
 entry_bg_12 = canvas.create_image(
     435.5,
     316.5,
@@ -350,7 +374,7 @@ entry_12.place(
     height=13.0
 )
 
-entry_image_13 = PhotoImage(file="beta 0.3\\assets\\frame0\\entry_13.png")
+entry_image_13 = PhotoImage(file="assets\\window3\\entry_13.png")
 entry_bg_13 = canvas.create_image(
     571.5,
     314.5,
