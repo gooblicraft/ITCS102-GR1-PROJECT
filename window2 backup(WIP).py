@@ -6,8 +6,33 @@ import subprocess
 from openpyxl import *
 import random
 from openpyxl import styles
-from openpyxl import utils    
+from openpyxl import utils
+import re    
 import qrcode
+
+# Email Validator + Other Windows
+def email_form(email):
+    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    return re.match(pattern, email)
+
+def validate_email_facilitator():
+    email = email_entry.get().strip()
+    if not email_form(email):
+        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
+        get_pass()
+    else:
+        in_facilitator()
+
+def validate_email_attendee():
+    email = email_entry.get().strip()
+    if not email_form(email):
+        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
+        get_pass()
+    else:
+        in_attendee()
+
+
+
 
 account_set = None
 def in_facilitator():
@@ -112,7 +137,7 @@ def submit_data():
 
         qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
         generate_qr_code(qr_data,last_name)  
-        messagebox.showinfo("Successfully created account and QR code generated.")
+        messagebox.showinfo("Great!","Successfully created account and QR code generated.")
         login()
         return False
     else:
@@ -465,7 +490,7 @@ button_facilitator = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command= in_facilitator,
+    command= validate_email_facilitator,
     relief="flat"
 )
 canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
@@ -478,7 +503,7 @@ button_attendee = Button(
     borderwidth=0,
     border=0,
     highlightthickness=0,
-    command= in_attendee,
+    command= validate_email_attendee,
     relief="flat"
 )
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
