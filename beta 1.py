@@ -145,10 +145,10 @@ class LoginWindow:
 
     def logged_in(self):
         # Pass the account ID to window3.py as an environment variable
-        env = os.environ.copy()
+        pack = os.environ.copy()
         if self.account_id:
-            env['ACCOUNT_ID'] = self.account_id
-        subprocess.Popen(['python', 'window3.py'], env=env)
+            pack['ACCOUNT_ID'] = self.account_id
+        subprocess.Popen(['python', 'window3.py'], env=pack)
 
 if __name__ == "__main__":
     LoginWindow()

@@ -1,18 +1,25 @@
 from tkinter import *
 from tkinter import ttk
 
+# ================= FOR WINDOW 3 ====================
+label_entry_pairs = []  # Each item: (label, entry, entry_place_args, label_place_args)
+
 def create_label_entry_pair(tab, label_text, label_x, label_y, entry_x, entry_y, width=190, height=13,
                             bg="#EEE9E9", fg="#0E3269", font=("JetBrains Mono", 10)):
 
-    label = Label(tab, text=label_text, bg="#EEE9E9", fg="#0E3269", font=("JetBrains Mono", 10))
+    label = Label(tab, text=label_text, bg="#EEE9E9", fg=fg, font=font)
     label.place(x=label_x, y=label_y)
-
+    
     entry = Entry(tab, bg=bg, fg=fg, font=font, bd=0, highlightthickness=0)
     entry.place(x=entry_x, y=entry_y, width=width, height=height)
     entry.place_forget()
 
-    place_args = {"x": entry_x, "y": entry_y, "width": width, "height": height}
-    label_entry_pairs.append((label, entry, place_args))
+    entry_place_args = {"x": entry_x, "y": entry_y, "width": width, "height": height}
+    label_place_args = {"x": label_x, "y": label_y}
+
+    # Save both label + entry and their positions
+    label_entry_pairs.append((label, entry, entry_place_args, label_place_args))
+
 
 # editing = False
 
@@ -40,21 +47,23 @@ editing = False
 def toggle_all():
     global editing
     if not editing:
-        for label, entry, place_args in label_entry_pairs:
+        # Switch from label → entry
+        for label, entry, entry_place_args, _ in label_entry_pairs:
             entry.delete(0, END)
-            entry.insert(0, label['text'])
+            entry.insert(0, label.cget("text"))  # pull label text
             label.place_forget()
-            entry.place(**place_args)  # ✅ Restore position
+            entry.place(**entry_place_args)
         toggle_button.config(text="Save All")
         editing = True
     else:
-        for label, entry, _ in label_entry_pairs:
-            label.config(text=entry.get())
+        # Switch from entry → label (with updated text)
+        for label, entry, _, label_place_args in label_entry_pairs:
+            updated_text = entry.get().strip()
+            label.config(text=updated_text)  # set new label text
             entry.place_forget()
-            label.place()  # It already knows its place
+            label.place(**label_place_args)  # restore original label location
         toggle_button.config(text="Edit All")
         editing = False
-
 
 window = Tk()
 window.geometry("665x640")
@@ -103,11 +112,9 @@ button_image_3 = PhotoImage(file="beta 0.4/assets/frame0/button_3.png")
 button_3 = Button(window, image=button_image_3, borderwidth=0, highlightthickness=0, command=lambda: print("button_3 clicked"), relief="flat")
 button_3.place(x=514.0, y=14.0, width=82.0, height=30.0)
 
-# ============ SECTION FOR LABEL/ENTRY TOGGLING ============
-
-label_entry_pairs = []  # Each item: (label, entry, entry_place_args)
-
 # Create label-entry fields with original styling and positions
+
+# Each item: (What Tab?, entry_x, label x, label_y, entry_x, entry_y, width, height)
 create_label_entry_pair(tab1, "John", 169, 70, 169, 88, 190, 13)
 create_label_entry_pair(tab1, "Doe", 385, 70, 385, 88, 191, 13)
 create_label_entry_pair(tab1, "Filipino", 170, 137, 170, 155, 129, 13)
