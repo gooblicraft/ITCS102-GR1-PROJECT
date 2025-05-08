@@ -99,3 +99,13 @@ Step 6:
 
 
 // Tested by Garcia, 1:38 comment "sakit mo sa ulo log in"
+
+
+# 05/08/2025
+
+- Debugging Log in and Create acc
+- Creating a resizeable window
+- Redesigning all of windows (colors and spacing)
+
+
+// 9:24am,  comment "Bat Ako nagawa huhuhu" 
