@@ -145,8 +145,8 @@ user_type = Entry(
     highlightthickness=0
 )
 user_type.place(
-    x=55.0,
-    y=314.0,
+    x=25.0,
+    y=158.0,
     width=85.0,
     height=10.0
 )
@@ -161,9 +161,9 @@ first_name = Entry(
     highlightthickness=0
 )
 first_name.place(
-    x=200.0,
-    y=145.0,
-    width=191.0,
+    x=169.0,
+    y=88.0,
+    width=190.0,
     height=13.0
 )
 
@@ -177,9 +177,72 @@ last_name = Entry(
     highlightthickness=0
 )
 last_name.place(
-    x=420.0,
-    y=245.0,
+    x=385.0,
+    y=88.0,
     width=191.0,
+    height=13.0
+)
+# Entry Nationality
+nationality = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+nationality.place(
+    x=170.0,
+    y=155.0,
+    width=129.0,
+    height=13.0
+)
+
+# Entry religion
+religion = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+religion.place(
+    x=340.0,
+    y=155.0,
+    width=108.0,
+    height=13.0
+)
+
+# Entry Last Name
+age = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+age.place(
+    x=485.0,
+    y=155.0,
+    width = 78.0,
+    height=13.0
+)
+
+# Entry Last Name
+sex = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+sex.place(
+    x=169.0,
+    y=223.0,
+    width=78.0,
     height=13.0
 )
 
@@ -193,14 +256,44 @@ email = Entry(
     highlightthickness=0
 )
 email.place(
-    x=430.0,
-    y=523.0,
+    x=392.0,
+    y=365.0,
     width=188.0,
     height=13.0
 )
 
-# Entry Perm Adress
-permanent_address = Entry(
+# civil Stats entry
+civil_stats = Entry(
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+civil_stats.place(
+    x=330.0,
+    y=380.0,
+    width=91.0,
+    height=13.0
+)
+
+# Entry Disability
+disability = Entry(
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+disability.place(
+    x=472.0,
+    y=380.0,
+    width=68.0,
+    height=13.0
+)
+
+# Entry Contact Number
+contact_number = Entry(
     tab1,
     bd=0,
     bg="#EEE9E9",
@@ -208,12 +301,13 @@ permanent_address = Entry(
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
-permanent_address.place(
-    x=202.0,
-    y=591.0,
-    width=191.0,
+contact_number.place(
+    x=172.0,
+    y=365.0,
+    width=186.0,
     height=13.0
 )
+
 
 window.resizable(False, False)
 window.mainloop()
