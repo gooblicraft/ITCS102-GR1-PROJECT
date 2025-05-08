@@ -157,6 +157,7 @@ first_name = Entry(
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
+    state="readonly",
     font= ("JetBrains Mono", 10),
     highlightthickness=0
 )
@@ -166,7 +167,9 @@ first_name.place(
     width=190.0,
     height=13.0
 )
-
+first_name.config(state="normal")
+first_name.insert(0, "Test")
+first_name.config(state='readonly')
 # Entry Last Name
 last_name = Entry(
     tab1,

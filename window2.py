@@ -6,7 +6,8 @@ import subprocess
 from openpyxl import *
 import random
 from openpyxl import styles
-from openpyxl import utils    
+from openpyxl import utils
+import re    
 import qrcode
 
 account_set = None
@@ -29,6 +30,28 @@ def in_attendee():
 def login():
     subprocess.Popen(['python', 'window1.py'])
     window.destroy()
+
+
+# Email Validator + Other Windows
+def email_form(email):
+    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    return re.match(pattern, email)
+
+def validate_email_facilitator():
+    email = email_entry.get().strip()
+    if not email_form(email):
+        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
+        get_pass()
+    else:
+        in_facilitator()
+
+def validate_email_attendee():
+    email = email_entry.get().strip()
+    if not email_form(email):
+        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
+        get_pass()
+    else:
+        in_attendee()
 
 #<===================================================== OPENPYXL===================================================>
 
@@ -113,10 +136,12 @@ def submit_data():
         qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
         generate_qr_code(qr_data,last_name)  
 
-        topWindow = Toplevel
-        topWindow.geometry("670x410")
-        topWindow.title("QR Code")
+        # KYLA DITO KA MAG COCODE :) DIME GALIT HEHE
+        # topWindow = Toplevel
+        # topWindow.geometry("670x410")
+        # topWindow.title("QR Code")
         
+
         messagebox.showinfo("Signed Up Successfully","Account and QR Code generated.")
 
         
@@ -341,6 +366,12 @@ canvas.create_window(300, 422, window=rb_no_disable)
 
 # ====================== ENTRY ======================
 
+def limit_length(new_text):
+    return len(new_text) <= 8
+
+charmax = (window.register(limit_length), '%P')
+
+
 # First Name entry
 Fname_entry = Entry(
     bd=0,
@@ -433,7 +464,9 @@ confirm_pass = Entry(
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    highlightthickness=0,
+    validate='key',
+    validatecommand=charmax
 )
 canvas.create_window(540, 470, window=confirm_pass, width=165, height=12)
 
@@ -443,7 +476,9 @@ set_pass= Entry(
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    highlightthickness=0,
+    validate='key',
+    validatecommand=charmax
 )
 canvas.create_window(330, 470, window=set_pass, width=165, height=12)
 
@@ -462,7 +497,7 @@ button_facilitator = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command= in_facilitator,
+    command= validate_email_facilitator,
     relief="flat"
 )
 canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
@@ -475,7 +510,7 @@ button_attendee = Button(
     borderwidth=0,
     border=0,
     highlightthickness=0,
-    command= in_attendee,
+    command= validate_email_attendee,
     relief="flat"
 )
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
