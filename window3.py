@@ -1,5 +1,10 @@
 from tkinter import *
 from tkinter import ttk
+import os
+
+# Nakuha nayung account id, itutugma nalang sa account database then ishoshow dito yung code sa tab1
+account_id = os.environ.get('ACCOUNT_ID')
+print(f"Received Account ID: {account_id}")
 
 window = Tk()
 

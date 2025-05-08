@@ -71,7 +71,6 @@ def on_focusout(entry, placeholder, is_password=False):
         if is_password:
             entry.config(show="")
 
-
 # Entry error for empty space
 def entry_validation():
     student_id = username_entry.get().strip()
@@ -79,12 +78,12 @@ def entry_validation():
 
     if student_id == "" or student_id == "Student ID" or password == "" or password == "Password":
         messagebox.showerror("Input Error", "Please fill up all the boxes.")
+        return
     else:
         messagebox.showinfo("Great!", "You have successfully logged in to your account")
         new_window()
 
 #Window Resize in Center
-
 WindowMaxWidth = 700
 WindowMaxHeight = 600
 
@@ -100,8 +99,6 @@ def on_configure(event):
     if window.state() == 'zoomed':
         window.state('normal')  
         center_window(WindowMaxWidth, WindowMaxHeight)
-
-
 
 window = Tk()
 window.geometry("665x410")
@@ -271,6 +268,5 @@ def new_window():
     man.mainloop()
 
 #resize<<<<<<<<<,
-
 window.bind("<Configure>", on_configure)
 window.mainloop()
