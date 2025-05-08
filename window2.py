@@ -112,7 +112,14 @@ def submit_data():
 
         qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
         generate_qr_code(qr_data,last_name)  
-        messagebox.showinfo("Successfully created account and QR code generated.")
+
+        topWindow = Toplevel
+        topWindow.geometry("670x410")
+        topWindow.title("QR Code")
+        
+        messagebox.showinfo("Signed Up Successfully","Account and QR Code generated.")
+
+        
         login()
         return False
     else:

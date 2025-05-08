@@ -264,6 +264,7 @@ email.place(
 
 # civil Stats entry
 civil_stats = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
@@ -271,14 +272,15 @@ civil_stats = Entry(
     highlightthickness=0
 )
 civil_stats.place(
-    x=330.0,
-    y=380.0,
+    x=300.0,
+    y=223.0,
     width=91.0,
     height=13.0
 )
 
 # Entry Disability
 disability = Entry(
+    tab1,
     bd=0,
     bg="#EEE9E9",
     fg="#0E3269",
@@ -286,9 +288,9 @@ disability = Entry(
     highlightthickness=0
 )
 disability.place(
-    x=472.0,
-    y=380.0,
-    width=68.0,
+    x=442.0,
+    y=223.0,
+    width=63.0,
     height=13.0
 )
 
@@ -308,6 +310,21 @@ contact_number.place(
     height=13.0
 )
 
+# Entry Permanent Address
+permanent_adress = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+permanent_adress.place(
+    x=172.0,
+    y=435.0,
+    width=186.0,
+    height=13.0
+)
 
 window.resizable(False, False)
 window.mainloop()
