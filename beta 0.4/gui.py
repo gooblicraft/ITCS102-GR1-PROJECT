@@ -3,7 +3,7 @@ from tkinter import ttk
 
 window = Tk()
 
-window.geometry("1330x1280")
+window.geometry("665x640")
 window.configure(bg = "#FFFFFF")
 
 # =========== SECTION FOR STYLING TTK ==============
