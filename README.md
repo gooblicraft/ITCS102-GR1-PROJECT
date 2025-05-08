@@ -108,4 +108,11 @@ Step 6:
 - Redesigning all of windows (colors and spacing)
 
 
-// 9:24am,  comment "Bat Ako nagawa huhuhu" 
+// Tested by Garcia, 9:24am comment "Bat Ako nagawa endozo huhuhu" 
+
+- File Placement and File Merging Error Fixed
+- Window 3 objects adjustments (Added Entry/Label for Account Summary) (Demo)
+- Added restriction in Password and Email
+- QR Code that is connected in excel added
+- 
+//  Tested by Domanico, Pineda, Garcia, Tomo, Oabel, 6:09pm comment="buti nalang nafix hahaha yagat"
