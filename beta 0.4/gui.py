@@ -36,8 +36,8 @@ style.map("TNotebook.Tab",
 # ============ SECTION FOR TABS ============
 
 notebook = ttk.Notebook(window, style='TNotebook')
-tab1 = Frame(notebook,bg="#FFFFFF", width=600, height=460)
-tab2 = Frame(notebook)
+tab1 = Frame(notebook,bg="#0E3269", width=600, height=460)
+tab2 = Frame(notebook, bg="#0E3269")
 tab3 = Frame(notebook)
 
 notebook.add(tab1, text="Account tab")
@@ -45,9 +45,9 @@ notebook.add(tab2, text="Scan tab")
 notebook.add(tab3, text="QR tab")
 notebook.place(x=32, y=120)
 canvas = Canvas(
-    window,
+    tab1,
     bg = "#FFFFFF",
-    height = 640,
+    height = 460,
     width = 600,
     bd = 0,
     highlightthickness = 0,
@@ -109,21 +109,111 @@ button_3.place(
 # ============ SECTION FOR IMAGES =============
 
 image_image_1 = PhotoImage(file="beta 0.4\\assets\\frame0\\image_1.png")
-image_1 = canvas.create_image(
-    332.0,
-    57.0,
-    image=image_image_1
-)
+image_1 = Label(window, image=image_image_1, bg="white").place(x=-2, y=2)
+
 image_image_2 = PhotoImage(file="beta 0.4\\assets\\frame0\\image_2.png")
-image_2 = Label(tab1, image=image_image_2)
-image_2.place(
-
-    x=10,
-    y=1
-
-
+image_2 = canvas.create_image(
+    300,
+    230,
+    image=image_image_2
 )
 
+# Type (full_name)
+full_name = Entry(
+    tab1,
+    bd=0,
+    bg="#0E3269",
+    fg="#FFFFFF",
+    font= ("JetBrains Mono", 9),
+    highlightthickness=0,
+    width=155
+)
+full_name.place(
+    x= 7.0,
+    y=130.0,
+    width=121.0,
+    height=13.0
+)
+
+# Entry attendee or facilitator
+user_type = Entry(
+    tab1,
+    bd=0,
+    bg="#9F26C7",
+    fg="#FFFFFF",
+    font= ("JetBrains Mono", 6),
+    highlightthickness=0
+)
+user_type.place(
+    x=55.0,
+    y=314.0,
+    width=85.0,
+    height=10.0
+)
+
+# Entry First Name
+first_name = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+first_name.place(
+    x=200.0,
+    y=145.0,
+    width=191.0,
+    height=13.0
+)
+
+# Entry Last Name
+last_name = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+last_name.place(
+    x=420.0,
+    y=245.0,
+    width=191.0,
+    height=13.0
+)
+
+# Entry Email
+email = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+email.place(
+    x=430.0,
+    y=523.0,
+    width=188.0,
+    height=13.0
+)
+
+# Entry Perm Adress
+permanent_address = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0
+)
+permanent_address.place(
+    x=202.0,
+    y=591.0,
+    width=191.0,
+    height=13.0
+)
 
 window.resizable(False, False)
 window.mainloop()
