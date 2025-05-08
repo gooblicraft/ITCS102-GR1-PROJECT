@@ -10,6 +10,7 @@ from openpyxl import utils
 import re
 
 
+# Email Validator + Other Windows
 def email_form(email):
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
     return re.match(pattern, email)
@@ -28,7 +29,7 @@ def validate_email_attendee():
     else:
         in_attendee()
 
-
+# Other windows <<<<<<<<<<<<<<
 account_set = None
 def in_facilitator():
     global account_set
@@ -315,6 +316,13 @@ canvas.create_window(300, 422, window=rb_no_disable)
 
 # ====================== ENTRY ======================
 
+def limit_length(new_text):
+    return len(new_text) <= 6
+
+
+charmax = (window.register(limit_length), '%P')
+
+
 # First Name entry
 Fname_entry = Entry(
     bd=0,
@@ -407,7 +415,9 @@ confirm_pass = Entry(
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    highlightthickness=0,
+    validate='key',
+    validatecommand=charmax
 )
 canvas.create_window(540, 470, window=confirm_pass, width=165, height=12)
 
@@ -417,7 +427,9 @@ set_pass= Entry(
     bg="#FFFFFF",
     fg="#767676",
     font= ("JetBrains Mono", 10 * -1),
-    highlightthickness=0
+    highlightthickness=0,
+    validate='key',
+    validatecommand=charmax
 )
 canvas.create_window(330, 470, window=set_pass, width=165, height=12)
 
