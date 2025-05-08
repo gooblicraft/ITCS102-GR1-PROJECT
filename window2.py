@@ -67,31 +67,41 @@ def createExcel():
                 "Sex", "Civil Status", "Age", "Disability", "Permanent Address","Password"])  
         workbook.save(filename)
 
-QR_FOLDER = "QR_data"  
+import os
+import qrcode
+from tkinter import *
+from tkinter import messagebox, filedialog
+from PIL import Image, ImageTk
+import random
+from openpyxl import load_workbook
 
-def generate_qr_code(data, last_name, qr_folder=QR_FOLDER):
-    if not os.path.exists(qr_folder):
-        os.makedirs(qr_folder)
-    
+def generate_qr_code(data, last_name):
+    save_path = filedialog.asksaveasfilename(
+        defaultextension=".png",
+        filetypes=[("PNG files", "*.png")],
+        title="Save QR Code As",
+        initialfile=f"{last_name.replace(' ', '_')}_qr"
+    )
+
+    if not save_path:
+        return None  
+
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
     qr.add_data(data)
     qr.make(fit=True)
-    
+
     img = qr.make_image(fill='black', back_color='white')
-    
-    qr_name = last_name.replace(" ", "_")
-    file_path = os.path.join(qr_folder, f"{qr_name}_qr.png")
-    img.save(file_path)
-    print("Saved to absolute path:", os.path.abspath(file_path))
+    img.save(save_path)
+
+    return save_path  
 
 def submit_data():
-    
-    path = filename
+    path = filename  
     workbook = load_workbook(path)
     sheet = workbook.active
 
-    account_id = str(random.randint(10**5, 10**6 -1))
-    account_type = account_set
+    account_id = str(random.randint(10**5, 10**6 - 1))
+    account_type = account_set  
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
     email = email_entry.get()
@@ -103,7 +113,7 @@ def submit_data():
     age = age_entry.get()
     disability = disability_RB.get()
     permanent_address = address_entry.get()
-    password = real_pass
+    password = real_pass  
 
     required_fields = [
         account_id, account_type, first_name, last_name, email,
@@ -115,32 +125,44 @@ def submit_data():
         row_values = required_fields
         sheet.append(row_values)
         workbook.save(path)
-        
+
         data = {
-        "ID Number": account_id,
-        "Account Type": account_type,
-        "First Name": first_name,
-        "Last Name": last_name,
-        "Email": email,
-        "Contact Number": contact_num,
-        "Nationality": nationality,
-        "Religion": religion,
-        "Sex": sex,
-        "Civil Status": civil_status,
-        "Age": age,
-        "Disability": disability,
-        "Permanent Address": permanent_address,
-        "Password": password
+            "ID Number": account_id,
+            "Account Type": account_type,
+            "First Name": first_name,
+            "Last Name": last_name,
+            "Email": email,
+            "Contact Number": contact_num,
+            "Nationality": nationality,
+            "Religion": religion,
+            "Sex": sex,
+            "Civil Status": civil_status,
+            "Age": age,
+            "Disability": disability,
+            "Permanent Address": permanent_address,
+            "Password": password
         }
 
         qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
-        generate_qr_code(qr_data,last_name)  
+        qr_path = generate_qr_code(qr_data, last_name)
 
-        # KYLA DITO KA MAG COCODE :) DIME GALIT HEHE
-        # topWindow = Toplevel
-        # topWindow.geometry("670x410")
-        # topWindow.title("QR Code")
-        
+        if qr_path:
+            
+            topWindow = Toplevel()
+            topWindow.geometry("300x300")
+            topWindow.title("QR Code")
+
+            img = Image.open(qr_path)
+            img = img.resize((250, 250))
+            photo = ImageTk.PhotoImage(img)
+
+            qr_label = Label(topWindow, image=photo)
+            qr_label.image = photo  
+            qr_label.pack(pady=10)
+
+            messagebox.showinfo("Signed Up Successfully", "Account and QR Code generated.")
+        else:
+            messagebox.showwarning("Cancelled", "QR Code was not saved.")
 
         messagebox.showinfo("Signed Up Successfully","Account and QR Code generated.")
 
