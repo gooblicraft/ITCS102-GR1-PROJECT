@@ -2,20 +2,50 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 import os
-from openpyxl import Workbook
+from openpyxl import *
+import openpyxl
+from openpyxl.styles import Font
+from openpyxl.utils import get_column_letter    
+
+def inClick():
+    createExcel()
+    submit_data()
 
 #<===================================================== OPENPYXL===================================================>
 
-filename = "student_scores.xlsx"
+filename = "AccountDatabase.xlsx"
 
 def createExcel():
     if not os.path.exists(filename):
-        wb = Workbook()
-        ws = wb.active
-        ws.append(["Name", "Score", "Result"])  
-        wb.save(filename)
+        workbook = Workbook()
+        ws = workbook.active
+        ws.append(["ID Number","Account Type","First Name", "Last Name", 
+                   "Email","Contact Number", "Nationality", "Religion", 
+                   "Sex", "Civil Status", "Age", "Disability", "Permanent Address","Password"])  
+        workbook.save(filename)
 
+def submit_data():
 
+    path = filename
+    workbook = load_workbook(path)
+    sheet = workbook.active
+
+    first_name = Fname_entry.get()
+    last_name = Lname_entry.get()
+    email = email_entry.get()
+    contact_num = contact_entry.get()
+    nationality = nationality_entry.get()
+    religion = cb_religion.get()
+    sex = cb_sex.get()
+    civil_status = cb_civil_status.get()
+    age = age_entry.get()
+    disability = disability_RB.get()
+    permanent_address = address_entry.get()
+    password = real_pass
+    
+    row_values = [first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
+    sheet.append(row_values)
+    workbook.save(path)
 
 
 
@@ -220,13 +250,12 @@ cb_civil_status.set("Select")
 canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
-disability = IntVar()
-
+disability_RB = StringVar()
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
-    variable=disability, 
-    value="yes",
+    variable=disability_RB, 
+    value=1,
     bg="#ffffff", 
     activebackground="#ffffff", 
     highlightthickness=0, 
@@ -236,64 +265,13 @@ canvas.create_window(250, 422, window=rb_yes_disable)
 rb_no_disable = Radiobutton(
     window, 
     text="no", 
-    variable=disability, 
-    value="no",
+    variable=disability_RB, 
+    value=0,
     bg="#ffffff", 
     activebackground="#ffffff",
     highlightthickness=0, 
     bd=0)
 canvas.create_window(300, 422, window=rb_no_disable)
-
-# ============== BUTTONS ===============
-
-# Button Facilitator
-button_image_2 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_2.png")
-button_facilitator = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="flat"
-)
-canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
-
-
-# Button Attendee
-button_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_3.png")
-button_attendee = Button(
-    image=button_image_3,
-    borderwidth=0,
-    border=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
-
-# Button log im
-button_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_1.png")
-button_logIn = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=get_pass,
-    relief="flat"
-)
-canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
-
-image_image_13 =PhotoImage(file="beta 0.2\\assets\\frame0\\image_13.png")
-image_13 = canvas.create_image(
-    352.0,
-    260.0,
-    image=image_image_13
-)
-
-image_image_15 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_15.png")
-image_15 = canvas.create_image(
-    570.0,
-    263.0,
-    image=image_image_15
-)
 
 # ====================== ENTRY ======================
 
@@ -393,5 +371,58 @@ image_16 = canvas.create_image(
     216.0,
     image=image_image_16
 )
+
+# ============== BUTTONS ===============
+
+# Button Facilitator
+button_image_2 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_2.png")
+button_facilitator = Button(
+    image=button_image_2,
+    borderwidth=0,
+    highlightthickness=0,
+    command= inClick,
+    relief="flat"
+)
+canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
+
+
+# Button Attendee
+button_image_3 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_3.png")
+button_attendee = Button(
+    image=button_image_3,
+    borderwidth=0,
+    border=0,
+    highlightthickness=0,
+    command= inClick,
+    relief="flat"
+)
+canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
+
+# Button log im
+button_image_1 = PhotoImage(file="beta 0.2\\assets\\frame0\\button_1.png")
+button_logIn = Button(
+    image=button_image_1,
+    borderwidth=0,
+    highlightthickness=0,
+    command=get_pass,
+    relief="flat"
+)
+canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
+
+image_image_13 =PhotoImage(file="beta 0.2\\assets\\frame0\\image_13.png")
+image_13 = canvas.create_image(
+    352.0,
+    260.0,
+    image=image_image_13
+)
+
+image_image_15 = PhotoImage(file="beta 0.2\\assets\\frame0\\image_15.png")
+image_15 = canvas.create_image(
+    570.0,
+    263.0,
+    image=image_image_15
+)
+
+
 window.resizable(False, False)
 window.mainloop()
