@@ -38,9 +38,11 @@ style.map("TNotebook.Tab",
 notebook = ttk.Notebook(window, style='TNotebook')
 tab1 = Frame(notebook,bg="#0E3269", width=600, height=500)
 tab2 = Frame(notebook)
+tab3 = Frame(notebook)
 
 notebook.add(tab1, text="Account tab")
 notebook.add(tab2, text="Scan tab")
+notebook.add(tab3, text="QR tab")
 notebook.place(x=32, y=120)
 canvas = Canvas(
     window,
@@ -54,7 +56,7 @@ canvas = Canvas(
 
 canvas.place(x = 0, y = 0)
 
-# ========= SECTION FOR BUTTONS =============
+# ========= SECTION FOR BUTTONS IN WINDOW =============
 
 button_image_1 = PhotoImage(file="beta 0.4\\assets\\frame0\\button_1.png")
 button_1 = Button(
