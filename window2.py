@@ -7,29 +7,31 @@ from openpyxl import *
 import random
 from openpyxl import styles
 from openpyxl import utils    
+import qrcode
 
-account_set = None
 def in_facilitator():
     global account_set
     account_set = "Facilitator"
     createExcel()
-    get_pass()
-    submit_data()
+    if get_pass():
+        submit_data(account_set)
     return account_set
 
 def in_attendee():
     global account_set
     account_set = "Attendee"
     createExcel()
-    get_pass()
-    submit_data()
+    if get_pass():
+        submit_data(account_set)
     return account_set
+
 
 def login():
     subprocess.Popen(['python', 'window1.py'])
     window.destroy()
 
 #<===================================================== OPENPYXL===================================================>
+
 
 filename = "AccountDatabase.xlsx"
 
@@ -42,13 +44,34 @@ def createExcel():
                 "Sex", "Civil Status", "Age", "Disability", "Permanent Address","Password"])  
         workbook.save(filename)
 
-def submit_data():
+QR_FOLDER = "QR_data"  
+
+def generate_qr_code(data, last_name, qr_folder=QR_FOLDER):
+    if not os.path.exists(qr_folder):
+        os.makedirs(qr_folder)
+    
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data(data)
+    qr.make(fit=True)
+    
+    img = qr.make_image(fill='black', back_color='white')
+    
+    qr_name = last_name.replace(" ", "_")
+    file_path = os.path.join(qr_folder, f"{qr_name}_qr.png")
+    img.save(file_path)
+    print("Saved to absolute path:", os.path.abspath(file_path))
+
+def submit_data(account_type):
+
+    if real_pass is None:
+        messagebox.showerror("Error", "Passwords do not match. Please try again.")
+        return  
+    
     path = filename
     workbook = load_workbook(path)
     sheet = workbook.active
 
-    account_id = str(random.randint(10**5, 10**6 - 1))
-    account_type = account_set
+    account_id = str(random.randint(10**5, 10**6 -1))
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
     email = email_entry.get()
@@ -62,21 +85,33 @@ def submit_data():
     permanent_address = address_entry.get()
     password = real_pass
 
-    # Combine all fields to check for emptiness
-    required_fields = [
-        account_id, account_type, first_name, last_name, email,
-        contact_num, nationality, religion, sex, civil_status,
-        age, disability, permanent_address, password
-    ]
+    row_values = [account_id, account_type, first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
+    sheet.append(row_values)
+    workbook.save(path)
 
-    if all(required_fields):
-        row_values = required_fields
-        sheet.append(row_values)
-        workbook.save(path)
-        messagebox.showinfo("Info", "Successfully created account")
-        login()
-    else:
-        messagebox.showerror("Error", "Please fill in all fields before submitting.")
+    data = {
+        "ID Number": account_id,
+        "Account Type": account_type,
+        "First Name": first_name,
+        "Last Name": last_name,
+        "Email": email,
+        "Contact Number": contact_num,
+        "Nationality": nationality,
+        "Religion": religion,
+        "Sex": sex,
+        "Civil Status": civil_status,
+        "Age": age,
+        "Disability": disability,
+        "Permanent Address": permanent_address,
+        "Password": password
+    }
+
+    qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
+    generate_qr_code(qr_data,last_name)  
+
+    messagebox.showinfo("Successfully created account and QR code generated.")
+    login()
+
 
 real_pass = None
 # real password (TRIGGER WINDOW SWITCH)
@@ -88,9 +123,10 @@ def get_pass():
     if pass1 == pass2:
         real_pass = pass1
         print(real_pass)
-        return real_pass
+        return True
     else:
         messagebox.showerror("Error", "Your password doesn't match")
+        return False
 
 window = Tk()
 window.title("Window 2 Create Account")
@@ -263,13 +299,12 @@ canvas.create_window(310, 370, window=cb_sex)
 
 # Combobox Civil Satus
 cb_civil_status = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', width=20, state="readonly")
-cb_civil_status.set("null")
 cb_civil_status.set("Select")
 canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
 disability_RB = StringVar()
-disability_RB.set("null")
+disability_RB.set("N/A")
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
@@ -457,6 +492,7 @@ image_15 = canvas.create_image(
     263.0,
     image=image_image_15
 )
+
 
 window.resizable(False, False)
 window.mainloop()
