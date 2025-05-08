@@ -9,22 +9,22 @@ from openpyxl import styles
 from openpyxl import utils    
 import qrcode
 
+account_set = None
 def in_facilitator():
     global account_set
     account_set = "Facilitator"
     createExcel()
-    if get_pass():
-        submit_data(account_set)
+    get_pass()
+    submit_data()
     return account_set
 
 def in_attendee():
     global account_set
     account_set = "Attendee"
     createExcel()
-    if get_pass():
-        submit_data(account_set)
+    get_pass()
+    submit_data()
     return account_set
-
 
 def login():
     subprocess.Popen(['python', 'window1.py'])
@@ -61,17 +61,14 @@ def generate_qr_code(data, last_name, qr_folder=QR_FOLDER):
     img.save(file_path)
     print("Saved to absolute path:", os.path.abspath(file_path))
 
-def submit_data(account_type):
-
-    if real_pass is None:
-        messagebox.showerror("Error", "Passwords do not match. Please try again.")
-        return  
+def submit_data():
     
     path = filename
     workbook = load_workbook(path)
     sheet = workbook.active
 
     account_id = str(random.randint(10**5, 10**6 -1))
+    account_type = account_set
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
     email = email_entry.get()
@@ -85,11 +82,18 @@ def submit_data(account_type):
     permanent_address = address_entry.get()
     password = real_pass
 
-    row_values = [account_id, account_type, first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, permanent_address, password]
-    sheet.append(row_values)
-    workbook.save(path)
+    required_fields = [
+        account_id, account_type, first_name, last_name, email,
+        contact_num, nationality, religion, sex, civil_status,
+        age, disability, permanent_address, password
+    ]
 
-    data = {
+    if all(required_fields):
+        row_values = required_fields
+        sheet.append(row_values)
+        workbook.save(path)
+        
+        data = {
         "ID Number": account_id,
         "Account Type": account_type,
         "First Name": first_name,
@@ -104,14 +108,15 @@ def submit_data(account_type):
         "Disability": disability,
         "Permanent Address": permanent_address,
         "Password": password
-    }
+        }
 
-    qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
-    generate_qr_code(qr_data,last_name)  
-
-    messagebox.showinfo("Successfully created account and QR code generated.")
-    login()
-
+        qr_data = "\n".join([f"{key}: {value}" for key, value in data.items()])
+        generate_qr_code(qr_data,last_name)  
+        messagebox.showinfo("Successfully created account and QR code generated.")
+        login()
+        return False
+    else:
+        messagebox.showerror("Error", "Please fill in all fields before submitting.")
 
 real_pass = None
 # real password (TRIGGER WINDOW SWITCH)
@@ -123,7 +128,7 @@ def get_pass():
     if pass1 == pass2:
         real_pass = pass1
         print(real_pass)
-        return True
+        return real_pass
     else:
         messagebox.showerror("Error", "Your password doesn't match")
         return False

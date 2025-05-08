@@ -1,46 +1,59 @@
-import openpyxl
-import os
 from tkinter import *
+from tkinter import messagebox
+from openpyxl import Workbook, load_workbook
+import subprocess
 
-# ========== INITIALIZE EXCEL ==========
-def initialize_excel_file():
-    file_name = "karlo.xlsx"
-    sheet_name = "Accounts"
-    if not os.path.exists(file_name):
-        wb = openpyxl.Workbook()
+def open_window2():
+    subprocess.Popen(['python', 'window2.py'])
+    window.destroy()
+    
+def logged_in():
+    subprocess.Popen(['python', 'window3.py']) 
+
+
+def validate_login():
+    input_username = username_entry.get().strip().lower()
+    input_password = password_entry.get().strip()
+    
+    try:
+        wb = load_workbook("AccountDatabase.xlsx")
         ws = wb.active
-        ws.title = sheet_name
-        ws.append(["Student ID", "Password", "Name"])  # Header row
-        wb.save(file_name)
-    else:
-        wb = openpyxl.load_workbook(file_name)
-        if sheet_name not in wb.sheetnames:
-            ws = wb.create_sheet(sheet_name)
-            ws.append(["Student ID", "Password", "Name"])
-            wb.save(file_name)
-        else:
-            ws = wb[sheet_name]
-            if ws.max_row < 1:
-                ws.append(["Student ID", "Password", "Name"])
-                wb.save(file_name)
 
-initialize_excel_file()
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            account_type = str(row[1]).strip() if row[1] else ""
+            first_name = str(row[2]).strip().lower() if row[2] else ""
+            last_name = str(row[3]).strip().lower() if row[3] else ""
+            password = str(row[-1]).strip() if len(row) > -1 and row[-1] else ""
 
-# Show/Hide password logic for main login
+            full_name = f"{first_name} {last_name}".strip() 
+            
+            # debugging
+            print(f" Account Type:'{account_type}' Username: '{full_name}' Password '{password}'")
+
+            if input_username == full_name and input_password == password:
+                messagebox.showinfo("Login", f"Welcome,{account_type.capitalize()} {first_name.capitalize()}!")
+                logged_in()
+                window.destroy()
+                return
+        messagebox.showerror("Login Failed", "Invalid username or password.")
+
+    except FileNotFoundError:
+        messagebox.showerror("File Error", "The file 'AccountDatabase.xlsx' was not found.")
+    
+# Show/Hide password logic via embedded button
 password_visible = False
-
 def toggle_password_button():
     global password_visible
-    if entry_2.get() != "Password":
+    if password_entry.get() != "Password":
         if password_visible:
-            entry_2.config(show="*")
+            password_entry.config(show="*")
             show_button.config(text="Show")
             password_visible = False
         else:
-            entry_2.config(show="")
+            password_entry.config(show="")
             show_button.config(text="Hide")
             password_visible = True
-
+            
 # Placeholder Handling Functions
 def on_entry_click(entry, placeholder, is_password=False):
     if entry.get() == placeholder:
@@ -59,88 +72,41 @@ def on_focusout(entry, placeholder, is_password=False):
         if is_password:
             entry.config(show="")
 
-# ========== LOGIN WITH EXCEL ==========
-def check_credentials(student_id, password):
-    try:
-        wb = openpyxl.load_workbook("karlo.xlsx")
-        sheet = wb["Accounts"]
-        for row in sheet.iter_rows(min_row=2, values_only=True):
-            stored_id = row[0]
-            stored_password = row[1]
-            if student_id == stored_id and password == stored_password:
-                return row[2]
-        return None
-    except Exception as e:
-        print(f"Error reading file: {e}")
-        return None
 
-def handle_login():
-    student_id = entry_1.get()
-    password = entry_2.get()
+# Entry error for empty space
+def entry_validation():
+    student_id = username_entry.get().strip()
+    password = password_entry.get().strip()
 
-    if student_id == "Student ID" or student_id.strip() == "":
-        if password == "Password" or password.strip() == "":
-            warning_label.config(text="Please fill up both forms.")
-        else:
-            warning_label.config(text="Please fill up the Student ID form.")
-    elif password == "Password" or password.strip() == "":
-        warning_label.config(text="Please fill up the Password form.")
+    if student_id == "" or student_id == "Student ID" or password == "" or password == "Password":
+        messagebox.showerror("Input Error", "Please fill up all the boxes.")
     else:
-        warning_label.config(text="")
-        name = check_credentials(student_id, password)
-        if name:
-            warning_label.config(text=f"Welcome, {name}!")
-        else:
-            warning_label.config(text="Invalid Student ID or Password.")
+        messagebox.showinfo("Great!", "You have successfully logged in to your account")
+        new_window()
 
-# ========== CREATE ACCOUNT WINDOW ==========
-def open_create_account():
-    create_accW = Toplevel(window)
-    create_accW.title("Create Account")
-    create_accW.geometry("500x500")
-    create_accW.config(bg="white")
+#Window Resize in Center
 
-    Label(create_accW, text="Create New Account", font=("JetsBrains Mono", 14, "bold"), bg="white").pack(pady=20)
+WindowMaxWidth = 700
+WindowMaxHeight = 600
 
-    Label(create_accW, text="Username", font=("JetsBrains Mono", 10), bg="white").pack()
-    username_entry = Entry(create_accW)
-    username_entry.pack(pady=5)
+def center_window(width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2)
+    y = (screen_height // 2) - (height // 2)
+    window.geometry(f"{width}x{height}+{x}+{y}")
 
-    Label(create_accW, text="Password", font=("JetsBrains Mono", 10), bg="white").pack()
-    password_entry = Entry(create_accW, show="*")
-    password_entry.pack(pady=5)
+def on_configure(event):
+    
+    if window.state() == 'zoomed':
+        window.state('normal')  
+        center_window(WindowMaxWidth, WindowMaxHeight)
 
-    def toggle_create_password():
-        if password_entry.cget('show') == '':
-            password_entry.config(show='*')
-            show_pw_btn.config(text='Show')
-        else:
-            password_entry.config(show='')
-            show_pw_btn.config(text='Hide')
 
-    show_pw_btn = Button(create_accW, text="Show", command=toggle_create_password,
-                         font=("JetBrains Mono", 8), bg="white", bd=0, cursor="hand2")
-    show_pw_btn.pack(pady=2)
 
-    def register_and_close():
-        username = username_entry.get()
-        password = password_entry.get()
-        try:
-            wb = openpyxl.load_workbook("karlo.xlsx")
-            sheet = wb["Accounts"]
-            sheet.append([username, password, username])
-            wb.save("karlo.xlsx")
-            print("Account Created:", username)
-            create_accW.destroy()
-        except Exception as e:
-            print(f"Error saving account: {e}")
-            warning_label.config(text="Error creating account.")
-
-    Button(create_accW, text="Register", font=("JetsBrains Mono", 10), command=register_and_close).pack(pady=20)
-
-# ========== MAIN WINDOW ==========
 window = Tk()
 window.geometry("665x410")
+window.maxsize(WindowMaxWidth, WindowMaxHeight)
 window.configure(bg="#FFFFFF")
 window.title("Window 1")
 
@@ -155,62 +121,119 @@ canvas = Canvas(
 )
 canvas.place(x=0, y=0)
 
-# ========== IMAGES ==========
-image_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_1.png")
-image_1 = canvas.create_image(519.0, 126.0, image=image_image_1)
+# ================= IMAGES =================
+image_image_1 = PhotoImage(
+    file="assets\\window1\\image_1.png")
+image_1 = canvas.create_image(
+    519.0,
+    126.0,
+    image=image_image_1
+)
 
-image_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_2.png")
-image_2 = canvas.create_image(519.0, 190.0, image=image_image_2)
+image_image_2 = PhotoImage(
+    file="assets\\window1\\image_2.png")
+image_2 = canvas.create_image(
+    519.0,
+    190.0,
+    image=image_image_2
+)
 
-image_image_3 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_3.png")
-image_3 = canvas.create_image(140.0, 180.0, image=image_image_3)
+image_image_3 = PhotoImage(
+    file="assets\\window1\\image_3.png")
+image_3 = canvas.create_image(
+    140.0,
+    180.0,
+    image=image_image_3
+)
 
-# ========== LABEL TEXTS ==========
-canvas.create_text(450.0, 286.0, anchor="nw", text="          Forgot Password?", fill="#757575", font=("JetBrains Mono", 10 * -1))
-canvas.create_text(466.0, 76.0, anchor="nw", text="Sign in your account", fill="#757575", font=("JetBrains Mono", 10 * -1))
-canvas.create_text(419.0, 38.0, anchor="nw", text="ScanTracker", fill="#060606", font=("JetBrains Mono", 24, "bold"))
+# ================= LABEL TEXTS =================
+canvas.create_text(
+    450.0,
+    286.0,
+    anchor="nw",
+    text="          Forgot Password?",
+    fill="#757575",
+    font=("JetBrains Mono", 10 * -1)
+)
 
-# ========== ENTRY ==========
-entry_1 = Entry(
+canvas.create_text(
+    466.0,
+    76.0,
+    anchor="nw",
+    text="Sign in your account",
+    fill="#757575",
+    font=("JetBrains Mono", 10 * -1)
+)
+
+canvas.create_text(
+    419.0,
+    38.0,
+    anchor="nw",
+    text="ScanTracker",
+    fill="#060606",
+    font=("JetBrains Mono", 24, "bold")
+)
+
+# ================= ENTRY ==================
+# Student ID Entry
+username_entry = Entry(
     bd=0,
     bg="#AEAEAE",
     fg="#767676",
     highlightthickness=0,
     font=("JetBrains Mono", 10, "bold")
 )
-entry_1.insert(0, "Student ID")
-entry_1.place(x=464.0, y=118.0, width=152.0, height=14.0)
-entry_1.bind("<FocusIn>", lambda event: on_entry_click(entry_1, "Student ID"))
-entry_1.bind("<FocusOut>", lambda event: on_focusout(entry_1, "Student ID"))
+username_entry.insert(0, "Student ID")
+username_entry.place(
+    x=464.0,
+    y=118.0,
+    width=152.0,
+    height=14.0
+)
+# Bindings for Student ID
+username_entry.bind("<FocusIn>", lambda event: on_entry_click(username_entry, "Student ID"))
+username_entry.bind("<FocusOut>", lambda event: on_focusout(username_entry, "Student ID"))
 
-entry_2 = Entry(
+# Password Entry
+password_entry = Entry(
     bd=0,
     bg="#AEAEAE",
     fg="#767676",
     highlightthickness=0,
     font=("JetBrains Mono", 10, "bold")
 )
-entry_2.insert(0, "Password")
-entry_2.place(x=464.0, y=182.0, width=152.0, height=14.0)
-entry_2.bind("<FocusIn>", lambda event: on_entry_click(entry_2, "Password", is_password=True))
-entry_2.bind("<FocusOut>", lambda event: on_focusout(entry_2, "Password", is_password=True))
+password_entry.insert(0, "Password")
+password_entry.place(
+    x=464.0,
+    y=182.0,
+    width=152.0,
+    height=14.0
+)
+# Bindings for Password (with hiding)
+password_entry.bind("<FocusIn>", lambda event: on_entry_click(password_entry, "Password", is_password=True))
+password_entry.bind("<FocusOut>", lambda event: on_focusout(password_entry, "Password", is_password=True))
 
-# ========== WARNING LABEL ==========
-warning_label = Label(window, text="", fg="red", bg="#FFFFFF", font=("JetBrains Mono", 9, "bold"))
-warning_label.place(x=402, y=290)
+#New Window <<<<<<<<<<
+# ================= BUTTONS ================
 
-# ========== BUTTONS ==========
-button_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_1.png")
+# Log in Submit Button
+button_image_1 = PhotoImage(
+    file="assets\\window1\\button_1.png")
 button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=handle_login,
-    relief="flat",
-    cursor="hand2"
+    command=validate_login,
+    relief="flat"
 )
-button_logIn.place(x=402.0, y=224.0, width=234.0, height=59.0)
+button_logIn.place(
+    x=402.0,
+    y=224.0,
+    width=234.0,
+    height=59.0
+)
 
+# Button inside the password entry area
 show_button = Button(
     window,
     text="Show",
@@ -224,16 +247,29 @@ show_button = Button(
 )
 show_button.place(x=568, y=180, width=40, height=18)
 
-button_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_2.png")
+# Button Create Account
+button_image_2 = PhotoImage(
+    file="assets\\window1\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=open_create_account,
-    relief="flat",
-    cursor="hand2"
+    command=open_window2,
+    relief="flat"
 )
-button_2.place(x=402.0, y=325.0, width=234.0, height=57.0)
+button_2.place(
+    x=402.0,
+    y=325.0,
+    width=234.0,
+    height=57.0
+)
 
-window.resizable(False, False)
+#New window (log in page) <<<<<<<<<< 
+def new_window():
+    man = Tk()
+    man.mainloop()
+
+#resize<<<<<<<<<,
+
+window.bind("<Configure>", on_configure)
 window.mainloop()
