@@ -224,7 +224,8 @@ button_logIn = Button(
     borderwidth=0,
     highlightthickness=0,
     command=validate_login,
-    relief="flat"
+    relief="flat",
+    cursor="hand2"
 )
 button_logIn.place(
     x=402.0,
@@ -255,7 +256,8 @@ button_2 = Button(
     borderwidth=0,
     highlightthickness=0,
     command=open_window2,
-    relief="flat"
+    relief="flat",
+    cursor="hand2"
 )
 button_2.place(
     x=402.0,
