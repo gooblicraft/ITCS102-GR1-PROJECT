@@ -156,13 +156,13 @@ canvas = Canvas(
 canvas.place(x=0, y=0)
 
 # ========== IMAGES ==========
-image_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_1.png")
+image_image_1 = PhotoImage(file="assets\\window1\\image_1.png")
 image_1 = canvas.create_image(519.0, 126.0, image=image_image_1)
 
-image_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_2.png")
+image_image_2 = PhotoImage(file="assets\\window1\\image_2.png")
 image_2 = canvas.create_image(519.0, 190.0, image=image_image_2)
 
-image_image_3 = PhotoImage(file="beta 0.1\\assets\\frame0\\image_3.png")
+image_image_3 = PhotoImage(file="assets\\window1\\image_3.png")
 image_3 = canvas.create_image(140.0, 180.0, image=image_image_3)
 
 # ========== LABEL TEXTS ==========
@@ -200,7 +200,7 @@ warning_label = Label(window, text="", fg="red", bg="#FFFFFF", font=("JetBrains 
 warning_label.place(x=402, y=290)
 
 # ========== BUTTONS ==========
-button_image_1 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_1.png")
+button_image_1 = PhotoImage(file="assets\\window1\\button_1.png")
 button_logIn = Button(
     image=button_image_1,
     borderwidth=0,
@@ -224,7 +224,7 @@ show_button = Button(
 )
 show_button.place(x=568, y=180, width=40, height=18)
 
-button_image_2 = PhotoImage(file="beta 0.1\\assets\\frame0\\button_2.png")
+button_image_2 = PhotoImage(file="assets\\window1\\button_2.png")
 button_2 = Button(
     image=button_image_2,
     borderwidth=0,
