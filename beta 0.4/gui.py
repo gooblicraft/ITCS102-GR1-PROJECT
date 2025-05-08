@@ -36,7 +36,7 @@ style.map("TNotebook.Tab",
 # ============ SECTION FOR TABS ============
 
 notebook = ttk.Notebook(window, style='TNotebook')
-tab1 = Frame(notebook,bg="#0E3269", width=600, height=500)
+tab1 = Frame(notebook,bg="#FFFFFF", width=600, height=460)
 tab2 = Frame(notebook)
 tab3 = Frame(notebook)
 
@@ -47,8 +47,8 @@ notebook.place(x=32, y=120)
 canvas = Canvas(
     window,
     bg = "#FFFFFF",
-    height = 115,
-    width = 665,
+    height = 640,
+    width = 600,
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
@@ -57,6 +57,9 @@ canvas = Canvas(
 canvas.place(x = 0, y = 0)
 
 # ========= SECTION FOR BUTTONS IN WINDOW =============
+
+
+
 
 button_image_1 = PhotoImage(file="beta 0.4\\assets\\frame0\\button_1.png")
 button_1 = Button(
@@ -111,6 +114,16 @@ image_1 = canvas.create_image(
     57.0,
     image=image_image_1
 )
+image_image_2 = PhotoImage(file="beta 0.4\\assets\\frame0\\image_2.png")
+image_2 = Label(tab1, image=image_image_2)
+image_2.place(
+
+    x=10,
+    y=1
+
+
+)
+
 
 window.resizable(False, False)
 window.mainloop()
