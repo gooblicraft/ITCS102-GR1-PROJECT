@@ -8,8 +8,8 @@ class LoginWindow:
     def __init__(self):
         self.window = Tk()
         self.window.geometry("665x410")
-        self.window.maxsize(700, 600)
         self.window.configure(bg="#FFFFFF")
+        self.window.resizable(False,False)
         self.window.title("Window 1")
         self.password_visible = False
         self.account_id = None  # Store matched account ID here
