@@ -131,3 +131,11 @@ Step 6:
 
 // Tested by Garcia 9:27pm, comment="do you believe in god?"
 
+- redesigning all the windows
+- updated user restriction in window1
+- fixing window3 (tab, design, etc)
+
+//
+
+//
+
