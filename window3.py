@@ -2,7 +2,14 @@ from openpyxl import load_workbook
 from tkinter import *
 from tkinter import ttk
 import openpyxl
-import os
+import os, webbrowser, subprocess
+
+def logOut():
+    window.destroy()
+    subprocess.Popen(['python', 'window1.py'])
+
+def open_github():
+    webbrowser.open("https://github.com/gooblicraft/ITCS102-GR1-PROJECT")
 
 def save_account_data(account_id):
     try:
@@ -43,6 +50,7 @@ def save_account_data(account_id):
 
 
 def toggle_show():
+    toggle_button_image.configure(file="assets\\window3\\account_tab\\image_btn_edit.png")
     # Get text from entry and update label *before* showing it
     firstName_label.configure(text=firstName_entry.get())
     lastName_label.configure(text=lastName_entry.get())
@@ -85,6 +93,7 @@ def toggle_show():
     toggle_button.configure(text="Edit", command=toggle_edit)
 
 def toggle_edit():
+    toggle_button_image.configure(file="assets\\window3\\account_tab\\image_btn_show.png")
     # Optionally: prefill entry with label text
     firstName_entry.delete(0, 'end')
     firstName_entry.insert(0, firstName_label.cget("text"))
@@ -299,16 +308,16 @@ image_2 = canvas.create_image(300, 230, image=image_image_2)
 
 # ============ SECTION FOR IMAGE BUTTONS ============
 button_image_1 = PhotoImage(file="assets/window3/account_tab/button_1.png")
-button_1 = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("button_1 clicked"), relief="flat")
-button_1.place(x=346.0, y=14.0, width=82.0, height=30.0)
+button_about = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("Github readme will be linked here"), relief="flat")
+button_about.place(x=346.0, y=14.0, width=82.0, height=30.0)
 
 button_image_2 = PhotoImage(file="assets/window3/account_tab/button_2.png")
-button_2 = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command=lambda: print("button_2 clicked"), relief="flat")
-button_2.place(x=430.0, y=14.0, width=82.0, height=30.0)
+button_github = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command=open_github, relief="flat")
+button_github.place(x=430.0, y=14.0, width=82.0, height=30.0)
 
 button_image_3 = PhotoImage(file="assets/window3/account_tab/button_3.png")
-button_3 = Button(window, image=button_image_3, borderwidth=0, highlightthickness=0, command=lambda: print("button_3 clicked"), relief="flat")
-button_3.place(x=514.0, y=14.0, width=82.0, height=30.0)
+button_logOut = Button(window, image=button_image_3, borderwidth=0, highlightthickness=0, command=logOut, relief="flat")
+button_logOut.place(x=514.0, y=14.0, width=82.0, height=30.0)
 
 # ============ SECTION FOR NEEDED WIDGET ============
 firstName_label = Label(tab1,bd=0,text=firstName,bg="#EEE9E9",fg="#0E3269",font= ("JetBrains Mono", 10),highlightthickness=0,width=23,anchor="w")
@@ -453,12 +462,50 @@ permanent_address_entry = Entry(
 )
 permanent_address_entry_canvas = canvas.create_window(262, 442, window=permanent_address_entry, state="hidden")
 
-toggle_button = Button(tab1, text="Edit All", command=toggle_edit)
-toggle_button.place(x=500, y=10)
+accountID_label = Label(
+    tab1,
+    bd=0,
+    text=account_id,
+    bg="#9F26C7",
+    fg="#FFFFFF",
+    font= ("JetBrains Mono", 8),
+    highlightthickness=0,
+    width=10
+)
+canvas.create_window(66, 162, window=accountID_label, state="normal")
 
-save_button = Button(tab1, text="Save", command=lambda: save_account_data(account_id))
-save_button.place(x=420, y=10)
+account_type_label = Label(
+    tab1,
+    bd=0,
+    text=accountType,
+    bg="#FFFFFF",
+    fg="#767676",
+    font= ("Lalezar", 10),
+    highlightthickness=0,
+    width=12
+)
+canvas.create_window(66, 187, window=account_type_label, state="normal")
 
+full_name = f"{firstName_label.cget("text")} {lastName_label.cget("text")}"
+fullName_label = Label(
+    tab1,
+    bd=0,
+    text=full_name,
+    bg="#0E3269",
+    fg="#FFFFFF",
+    font= ("JetBrains Mono", 8),
+    highlightthickness=0,
+    width=16
+)
+canvas.create_window(66, 137, window=fullName_label, state="normal")
+
+toggle_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_edit.png")
+toggle_button = Button(tab1, image=toggle_button_image, borderwidth=0, border=0, highlightthickness=0, relief="flat", command=toggle_edit)
+toggle_button.place(x=380, y=420)
+
+save_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_save.png")
+save_button = Button(tab1, image=save_button_image, borderwidth=0, border=0, highlightthickness=0, relief="flat", command=lambda: save_account_data(account_id))
+save_button.place(x=490, y=420)
 
 # ==================== SECTION FOR TAB 2 (SCAN TAB) =====================================
 # DITO KYLAA :>
