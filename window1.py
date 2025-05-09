@@ -42,8 +42,8 @@ class LoginWindow:
         self.image_2 = PhotoImage(file="assets\\window1\\image_2.png")
         canvas.create_image(519.0, 190.0, image=self.image_2)
 
-        self.image_3 = PhotoImage(file="assets\\window1\\image_3.png")
-        canvas.create_image(140.0, 180.0, image=self.image_3)
+        self.image_3 = PhotoImage(file="assets\\window1(new)\\image (2).png")
+        canvas.create_image(170.0, 205.0, image=self.image_3)
 
         # ========== TEXT ==========
         canvas.create_text(450.0, 286.0, anchor="nw", text="          Forgot Password?",
@@ -56,10 +56,10 @@ class LoginWindow:
         # ========== ENTRY FIELDS ==========
         self.username_entry = Entry(bd=0, bg="#AEAEAE", fg="#767676",
                                     highlightthickness=0, font=("JetBrains Mono", 10, "bold"))
-        self.username_entry.insert(0, "Student ID")
+        self.username_entry.insert(0, "Username")
         self.username_entry.place(x=464.0, y=118.0, width=152.0, height=14.0)
-        self.username_entry.bind("<FocusIn>", lambda e: self.on_entry_click(self.username_entry, "Student ID"))
-        self.username_entry.bind("<FocusOut>", lambda e: self.on_focusout(self.username_entry, "Student ID"))
+        self.username_entry.bind("<FocusIn>", lambda e: self.on_entry_click(self.username_entry, "Username"))
+        self.username_entry.bind("<FocusOut>", lambda e: self.on_focusout(self.username_entry, "Username"))
 
         self.password_entry = Entry(bd=0, bg="#AEAEAE", fg="#767676",
                                     highlightthickness=0, font=("JetBrains Mono", 10, "bold"))
@@ -69,7 +69,7 @@ class LoginWindow:
         self.password_entry.bind("<FocusOut>", lambda e: self.on_focusout(self.password_entry, "Password", True))
 
         # ========== BUTTONS ==========
-        self.button_image_1 = PhotoImage(file="assets\\window1\\button_1.png")
+        self.button_image_1 = PhotoImage(file="assets\\window1(new)\\Login.png")
         Button(image=self.button_image_1, borderwidth=0, highlightthickness=0,
             command=self.validate_login, relief="flat", cursor="hand2").place(
             x=402.0, y=224.0, width=234.0, height=59.0)
@@ -79,7 +79,7 @@ class LoginWindow:
                                 activebackground="#AEAEAE", fg="gray25", cursor="hand2")
         self.show_button.place(x=568, y=180, width=40, height=18)
 
-        self.button_image_2 = PhotoImage(file="assets\\window1\\button_2.png")
+        self.button_image_2 = PhotoImage(file="assets\\window1(new)\\create.png")
         Button(image=self.button_image_2, borderwidth=0, highlightthickness=0,
             command=self.open_window2, relief="flat", cursor="hand2").place(
             x=402.0, y=325.0, width=234.0, height=57.0)
