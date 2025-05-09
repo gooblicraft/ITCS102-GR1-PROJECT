@@ -4,7 +4,7 @@ from tkinter import ttk
 from openpyxl import *
 from openpyxl import styles
 from openpyxl import utils 
-import qrcode, os, re, subprocess, random
+import qrcode , os, re, subprocess, random
 from PIL import Image, ImageTk
 
 account_set = None
@@ -20,7 +20,7 @@ def in_attendee():
     global account_set
     account_set = "Attendee"
     createExcel()
-    get_pass()
+    get_pass()  
     submit_data()
     return account_set
 
@@ -103,7 +103,61 @@ def submit_data():
     disability = disability_RB.get()
     permanent_address = address_entry.get()
     password = real_pass  
+    
+# ===================================================== User Restrictions ====================================================================
+    
+    # First Name
+    if len(first_name) < 2 or not re.match(r"^[A-Za-z\s]+$", first_name):
+        messagebox.showerror("Invalid First Name", "First Name must be at least 2 letters.")
+        return
+    
+    if not re.match(r"^[A-Za-z\s]+$", first_name):
+        messagebox.showerror("Invalid First Name", "First Name can only contain letters.")
+        return
+    
+    # Last Name
+    if len(last_name) < 2 or not re.match(r"^[A-Za-z\s]+$", last_name):
+        messagebox.showerror("Invalid Last Name", "Last Name must be at least 2 letters.")
+        return
+    
+    if not re.match(r"^[A-Za-z\s]+$", last_name):
+        messagebox.showerror("Invalid Last Name", "Last Name can only contain letters.")
+        return
+    
+    # Contact Number
+    if not contact_num:
+        messagebox.showerror("Invalid Contact Number", "Please enter a contact number.")
+        return
+    
+    if len(contact_num) != 11:
+        messagebox.showerror("Invalid Contact Number", "Contact number must be exactly 11 digits.")
+        return
+    
+    # Age entry
+    age_string = age_entry.get().strip()
+    if not age_string.isdigit():
+        messagebox.showerror("Invalid Age","Please provide your age to proceed.")
+        return
+    age = int(age_string)
+    
+    # Civil Status
+    if civil_status == "Married" and age <= 17:
+        messagebox.showerror("Invalid Civil Status", "You must be 18 and about to get married.")
 
+    # Nationality
+    if not re.match(r"^[A-Za-z\s]+$", nationality):
+        messagebox.showerror("Invalid Nationality", "Nationality can only contain letters.")
+        return
+    
+    if len(nationality) < 4 or not re.match(r"^[A-Za-z\s]+$", nationality):
+        messagebox.showerror("Invalid Nationality", "Nationality must be at least 4 letters.")
+        return
+    
+    # Permanent Address
+    if len(permanent_address) < 10:
+        messagebox.showerror("Invalid Address", "Please input a valid permanent address.")
+        return
+    
     required_fields = [
         account_id, account_type, first_name, last_name, email,
         contact_num, nationality, religion, sex, civil_status,

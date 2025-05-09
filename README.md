@@ -126,3 +126,8 @@ Step 6:
 
 // Tested by Kyla, Domanico, Tomo, Garcia 2:08pm 
 
+- added more user entry restrictions
+- fixing possible bugs
+
+// Tested by Garcia 9:27pm, comment="do you believe in god?"
+
