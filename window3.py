@@ -4,6 +4,44 @@ from tkinter import ttk
 import openpyxl
 import os
 
+def save_account_data(account_id):
+    try:
+        wb = load_workbook("AccountDatabase.xlsx")
+        ws = wb.active
+
+        # Find the header row to map column indices
+        headers = [cell.value for cell in ws[1]]
+
+        # Build a dict of updated values from the form
+        updated_data = {
+            "First Name": firstName_entry.get(),
+            "Last Name": lastName_entry.get(),
+            "Email": email_entry.get(),
+            "Contact Number": contact_number_entry.get(),
+            "Nationality": nationality_entry.get(),
+            "Religion": religion_combobox.get(),
+            "Sex": sex_combobox.get(),
+            "Civil Status": civil_status_combobox.get(),
+            "Age": age_entry.get(),
+            "Disability": isDisability_entry.get(),
+            "Permanent Address": permanent_address_entry.get()
+        }
+
+        for row in ws.iter_rows(min_row=2):
+            if str(row[0].value).strip() == account_id:
+                for cell in row:
+                    header = headers[cell.column - 1]
+                    if header in updated_data:
+                        cell.value = updated_data[header]
+                wb.save("AccountDatabase.xlsx")
+                print("Account data updated successfully.")
+                return
+        print("Account ID not found.")
+
+    except FileNotFoundError:
+        print("ERROR: AccountDatabase.xlsx not found.")
+
+
 def toggle_show():
     # Get text from entry and update label *before* showing it
     firstName_label.configure(text=firstName_entry.get())
@@ -417,6 +455,10 @@ permanent_address_entry_canvas = canvas.create_window(262, 442, window=permanent
 
 toggle_button = Button(tab1, text="Edit All", command=toggle_edit)
 toggle_button.place(x=500, y=10)
+
+save_button = Button(tab1, text="Save", command=lambda: save_account_data(account_id))
+save_button.place(x=420, y=10)
+
 
 # ==================== SECTION FOR TAB 2 (SCAN TAB) =====================================
 # DITO KYLAA :>
