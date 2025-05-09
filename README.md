@@ -137,7 +137,7 @@ Step 6:
 
 // Tested by Domanico, Garcia, Oabel, Tomo 11:45pm, comment="aaaaaaaa"
 
-- Window 3 can modify all of the user infos and save/overwrite it in excel
+- Window 3 tab1 can modify all of the user infos and save/overwrite it in excel
 - Done in Design in window 1 and 2
 - fixed merging bug (part2)
 
