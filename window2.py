@@ -252,6 +252,7 @@ real_pass = None
 
 window = Tk()
 window.title("Window 2 Create Account")
+window.iconbitmap("assets\\logo.ico")
 window.geometry("670x590")
 window.configure(bg = "#FFFFFF")
 

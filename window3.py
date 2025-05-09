@@ -273,6 +273,7 @@ else:
 
 window = Tk()
 window.geometry("665x640")
+window.iconbitmap("assets\\logo.ico")
 window.configure(bg="#FFFFFF")
 
 # =========== SECTION FOR STYLING TTK ==============

@@ -8,6 +8,7 @@ class LoginWindow:
     def __init__(self):
         self.window = Tk()
         self.window.geometry("665x410")
+        self.window.iconbitmap("assets\\logo.ico")
         self.window.resizable(False,False)
         self.window.configure(bg="#FFFFFF")
         self.window.title("Window 1")
