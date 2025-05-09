@@ -3,6 +3,17 @@ from tkinter import *
 from tkinter import ttk
 import openpyxl
 import os, webbrowser, subprocess
+import os
+import datetime
+from openpyxl import Workbook, load_workbook
+from tkinter import messagebox
+import cv2
+import qrcode
+from pyzbar.pyzbar import decode
+from PIL import Image, ImageTk
+import threading
+import random
+import time
 
 def logOut():
     window.destroy()
@@ -524,12 +535,190 @@ fullName_label = Label(
 )
 canvas.create_window(66, 137, window=fullName_label, state="normal")
 
-# ==================== SECTION FOR TAB 2 (SCAN TAB) =====================================
-# DITO KYLAA :>
+
+# MOST COMPLICATED RAAAAAAAAAAAAAAAAAHHHHHHHHHHH
+
+attendance_filename = "AttendanceDatabase.xlsx"
+clock_in_status = {} 
+total_time_ins = 0  
+
+def createAttendanceExcel():
+    if not os.path.exists(attendance_filename):
+        workbook = Workbook()
+        sheet = workbook.active
+        sheet.append(["Account ID", "First Name", "Last Name", "Sex", "Age", "Date", "Time In", "Time Out", "Status"])
+        workbook.save(attendance_filename)
+
+def time_in(account_id, first_name, last_name, sex, age, timestamp):
+    global total_time_ins
+    
+    if account_id in clock_in_status:
+        last_time_in = clock_in_status[account_id]["time_in"]
+        current_time = datetime.now()
+
+        if current_time - last_time_in < timedelta(hours=1):
+            time_left = timedelta(hours=1) - (current_time - last_time_in)
+            messagebox.showerror("Cooldown Error", f"You can only clock in again after {time_left}.")
+            return
+
+    clock_in_status[account_id] = {"status": "Present", "time_in": timestamp}
+    total_time_ins += 1  # Increase the total time-in count
+
+    log_attendance(account_id, first_name, last_name, sex, age, "Present", timestamp, None)
+    messagebox.showinfo("Successfully Timed In", f"{first_name} {last_name} has timed in at {timestamp}")
+
+def time_out(account_id, first_name, last_name, sex, age, timestamp):
+    time_in_time = clock_in_status.get(account_id, {}).get("time_in", None)
+    if not time_in_time:
+        messagebox.showerror("Error", f"{first_name} {last_name} was not time-in.")
+        return
+
+    log_attendance(account_id, first_name, last_name, sex, age, "Present", time_in_time, timestamp)
+    
+    del clock_in_status[account_id]  
+
+    messagebox.showinfo("Time Out", f"{first_name} {last_name} has timed out at {timestamp}")
+
+def log_attendance(account_id, first_name, last_name, sex, age, status, time_in_time, time_out_time):
+    if not os.path.exists(attendance_filename):
+        createAttendanceExcel()
+
+    workbook = load_workbook(attendance_filename)
+    sheet = workbook.active
+
+    row_to_update = None
+    for row in sheet.iter_rows(min_row=2, values_only=False):
+        if row[0].value == account_id and row[8].value == "Present":  
+            row_to_update = row
+            break
+
+    if row_to_update:
+        row_to_update[7].value = time_out_time.split(" ")[1][:5] if time_out_time else "" 
+    else:
+        sheet.append([account_id, first_name, last_name, sex, age, time_in_time.split(" ")[0], time_in_time.split(" ")[1][:5], time_out_time.split(" ")[1][:5] if time_out_time else "", "Present"])
+
+    workbook.save(attendance_filename)
+
+    write_present_count(sheet)
+
+def write_present_count(sheet):
+    global total_time_ins
+    
+    for row in sheet.iter_rows(min_row=2, values_only=False):
+        if row[0].value == "Total Present":
+            sheet.delete_rows(row[0].row)
+
+    sheet.append(["Total Present", total_time_ins, "", "", "", "", "", ""])
+
+    sheet.parent.save(attendance_filename)
+
+def process_qr_data(data):
+    try:
+        user_data = data.split("\n")
+        user_info = {item.split(":")[0].strip(): item.split(":")[1].strip() for item in user_data}
+
+        account_id = user_info.get("ID Number")
+        first_name = user_info.get("First Name")
+        last_name = user_info.get("Last Name")
+        sex = user_info.get("Sex")
+        age = user_info.get("Age")
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+
+        if not account_id:
+            messagebox.showerror("Error", "QR Code is missing Account ID.")
+            return
+
+     
+        if account_id in clock_in_status:
+            time_out(account_id, first_name, last_name, sex, age, timestamp)
+        else:
+            time_in(account_id, first_name, last_name, sex, age, timestamp)
+
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to process QR code: {e}")
 
 
-# ==================== SECTION FOR TAB 3 (QR SHOW TAB) =====================================
-# DITO KYLAA :>
+video_frame = Frame(tab2, width=320, height=240)
+video_frame.place(relx=0.5, rely=0.5, anchor="center") 
+
+video_label = Label(video_frame) 
+video_label.pack(fill="both", expand=True)
+
+cap = None
+
+def start_scanning():
+    global cap
+    if cap is None or not cap.isOpened():
+        cap = cv2.VideoCapture(0)  
+        if not cap.isOpened():
+            messagebox.showerror("Error", "Failed to open the webcam.")
+            return
+        update_frame()  
+
+def update_frame():
+    if cap is None or not cap.isOpened():
+        return
+
+    ret, frame = cap.read()
+    if not ret:
+        messagebox.showerror("Error", "Failed to capture image from webcam")
+        return
+
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    img = Image.fromarray(frame_rgb)
+    img = img.resize((320, 240))  
+    img_tk = ImageTk.PhotoImage(img)
+
+
+    video_label.img_tk = img_tk  
+    video_label.config(image=img_tk)
+
+    decoded_objects = decode(frame)
+    for obj in decoded_objects:
+        qr_data = obj.data.decode('utf-8')
+        qr_type = obj.type
+        if qr_type == "QRCODE":
+           
+            process_qr_data(qr_data)
+            break  
+
+    tab2.after(20, update_frame) 
+
+start_scanning()
+
+
+
+#==================== SECTION FOR TAB 3 (QR SHOW TAB) =====================================
+
+
+# def show_user_data(account_id):
+#     path = "AccountDatabase.xlsx"
+#     workbook = load_workbook(path)
+#     sheet = workbook.active
+    
+#     for row in sheet.iter_rows(min_row=2, values_only=True):
+#         if row[0] == account_id:  
+#             first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, address, password = row[2:14]
+#             break
+
+#     user_data = f"ID: {account_id}\nName: {first_name} {last_name}\nEmail: {email}\nContact: {contact_num}\nNationality: {nationality}\nReligion: {religion}\nSex: {sex}\nCivil Status: {civil_status}\nAge: {age}\nDisability: {disability}\nAddress: {address}"
+
+#     qr_path = generate_qr_code(user_data, last_name)
+
+
+#     # Display user data
+#     user_info_label = Label(tab3, text=user_data, justify="left", font=("Arial", 10))
+#     user_info_label.pack(pady=20)
+
+#     if qr_path:
+#         img = Image.open(qr_path)
+#         img = img.resize((150, 150))  # Resize image to fit the window
+#         photo = ImageTk.PhotoImage(img)
+
+#         qr_label = Label(tab3, image=photo)
+#         qr_label.image = photo 
+#         qr_label.pack(pady=20)
 
 
 # ==================== SECTION FOR TAB 4 (ATTENDANCE TAB) =====================================
