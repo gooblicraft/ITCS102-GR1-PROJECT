@@ -143,10 +143,16 @@ Step 6:
 
 // Tested by Domanico, Garcia 1:26am comment="Lets go Team"
 
-
 - Also added Account Id in Username for the user logIn
 - fixing entry and label format in window3 tab1
 - More functionality in window3 tab1
 
 // Tested by Domanico, Garcia 3:24am comment= "Kakayanin"
+
+- Scanner feature added  
+- forgot password feature fixed
+
+// Pineda, Domanico, Garcia 4:18am comment= "alas quatro"
+
+
 
