@@ -14,13 +14,13 @@ def load_account_data(account_id):
                 print(f"Details for Account ID: {account_id}")
                 for header, value in zip(headers, row):
                     
-                    if header == "ID Number":
-                        accountID = value
-                        print(f"Account ID: {accountID}")
-                    elif header == "Account Type":
-                        accountType = value
-                        print(f"Account Type: {accountType}")
-                    # print(f"{header}: {value}")
+                    # if header == "ID Number":
+                    #     accountID = value
+                    #     print(f"Account ID: {accountID}")
+                    # elif header == "Account Type":
+                    #     accountType = value
+                    #     print(f"Account Type: {accountType}")
+                     print(f"{header}: {value}")
                 return
 
         print(f"Account ID {account_id} not found.")

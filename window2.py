@@ -181,7 +181,7 @@ def get_pass():
 
 window = Tk()
 window.title("Window 2 Create Account")
-window.geometry("670x410")
+window.geometry("670x590")
 window.configure(bg = "#FFFFFF")
 
 # Styling ttk 
@@ -205,7 +205,7 @@ style.configure('Custom.TCombobox',
 canvas = Canvas(
     window,
     bg = "#FFFFFF",
-    height = 410,
+    height = 590,
     width = 665,
     bd = 0,
     highlightthickness = 0,
@@ -214,9 +214,9 @@ canvas = Canvas(
 )
 
 canvas.place(x = 0, y = 0)
-y_scroll = Scrollbar(window, orient="vertical", command=canvas.yview)
-canvas.config(yscrollcommand=y_scroll.set)
-y_scroll.place(x=651, y=0, height=410)
+# y_scroll = Scrollbar(window, orient="vertical", command=canvas.yview)
+# canvas.config(yscrollcommand=y_scroll.set)
+# y_scroll.place(x=651, y=0, height=410)
 
 canvas.create_text(
     76.0,
