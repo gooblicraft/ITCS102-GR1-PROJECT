@@ -76,7 +76,7 @@ def toggle_show():
     contact_number_label.configure(text=contact_number_entry.get())
     email_label.configure(text=email_entry.get())
     permanent_address_label.configure(text=permanent_address_entry.get())
-    
+
     # Show label
     canvas.itemconfigure(firstName_label_canvas, state='normal')
     canvas.itemconfigure(lastName_label_canvas, state='normal')
