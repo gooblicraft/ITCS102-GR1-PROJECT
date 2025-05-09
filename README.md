@@ -143,3 +143,9 @@ Step 6:
 
 // Tested by Domanico, Garcia 1:26am comment="Lets go Team"
 
+
+- Also added Account Id in Username for the user logIn
+- fixing entry and label format in window3 tab1
+
+// Tested by Domanico, Garcia 3:24am comment= ""
+
