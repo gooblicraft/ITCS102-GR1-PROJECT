@@ -1,14 +1,11 @@
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox, filedialog
 from tkinter import ttk
-import os
-import subprocess
 from openpyxl import *
-import random
 from openpyxl import styles
-from openpyxl import utils
-import re    
-import qrcode
+from openpyxl import utils 
+import qrcode, os, re, subprocess, random
+from PIL import Image, ImageTk
 
 account_set = None
 def in_facilitator():
@@ -66,14 +63,6 @@ def createExcel():
                 "Email","Contact Number", "Nationality", "Religion", 
                 "Sex", "Civil Status", "Age", "Disability", "Permanent Address","Password"])  
         workbook.save(filename)
-
-import os
-import qrcode
-from tkinter import *
-from tkinter import messagebox, filedialog
-from PIL import Image, ImageTk
-import random
-from openpyxl import load_workbook
 
 def generate_qr_code(data, last_name):
     save_path = filedialog.asksaveasfilename(
@@ -147,20 +136,23 @@ def submit_data():
         qr_path = generate_qr_code(qr_data, last_name)
 
         if qr_path:
-            
+            window.withdraw()
             topWindow = Toplevel()
             topWindow.geometry("300x300")
+            topWindow.resizable(False,False)
             topWindow.title("QR Code")
 
             img = Image.open(qr_path)
             img = img.resize((250, 250))
             photo = ImageTk.PhotoImage(img)
 
+            successful_label =Label(topWindow, text="Signed Up Successfully, Account and QR Code generated.")
+            successful_label.pack(pady=10)
             qr_label = Label(topWindow, image=photo)
             qr_label.image = photo  
             qr_label.pack(pady=10)
 
-            messagebox.showinfo("Signed Up Successfully", "Account and QR Code generated.")
+            # messagebox.showinfo("Signed Up Successfully", "Account and QR Code generated.")
         else:
             messagebox.showwarning("Cancelled", "QR Code was not saved.")
 
