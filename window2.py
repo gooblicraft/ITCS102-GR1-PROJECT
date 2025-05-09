@@ -12,15 +12,13 @@ def in_facilitator():
     global account_set
     account_set = "Facilitator"
     createExcel()
-    get_pass()
     submit_data()
     return account_set
 
 def in_attendee():
     global account_set
     account_set = "Attendee"
-    createExcel()
-    get_pass()  
+    createExcel() 
     submit_data()
     return account_set
 
@@ -169,6 +167,25 @@ def submit_data():
     if len(permanent_address) < 10:
         messagebox.showerror("Invalid Address", "Please input a valid permanent address.")
         return
+
+    # Password
+    pass1 = confirm_pass.get()
+    pass2 = set_pass.get()
+
+    if not pass1 or not pass2:
+        messagebox.showerror("Invalid Password", "Both password fields are required.")
+        return
+
+    if pass1 != pass2:
+        messagebox.showerror("Password Mismatch", "Passwords do not match.")
+        return
+    
+    if len(pass1) < 8 or len(pass2) < 8:
+        messagebox.showerror("Invalid Password", "Password must be at least 8 characters long.")
+        return
+
+    password = pass1
+
     
     required_fields = [
         account_id, account_type, first_name, last_name, email,
@@ -230,19 +247,6 @@ def submit_data():
         messagebox.showerror("Error", "Please fill in all fields before submitting.")
 
 real_pass = None
-# real password (TRIGGER WINDOW SWITCH)
-def get_pass():
-    global real_pass
-    pass1 = confirm_pass.get()
-    pass2 = set_pass.get()
-
-    if pass1 == pass2:
-        real_pass = pass1
-        print(real_pass)
-        return real_pass
-    else:
-        messagebox.showerror("Error", "Your password doesn't match")
-        return False
 
 window = Tk()
 window.title("Window 2 Create Account")
