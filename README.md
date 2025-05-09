@@ -135,7 +135,11 @@ Step 6:
 - updated user restriction in window1
 - fixing window3 (tab, design, etc)
 
-//
+// Tested by Domanico, Garcia, Oabel, Tomo 11:45pm, comment="aaaaaaaa"
 
-//
+- Window 3 tab1 can modify all of the user infos and save/overwrite it in excel
+- Done in Design in window 1 and 2
+- fixed merging bug (part2)
+
+// Tested by Domanico, Garcia 1:26am comment="Lets go Team"
 
