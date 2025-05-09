@@ -12,7 +12,11 @@ def toggle_show():
     religion_label.configure(text=religion_combobox.get())
     age_label.configure(text=age_entry.get())
     sex_label.configure(text=sex_combobox.get())
-    sex_label.configure(text=civil_status_combobox.get())
+    civil_status_label.configure(text=civil_status_combobox.get())
+    isDisability_label.configure(text=isDisability_entry.get())
+    contact_number_label.configure(text=contact_number_entry.get())
+    email_label.configure(text=email_entry.get())
+    permanent_address_label.configure(text=permanent_address_entry.get())
 
     # Show label
     canvas.itemconfigure(firstName_label_canvas, state='normal')
@@ -22,6 +26,10 @@ def toggle_show():
     canvas.itemconfigure(age_label_canvas, state='normal')
     canvas.itemconfigure(sex_label_canvas, state='normal')
     canvas.itemconfigure(civil_status_label_canvas, state='normal')
+    canvas.itemconfigure(isDisability_label_canvas, state='normal')
+    canvas.itemconfigure(contact_number_label_canvas, state='normal')
+    canvas.itemconfigure(email_label_canvas, state='normal')
+    canvas.itemconfigure(permanent_address_label_canvas, state='normal')
     
     # Hide entry
     canvas.itemconfigure(firstName_entry_canvas, state='hidden')
@@ -31,6 +39,10 @@ def toggle_show():
     canvas.itemconfigure(age_entry_canvas, state='hidden')
     canvas.itemconfigure(sex_combobox_canvas, state='hidden')
     canvas.itemconfigure(civil_status_combobox_canvas, state='hidden')
+    canvas.itemconfigure(isDisability_entry_canvas, state='hidden')
+    canvas.itemconfigure(contact_number_entry_canvas, state='hidden')
+    canvas.itemconfigure(email_entry_canvas, state='hidden')
+    canvas.itemconfigure(permanent_address_entry_canvas, state='hidden')
     
     toggle_button.configure(text="Edit", command=toggle_edit)
 
@@ -55,7 +67,19 @@ def toggle_edit():
     sex_combobox.insert(0, sex_label.cget("text"))
     
     civil_status_combobox.delete(0, 'end')
-    civil_status_combobox.insert(0, sex_label.cget("text"))
+    civil_status_combobox.insert(0, civil_status_label.cget("text"))
+    
+    isDisability_entry.delete(0, 'end')
+    isDisability_entry.insert(0, isDisability_label.cget("text"))
+    
+    contact_number_entry.delete(0, 'end')
+    contact_number_entry.insert(0, contact_number_label.cget("text"))
+    
+    email_entry.delete(0, 'end')
+    email_entry.insert(0, email_label.cget("text"))
+    
+    permanent_address_entry.delete(0, 'end')
+    permanent_address_entry.insert(0, permanent_address_label.cget("text"))
     
     # Hide label
     canvas.itemconfigure(firstName_label_canvas, state='hidden')
@@ -65,6 +89,10 @@ def toggle_edit():
     canvas.itemconfigure(age_label_canvas, state='hidden')
     canvas.itemconfigure(sex_label_canvas, state='hidden')
     canvas.itemconfigure(civil_status_label_canvas, state='hidden')
+    canvas.itemconfigure(isDisability_label_canvas, state='hidden')
+    canvas.itemconfigure(contact_number_label_canvas, state='hidden')
+    canvas.itemconfigure(email_label_canvas, state='hidden')
+    canvas.itemconfigure(permanent_address_label_canvas, state='hidden')
     
     # Show entry
     canvas.itemconfigure(firstName_entry_canvas, state='normal')
@@ -74,6 +102,10 @@ def toggle_edit():
     canvas.itemconfigure(age_entry_canvas, state='normal')
     canvas.itemconfigure(sex_combobox_canvas, state='normal')
     canvas.itemconfigure(civil_status_combobox_canvas, state='normal')
+    canvas.itemconfigure(isDisability_entry_canvas, state='normal')
+    canvas.itemconfigure(contact_number_entry_canvas, state='normal')
+    canvas.itemconfigure(email_entry_canvas, state='normal')
+    canvas.itemconfigure(permanent_address_entry_canvas, state='normal')
     
     toggle_button.configure(text="Show", command=toggle_show)
     
@@ -203,8 +235,8 @@ style.map("TNotebook.Tab", background=[("selected", "#0E3269")], foreground=[("s
 
 # ============ SECTION FOR TABS ============
 notebook = ttk.Notebook(window, style='TNotebook')
-tab1 = Frame(notebook, bg="#FFFFFF", width=600, height=460)
-tab2 = Frame(notebook, bg="#0E3269")
+tab1 = Frame(notebook, bg="#FFFFFF", width=600, height=500)
+tab2 = Frame(notebook, bg="#0E3269", width=600, height=460)
 tab3 = Frame(notebook, bg="#0E3269")
 tab4 = Frame(notebook, bg="#0E3269")
 notebook.add(tab1, text="Account")
@@ -270,50 +302,118 @@ religion_combobox_canvas = canvas.create_window(392, 159, window=religion_combob
 age_label = Label(tab1,bd=0,text=age,bg="#EEE9E9",fg="#0E3269",font= ("JetBrains Mono", 10),highlightthickness=0,width=8,anchor="w")
 age_label_canvas = canvas.create_window(522, 159, window=age_label, state="normal")
 
-age_entry = Entry(
-    tab1,
-    bd=0,
-    bg="#EEE9E9",
-    fg="#9F26C7",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0,
-    width=8
-)
+age_entry = Entry(tab1,bd=0,bg="#EEE9E9",fg="#9F26C7",font= ("JetBrains Mono", 10),highlightthickness=0,width=8)
 age_entry_canvas = canvas.create_window(522, 159, window=age_entry, state="hidden")
 
-sex_label = Label(
-    tab1,
-    bd=0,
-    text=sex,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0,
-    width=8,
-    anchor="w"
-)
+sex_label = Label(tab1,bd=0,text=sex,bg="#EEE9E9",fg="#0E3269",font= ("JetBrains Mono", 10),highlightthickness=0,width=8,anchor="w")
 sex_label_canvas = canvas.create_window(202, 232, window=sex_label, state="normal")
 
 sex_combobox = ttk.Combobox(values=["Male", "Female"], style='Custom.TCombobox', font=("JetBrains Mono", 10),width=7, state="readonly")
 sex_combobox.set(sex)
 sex_combobox_canvas = canvas.create_window(202, 232, window=sex_combobox, state='hidden')
 
-civil_status_label = Label(
-    tab1,
-    bd=0,
-    text=civil_status,
-    bg="#EEE9E9",
-    fg="#0E3269",
-    font= ("JetBrains Mono", 10),
-    highlightthickness=0,
-    width=12,
-    anchor="w"
-)
+civil_status_label = Label(tab1,bd=0,text=civil_status,bg="#EEE9E9",fg="#0E3269",font= ("JetBrains Mono", 10),highlightthickness=0,width=12,anchor="w")
 civil_status_label_canvas = canvas.create_window(342, 232, window=civil_status_label, state="normal")
 
 civil_status_combobox = ttk.Combobox(values=["Single", "Married"], style='Custom.TCombobox', font=("JetBrains Mono", 10),width=11, state="readonly")
 civil_status_combobox.set(civil_status)
 civil_status_combobox_canvas = canvas.create_window(345, 232, window=civil_status_combobox, state='hidden')
+
+isDisability_label = Label(
+    tab1,
+    bd=0,
+    text=isDisability,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0,
+    width=6,
+    anchor="w"
+)
+isDisability_label_canvas = canvas.create_window(467, 232, window=isDisability_label, state="normal")
+
+isDisability_entry = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#9F26C7",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0,
+    width=6
+)
+isDisability_entry_canvas = canvas.create_window(467, 232, window=isDisability_entry, state="hidden")
+
+contact_number_label = Label(
+    tab1,
+    bd=0,
+    text=contact_number,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 12),
+    highlightthickness=0,
+    width=15,
+    anchor="w"
+)
+contact_number_label_canvas = canvas.create_window(247, 372, window=contact_number_label, state="normal")
+
+contact_number_entry = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#9F26C7",
+    font= ("JetBrains Mono", 12),
+    highlightthickness=0,
+    width=15
+)
+contact_number_entry_canvas = canvas.create_window(247, 373, window=contact_number_entry, state="hidden")
+
+email_label = Label(
+    tab1,
+    bd=0,
+    text=email,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0,
+    width=23,
+    anchor="w"
+)
+email_label_canvas = canvas.create_window(485, 372, window=email_label, state="normal")
+
+email_entry = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#9F26C7",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0,
+    width=23
+)
+email_entry_canvas = canvas.create_window(485, 372, window=email_entry, state="hidden")
+
+permanent_address_label = Label(
+    tab1,
+    bd=0,
+    text=permanent_address,
+    bg="#EEE9E9",
+    fg="#0E3269",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0,
+    width=23,
+    anchor="w"
+)
+permanent_address_label_canvas = canvas.create_window(262, 442, window=permanent_address_label, state="normal")
+
+permanent_address_entry = Entry(
+    tab1,
+    bd=0,
+    bg="#EEE9E9",
+    fg="#9F26C7",
+    font= ("JetBrains Mono", 10),
+    highlightthickness=0,
+    width=23
+)
+permanent_address_entry_canvas = canvas.create_window(262, 442, window=permanent_address_entry, state="hidden")
 
 toggle_button = Button(tab1, text="Edit All", command=toggle_edit)
 toggle_button.place(x=500, y=10)
