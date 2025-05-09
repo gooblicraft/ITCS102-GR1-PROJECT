@@ -116,3 +116,13 @@ Step 6:
 - QR Code that is connected in excel added
 - 
 //  Tested by Domanico, Pineda, Garcia, Tomo, Oabel, 6:09pm comment="buti nalang nafix hahaha yagat"
+
+
+# 05/09/2025
+
+- debugging window 2 for user entry restriction
+- after creating acc qr code showing before the user proceed to log in
+- more debugs
+
+// Tested by Kyla, Domanico, Tomo, Garcia 2:08pm 
+
