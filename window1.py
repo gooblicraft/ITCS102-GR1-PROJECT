@@ -126,7 +126,7 @@ class LoginWindow:
                 full_name = f"{first_name} {last_name}".strip()
                 print(f"Account ID: '{account_id}' Account Type:'{account_type}' Username: '{full_name}' Password '{password}'")
 
-                if input_username == full_name and input_password == password:
+                if (input_username == account_id or input_username == full_name) and input_password == password:
                     print(f"DEBUG: Matched Account ID = {account_id}")
                     self.account_id = account_id  # store matched account ID
                     messagebox.showinfo("Login", f"Welcome, {account_type.capitalize()} {first_name.capitalize()}!")
