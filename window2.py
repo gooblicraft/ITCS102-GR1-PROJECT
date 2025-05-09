@@ -75,7 +75,7 @@ def submit_data():
     religion = cb_religion.get()
     sex = cb_sex.get()
     civil_status = cb_civil_status.get()
-    age = int(age_entry.get())
+    age = age_entry.get()
     disability = disability_RB.get()
     permanent_address = address_entry.get()
     password = real_pass  
@@ -143,11 +143,13 @@ def submit_data():
         return
     
     # Age entry
-    age_string = age_entry.get().strip()
+    age_string = age_entry.get()
     if not age_string.isdigit():
-        messagebox.showerror("Invalid Age","Please enter your age to proceed.")
+        messagebox.showerror("Input Error", "Please enter a valid age.")
         return
+
     age = int(age_string)
+
     
     # Civil Status & Age
     if civil_status == "Married" and age <= 17:
