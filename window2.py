@@ -12,43 +12,19 @@ def in_facilitator():
     global account_set
     account_set = "Facilitator"
     createExcel()
-    get_pass()
     submit_data()
     return account_set
 
 def in_attendee():
     global account_set
     account_set = "Attendee"
-    createExcel()
-    get_pass()  
+    createExcel() 
     submit_data()
     return account_set
 
 def login():
     subprocess.Popen(['python', 'window1.py'])
     window.destroy()
-
-
-# Email Validator + Other Windows
-def email_form(email):
-    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-    return re.match(pattern, email)
-
-def validate_email_facilitator():
-    email = email_entry.get().strip()
-    if not email_form(email):
-        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
-        get_pass()
-    else:
-        in_facilitator()
-
-def validate_email_attendee():
-    email = email_entry.get().strip()
-    if not email_form(email):
-        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
-        get_pass()
-    else:
-        in_attendee()
 
 #<===================================================== OPENPYXL===================================================>
 
@@ -93,32 +69,125 @@ def submit_data():
     account_type = account_set  
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
-    email = email_entry.get()
+    email = email_entry.get().strip()
     contact_num = contact_entry.get()
     nationality = nationality_entry.get()
     religion = cb_religion.get()
     sex = cb_sex.get()
     civil_status = cb_civil_status.get()
-    age = int(age_entry.get())
+    age = age_entry.get()
     disability = disability_RB.get()
     permanent_address = address_entry.get()
     password = real_pass  
     
-    # User Restrictions
-    if civil_status == "Married" and age <= 17:
-        messagebox.showerror("Invalid Input", "You must be 18 and about to get married.")
+# ===================================================== User Restrictions ====================================================================
     
-    if not re.match(r"^[A-Za-z\s]+$", first_name):
-        messagebox.showerror("Invalid First Name", "First Name can only contain letters and spaces.")
+    # First Name
+    if not first_name:
+        messagebox.showerror("Invalid First Name", "Please enter your first name.")
+        return
+    
+    if len(first_name) < 2 or not re.match(r"^[A-Za-z\s]+$", first_name):
+        messagebox.showerror("Invalid Input", "First Name must be at least 2 letters and can only contain letters.")
+        return
+    
+    # Last Name
+    if not last_name:
+        messagebox.showerror("Invalid Last Name", "Please enter your last name.")
+        return
+    
+    if len(last_name) < 2 or not re.match(r"^[A-Za-z\s]+$", last_name):
+        messagebox.showerror("Invalid Input", "Last Name must be at least 2 letters and can only contain letters.")
+        return
+    
+    # Email
+    if not email:
+        messagebox.showerror("Invalid Email", "Please enter your email address.")
         return
 
-    if not re.match(r"^[A-Za-z\s]+$", last_name):
-        messagebox.showerror("Invalid Last Name", "Last Name can only contain letters and spaces.")
+    if not re.match(r"^[a-zA-Z0-9._%+-]+@gmail\.com$", email):
+        messagebox.showerror("Invalid Input", "Please enter a valid email address. (user@example.com).")
+        return
+
+    # Contact Number
+    if not contact_num:
+        messagebox.showerror("Invalid Contact Number", "Please enter your contact number.")
         return
     
-    if not re.match(r"^[A-Za-z\s]+$", nationality):
-        messagebox.showerror("Invalid Nationality", "Nationality can only contain letters and spaces.")
+    if len(contact_num) != 11:
+        messagebox.showerror("Invalid Input", "Contact number must be exactly 11 digits.")
         return
+    
+    # Nationality
+    if not nationality:
+        messagebox.showerror("Invalid Nationality", "Please input your nationality to proceed.")
+        return
+    
+    if len(nationality) < 4 or not re.match(r"^[A-Za-z\s]+$", nationality):
+        messagebox.showerror("Invalid Input", "Nationality must be at least 4 letters and can only contain letters.")
+        return
+    
+    # Religion
+    if religion == "Select":
+        messagebox.showerror("Invalid Religion", "Please input your religion to proceed.")
+        return
+    
+    # Sex
+    if sex == "Select":
+        messagebox.showerror("Invalid Sex", "Please input your sex to proceed.")
+        return
+    
+    # Civil Status
+    if civil_status == "Select":
+        messagebox.showerror("Invalid Civil Status", "Please input your civil status to proceed.")
+        return
+    
+    # Age entry
+    age_string = age_entry.get()
+    if not age_string.isdigit():
+        messagebox.showerror("Input Error", "Please enter a valid age.")
+        return
+
+    age = int(age_string)
+
+    
+    # Civil Status & Age
+    if civil_status == "Married" and age <= 17:
+        messagebox.showerror("Invalid Input", "You must be 18 and about to get married.")
+        return
+    
+    # Disability
+    if disability == "null":
+        messagebox.showerror("Invalid Input", "Please validate if you're a disabled person or not.")
+        return
+    
+    # Permanent Address
+    if not permanent_address:
+        messagebox.showerror("Invalid Permanent Address", "Please enter your permanent address.")
+        return
+    
+    if len(permanent_address) < 10:
+        messagebox.showerror("Invalid Address", "Please input a valid permanent address.")
+        return
+
+    # Password
+    pass1 = confirm_pass.get()
+    pass2 = set_pass.get()
+
+    if not pass1 or not pass2:
+        messagebox.showerror("Invalid Password", "Both password fields are required.")
+        return
+
+    if pass1 != pass2:
+        messagebox.showerror("Password Mismatch", "Passwords do not match.")
+        return
+    
+    if len(pass1) < 8 or len(pass2) < 8:
+        messagebox.showerror("Invalid Password", "Password must be at least 8 characters long.")
+        return
+
+    password = pass1
+
     
     required_fields = [
         account_id, account_type, first_name, last_name, email,
@@ -154,46 +223,32 @@ def submit_data():
         if qr_path:
             window.withdraw()
             topWindow = Toplevel()
-            topWindow.geometry("300x300")
+            topWindow.geometry("350x350")
             topWindow.resizable(False,False)
             topWindow.title("QR Code")
 
             img = Image.open(qr_path)
-            img = img.resize((250, 250))
+            img = img.resize((230, 230))
             photo = ImageTk.PhotoImage(img)
 
-            successful_label =Label(topWindow, text="Signed Up Successfully, Account and QR Code generated.")
+            successful_label =Label(topWindow, text="Signed Up Successfully!\n Account and QR Code generated.", font=("JetBrainsMono Bold", 12))
             successful_label.pack(pady=10)
+            
             qr_label = Label(topWindow, image=photo)
             qr_label.image = photo  
             qr_label.pack(pady=10)
+            
+            proceed_button = Button(topWindow, text="Proceed", command=login)
+            proceed_button.pack()
+            
+            return False
 
-            # messagebox.showinfo("Signed Up Successfully", "Account and QR Code generated.")
         else:
             messagebox.showwarning("Cancelled", "QR Code was not saved.")
-
-        messagebox.showinfo("Signed Up Successfully","Account and QR Code generated.")
-
-        
-        login()
-        return False
     else:
         messagebox.showerror("Error", "Please fill in all fields before submitting.")
 
 real_pass = None
-# real password (TRIGGER WINDOW SWITCH)
-def get_pass():
-    global real_pass
-    pass1 = confirm_pass.get()
-    pass2 = set_pass.get()
-
-    if pass1 == pass2:
-        real_pass = pass1
-        print(real_pass)
-        return real_pass
-    else:
-        messagebox.showerror("Error", "Your password doesn't match")
-        return False
 
 window = Tk()
 window.title("Window 2 Create Account")
@@ -371,7 +426,7 @@ canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
 disability_RB = StringVar()
-disability_RB.set("N/A")
+disability_RB.set("null")
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
@@ -527,7 +582,7 @@ button_facilitator = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command= validate_email_facilitator,
+    command= in_facilitator,
     relief="flat"
 )
 canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
@@ -540,7 +595,7 @@ button_attendee = Button(
     borderwidth=0,
     border=0,
     highlightthickness=0,
-    command= validate_email_attendee,
+    command= in_attendee,
     relief="flat"
 )
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
