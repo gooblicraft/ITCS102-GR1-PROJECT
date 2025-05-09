@@ -87,7 +87,7 @@ def load_account_data(account_id):
 
 # Nakuha nayung account id, itutugma nalang sa account database then ishoshow dito yung code sa tab1
 account_id = os.environ.get("ACCOUNT_ID")
-    
+
 if not account_id:
     print("ERROR: ACCOUNT_ID environment variable not set.")
 else:
@@ -114,28 +114,6 @@ def create_label_entry_pair(tab, label_text, label_x, label_y, entry_x, entry_y,
     # Save both label + entry and their positions
     label_entry_pairs.append((label, entry, entry_place_args, label_place_args))
 
-
-# editing = False
-
-# def toggle_all():
-#     global editing
-#     if not editing:
-#         for label, entry, entry_place_args, _ in label_entry_pairs:
-#             entry.delete(0, END)
-#             entry.insert(0, label['text'])
-#             label.place_forget()
-#             entry.place(**entry_place_args)
-#         toggle_button.config(text="Save All")
-#         editing = True
-#     else:
-#         for label, entry, _, label_place_args in label_entry_pairs:
-#             label.config(text=entry.get())
-#             entry.place_forget()
-#             label.place(**label_place_args)
-#         toggle_button.config(text="Edit All")
-#         editing = False
-
-# Toggle logic
 editing = False
 
 def toggle_all():
@@ -176,33 +154,35 @@ style.map("TNotebook.Tab", background=[("selected", "#0E3269")], foreground=[("s
 notebook = ttk.Notebook(window, style='TNotebook')
 tab1 = Frame(notebook, bg="#FFFFFF", width=600, height=460)
 tab2 = Frame(notebook, bg="#0E3269")
-tab3 = Frame(notebook, bg="#FFFFFF")
-notebook.add(tab1, text="Account tab")
-notebook.add(tab2, text="Scan tab")
-notebook.add(tab3, text="QR tab")
+tab3 = Frame(notebook, bg="#0E3269")
+tab4 = Frame(notebook, bg="#0E3269")
+notebook.add(tab1, text="Account")
+notebook.add(tab2, text="QR Scan")
+notebook.add(tab3, text="QR Code")
+notebook.add(tab4, text="Attendance")
 notebook.place(x=32, y=120)
 
 canvas = Canvas(tab1, bg="#FFFFFF", height=460, width=600, bd=0, highlightthickness=0, relief="ridge")
 canvas.place(x=0, y=0)
 
 # ============ SECTION FOR IMAGES ============
-image_image_1 = PhotoImage(file="beta 0.4/assets/frame0/image_1.png")
+image_image_1 = PhotoImage(file="assets/window3/account_tab/image_1.png")
 image_1 = Label(window, image=image_image_1, bg="white")
 image_1.place(x=-2, y=2)
 
-image_image_2 = PhotoImage(file="beta 0.4/assets/frame0/image_2.png")
+image_image_2 = PhotoImage(file="assets/window3/account_tab/image_2.png")
 image_2 = canvas.create_image(300, 230, image=image_image_2)
 
 # ============ SECTION FOR IMAGE BUTTONS ============
-button_image_1 = PhotoImage(file="beta 0.4/assets/frame0/button_1.png")
+button_image_1 = PhotoImage(file="assets/window3/account_tab/button_1.png")
 button_1 = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("button_1 clicked"), relief="flat")
 button_1.place(x=346.0, y=14.0, width=82.0, height=30.0)
 
-button_image_2 = PhotoImage(file="beta 0.4/assets/frame0/button_2.png")
+button_image_2 = PhotoImage(file="assets/window3/account_tab/button_2.png")
 button_2 = Button(window, image=button_image_2, borderwidth=0, highlightthickness=0, command=lambda: print("button_2 clicked"), relief="flat")
 button_2.place(x=430.0, y=14.0, width=82.0, height=30.0)
 
-button_image_3 = PhotoImage(file="beta 0.4/assets/frame0/button_3.png")
+button_image_3 = PhotoImage(file="assets/window3/account_tab/button_3.png")
 button_3 = Button(window, image=button_image_3, borderwidth=0, highlightthickness=0, command=lambda: print("button_3 clicked"), relief="flat")
 button_3.place(x=514.0, y=14.0, width=82.0, height=30.0)
 
