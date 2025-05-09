@@ -12,19 +12,43 @@ def in_facilitator():
     global account_set
     account_set = "Facilitator"
     createExcel()
+    get_pass()
     submit_data()
     return account_set
 
 def in_attendee():
     global account_set
     account_set = "Attendee"
-    createExcel() 
+    createExcel()
+    get_pass()  
     submit_data()
     return account_set
 
 def login():
     subprocess.Popen(['python', 'window1.py'])
     window.destroy()
+
+
+# Email Validator + Other Windows
+def email_form(email):
+    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    return re.match(pattern, email)
+
+def validate_email_facilitator():
+    email = email_entry.get().strip()
+    if not email_form(email):
+        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
+        get_pass()
+    else:
+        in_facilitator()
+
+def validate_email_attendee():
+    email = email_entry.get().strip()
+    if not email_form(email):
+        messagebox.showerror("Invalid Email", "Please enter a valid email address. (user@example.com).")
+        get_pass()
+    else:
+        in_attendee()
 
 #<===================================================== OPENPYXL===================================================>
 
@@ -69,7 +93,7 @@ def submit_data():
     account_type = account_set  
     first_name = Fname_entry.get()
     last_name = Lname_entry.get()
-    email = email_entry.get().strip()
+    email = email_entry.get()
     contact_num = contact_entry.get()
     nationality = nationality_entry.get()
     religion = cb_religion.get()
@@ -83,111 +107,56 @@ def submit_data():
 # ===================================================== User Restrictions ====================================================================
     
     # First Name
-    if not first_name:
-        messagebox.showerror("Invalid First Name", "Please enter your first name.")
+    if len(first_name) < 2 or not re.match(r"^[A-Za-z\s]+$", first_name):
+        messagebox.showerror("Invalid First Name", "First Name must be at least 2 letters.")
         return
     
-    if len(first_name) < 2 or not re.match(r"^[A-Za-z\s]+$", first_name):
-        messagebox.showerror("Invalid Input", "First Name must be at least 2 letters and can only contain letters.")
+    if not re.match(r"^[A-Za-z\s]+$", first_name):
+        messagebox.showerror("Invalid First Name", "First Name can only contain letters.")
         return
     
     # Last Name
-    if not last_name:
-        messagebox.showerror("Invalid Last Name", "Please enter your last name.")
-        return
-    
     if len(last_name) < 2 or not re.match(r"^[A-Za-z\s]+$", last_name):
-        messagebox.showerror("Invalid Input", "Last Name must be at least 2 letters and can only contain letters.")
+        messagebox.showerror("Invalid Last Name", "Last Name must be at least 2 letters.")
         return
     
-    # Email
-    if not email:
-        messagebox.showerror("Invalid Email", "Please enter your email address.")
+    if not re.match(r"^[A-Za-z\s]+$", last_name):
+        messagebox.showerror("Invalid Last Name", "Last Name can only contain letters.")
         return
-
-    if not re.match(r"^[a-zA-Z0-9._%+-]+@gmail\.com$", email):
-        messagebox.showerror("Invalid Input", "Please enter a valid email address. (user@example.com).")
-        return
-
+    
     # Contact Number
     if not contact_num:
-        messagebox.showerror("Invalid Contact Number", "Please enter your contact number.")
+        messagebox.showerror("Invalid Contact Number", "Please enter a contact number.")
         return
     
     if len(contact_num) != 11:
-        messagebox.showerror("Invalid Input", "Contact number must be exactly 11 digits.")
-        return
-    
-    # Nationality
-    if not nationality:
-        messagebox.showerror("Invalid Nationality", "Please input your nationality to proceed.")
-        return
-    
-    if len(nationality) < 4 or not re.match(r"^[A-Za-z\s]+$", nationality):
-        messagebox.showerror("Invalid Input", "Nationality must be at least 4 letters and can only contain letters.")
-        return
-    
-    # Religion
-    if religion == "Select":
-        messagebox.showerror("Invalid Religion", "Please input your religion to proceed.")
-        return
-    
-    # Sex
-    if sex == "Select":
-        messagebox.showerror("Invalid Sex", "Please input your sex to proceed.")
-        return
-    
-    # Civil Status
-    if civil_status == "Select":
-        messagebox.showerror("Invalid Civil Status", "Please input your civil status to proceed.")
+        messagebox.showerror("Invalid Contact Number", "Contact number must be exactly 11 digits.")
         return
     
     # Age entry
-    age_string = age_entry.get()
+    age_string = age_entry.get().strip()
     if not age_string.isdigit():
-        messagebox.showerror("Input Error", "Please enter a valid age.")
+        messagebox.showerror("Invalid Age","Please provide your age to proceed.")
         return
-
     age = int(age_string)
-
     
-    # Civil Status & Age
+    # Civil Status
     if civil_status == "Married" and age <= 17:
-        messagebox.showerror("Invalid Input", "You must be 18 and about to get married.")
+        messagebox.showerror("Invalid Civil Status", "You must be 18 and about to get married.")
+
+    # Nationality
+    if not re.match(r"^[A-Za-z\s]+$", nationality):
+        messagebox.showerror("Invalid Nationality", "Nationality can only contain letters.")
         return
     
-    # Disability
-    if disability == "null":
-        messagebox.showerror("Invalid Input", "Please validate if you're a disabled person or not.")
+    if len(nationality) < 4 or not re.match(r"^[A-Za-z\s]+$", nationality):
+        messagebox.showerror("Invalid Nationality", "Nationality must be at least 4 letters.")
         return
     
     # Permanent Address
-    if not permanent_address:
-        messagebox.showerror("Invalid Permanent Address", "Please enter your permanent address.")
-        return
-    
     if len(permanent_address) < 10:
         messagebox.showerror("Invalid Address", "Please input a valid permanent address.")
         return
-
-    # Password
-    pass1 = confirm_pass.get()
-    pass2 = set_pass.get()
-
-    if not pass1 or not pass2:
-        messagebox.showerror("Invalid Password", "Both password fields are required.")
-        return
-
-    if pass1 != pass2:
-        messagebox.showerror("Password Mismatch", "Passwords do not match.")
-        return
-    
-    if len(pass1) < 8 or len(pass2) < 8:
-        messagebox.showerror("Invalid Password", "Password must be at least 8 characters long.")
-        return
-
-    password = pass1
-
     
     required_fields = [
         account_id, account_type, first_name, last_name, email,
@@ -223,32 +192,46 @@ def submit_data():
         if qr_path:
             window.withdraw()
             topWindow = Toplevel()
-            topWindow.geometry("350x350")
+            topWindow.geometry("300x300")
             topWindow.resizable(False,False)
             topWindow.title("QR Code")
 
             img = Image.open(qr_path)
-            img = img.resize((230, 230))
+            img = img.resize((250, 250))
             photo = ImageTk.PhotoImage(img)
 
-            successful_label =Label(topWindow, text="Signed Up Successfully!\n Account and QR Code generated.", font=("JetBrainsMono Bold", 12))
+            successful_label =Label(topWindow, text="Signed Up Successfully, Account and QR Code generated.")
             successful_label.pack(pady=10)
-            
             qr_label = Label(topWindow, image=photo)
             qr_label.image = photo  
             qr_label.pack(pady=10)
-            
-            proceed_button = Button(topWindow, text="Proceed", command=login)
-            proceed_button.pack()
-            
-            return False
 
+            # messagebox.showinfo("Signed Up Successfully", "Account and QR Code generated.")
         else:
             messagebox.showwarning("Cancelled", "QR Code was not saved.")
+
+        messagebox.showinfo("Signed Up Successfully","Account and QR Code generated.")
+
+        
+        login()
+        return False
     else:
         messagebox.showerror("Error", "Please fill in all fields before submitting.")
 
 real_pass = None
+# real password (TRIGGER WINDOW SWITCH)
+def get_pass():
+    global real_pass
+    pass1 = confirm_pass.get()
+    pass2 = set_pass.get()
+
+    if pass1 == pass2:
+        real_pass = pass1
+        print(real_pass)
+        return real_pass
+    else:
+        messagebox.showerror("Error", "Your password doesn't match")
+        return False
 
 window = Tk()
 window.title("Window 2 Create Account")
@@ -307,21 +290,21 @@ image_1 = canvas.create_image(
     image=image_image_1
 )
 
-image_image_2 = PhotoImage(file="assets\\Window2(new)\\First_name.png")
+image_image_2 = PhotoImage(file="assets\\window2\\image_2.png")
 image_2 = canvas.create_image(
     276.0,
     180.0,
     image=image_image_2
 )
 
-image_image_4 = PhotoImage(file="assets\\Window2(new)\\EMAIL (2).png")
+image_image_4 = PhotoImage(file="assets\\window2\\image_4.png")
 image_4 = canvas.create_image(
     261.0,
     237.0,
     image=image_image_4
 )
 
-image_image_5 = PhotoImage(file="assets\\Window2(new)\\Last_name.png")
+image_image_5 = PhotoImage(file="assets\\window2\\image_5.png")
 image_5 = canvas.create_image(
     485.0,
     180.0,
@@ -349,14 +332,14 @@ image_9 = canvas.create_image(
     image=image_image_9
 )
 # Image Entry FIRST NAME
-image_image_10 = PhotoImage(file="assets\\Window2(new)\\lastName.png")
+image_image_10 = PhotoImage(file="assets\\window2\\image_10.png")
 image_10 = canvas.create_image(
     333.0,
     203.0,
     image=image_image_10
 )
 
-image_image_11 = PhotoImage(file="assets\\Window2(new)\\lastName.png")
+image_image_11 = PhotoImage(file="assets\\window2\\image_11.png")
 image_11 = canvas.create_image(
     548.0,
     203.0,
@@ -371,7 +354,7 @@ image_3 = canvas.create_image(
     450.0,
     image=image_image_3
 )
-image_image_12 = PhotoImage(file="assets\\Window2(new)\\SetPass.png")
+image_image_12 = PhotoImage(file="assets\\window2\\image_12.png")
 
 # image entry SET PASSWORD
 image_12 = canvas.create_image(
@@ -383,7 +366,7 @@ image_12 = canvas.create_image(
 # ============ Confirm password ===========
 
 # image confirm password
-image_image_6 = PhotoImage(file="assets\\Window2\\image_6.png")
+image_image_6 = PhotoImage(file="assets\\window2\\image_6.png")
 image_6 = canvas.create_image(
     500.0,
     450.0,
@@ -391,7 +374,7 @@ image_6 = canvas.create_image(
 )
 
 # Border confirm password
-image_image_14 = PhotoImage(file="assets\\Window2(new)\\ConfirmPass.png")
+image_image_14 = PhotoImage(file="assets\\window2\\image_14.png")
 image_14 = canvas.create_image(
     540.0,
     470.0,
@@ -400,7 +383,7 @@ image_14 = canvas.create_image(
 
 # ======== Whole Mid code =====
 # Image MID
-image_image_17 = PhotoImage(file="assets\\Window2(new)\\Middle.png")
+image_image_17 = PhotoImage(file="assets\\window2\\image_17.png")
 image_17 = canvas.create_image(
     434.0,
     360.0,
@@ -426,7 +409,7 @@ canvas.create_window(470, 370, window=cb_civil_status)
 
 # Disability Radio Button
 disability_RB = StringVar()
-disability_RB.set("null")
+disability_RB.set("N/A")
 rb_yes_disable = Radiobutton(
     window, 
     text="yes", 
@@ -582,7 +565,7 @@ button_facilitator = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command= in_facilitator,
+    command= validate_email_facilitator,
     relief="flat"
 )
 canvas.create_window(330, 520, window=button_facilitator, width=177, height=45)
@@ -595,7 +578,7 @@ button_attendee = Button(
     borderwidth=0,
     border=0,
     highlightthickness=0,
-    command= in_attendee,
+    command= validate_email_attendee,
     relief="flat"
 )
 canvas.create_window(540, 520, window=button_attendee, width=177, height=45)
@@ -611,14 +594,14 @@ button_logIn = Button(
 )
 canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
 
-image_image_13 =PhotoImage(file="assets\\Window2(new)\\Email.png")
+image_image_13 =PhotoImage(file="assets\\window2\\image_13.png")
 image_13 = canvas.create_image(
     352.0,
     260.0,
     image=image_image_13
 )
 
-image_image_15 = PhotoImage(file="assets\\Window2(new)\\ContactNo.png")
+image_image_15 = PhotoImage(file="assets\\window2\\image_15.png")
 image_15 = canvas.create_image(
     570.0,
     263.0,
