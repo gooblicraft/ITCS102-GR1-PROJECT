@@ -146,6 +146,7 @@ Step 6:
 
 - Also added Account Id in Username for the user logIn
 - fixing entry and label format in window3 tab1
+- More functionality in window3 tab1
 
-// Tested by Domanico, Garcia 3:24am comment= ""
+// Tested by Domanico, Garcia 3:24am comment= "Kakayanin"
 
