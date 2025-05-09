@@ -99,63 +99,25 @@ def submit_data():
     religion = cb_religion.get()
     sex = cb_sex.get()
     civil_status = cb_civil_status.get()
-    age = age_entry.get()
+    age = int(age_entry.get())
     disability = disability_RB.get()
     permanent_address = address_entry.get()
     password = real_pass  
     
-# ===================================================== User Restrictions ====================================================================
-    
-    # First Name
-    if len(first_name) < 2 or not re.match(r"^[A-Za-z\s]+$", first_name):
-        messagebox.showerror("Invalid First Name", "First Name must be at least 2 letters.")
-        return
+    # User Restrictions
+    if civil_status == "Married" and age <= 17:
+        messagebox.showerror("Invalid Input", "You must be 18 and about to get married.")
     
     if not re.match(r"^[A-Za-z\s]+$", first_name):
-        messagebox.showerror("Invalid First Name", "First Name can only contain letters.")
+        messagebox.showerror("Invalid First Name", "First Name can only contain letters and spaces.")
         return
-    
-    # Last Name
-    if len(last_name) < 2 or not re.match(r"^[A-Za-z\s]+$", last_name):
-        messagebox.showerror("Invalid Last Name", "Last Name must be at least 2 letters.")
-        return
-    
-    if not re.match(r"^[A-Za-z\s]+$", last_name):
-        messagebox.showerror("Invalid Last Name", "Last Name can only contain letters.")
-        return
-    
-    # Contact Number
-    if not contact_num:
-        messagebox.showerror("Invalid Contact Number", "Please enter a contact number.")
-        return
-    
-    if len(contact_num) != 11:
-        messagebox.showerror("Invalid Contact Number", "Contact number must be exactly 11 digits.")
-        return
-    
-    # Age entry
-    age_string = age_entry.get().strip()
-    if not age_string.isdigit():
-        messagebox.showerror("Invalid Age","Please provide your age to proceed.")
-        return
-    age = int(age_string)
-    
-    # Civil Status
-    if civil_status == "Married" and age <= 17:
-        messagebox.showerror("Invalid Civil Status", "You must be 18 and about to get married.")
 
-    # Nationality
+    if not re.match(r"^[A-Za-z\s]+$", last_name):
+        messagebox.showerror("Invalid Last Name", "Last Name can only contain letters and spaces.")
+        return
+    
     if not re.match(r"^[A-Za-z\s]+$", nationality):
-        messagebox.showerror("Invalid Nationality", "Nationality can only contain letters.")
-        return
-    
-    if len(nationality) < 4 or not re.match(r"^[A-Za-z\s]+$", nationality):
-        messagebox.showerror("Invalid Nationality", "Nationality must be at least 4 letters.")
-        return
-    
-    # Permanent Address
-    if len(permanent_address) < 10:
-        messagebox.showerror("Invalid Address", "Please input a valid permanent address.")
+        messagebox.showerror("Invalid Nationality", "Nationality can only contain letters and spaces.")
         return
     
     required_fields = [
@@ -290,21 +252,21 @@ image_1 = canvas.create_image(
     image=image_image_1
 )
 
-image_image_2 = PhotoImage(file="assets\\window2\\image_2.png")
+image_image_2 = PhotoImage(file="assets\\Window2(new)\\First_name.png")
 image_2 = canvas.create_image(
     276.0,
     180.0,
     image=image_image_2
 )
 
-image_image_4 = PhotoImage(file="assets\\window2\\image_4.png")
+image_image_4 = PhotoImage(file="assets\\Window2(new)\\EMAIL (2).png")
 image_4 = canvas.create_image(
     261.0,
     237.0,
     image=image_image_4
 )
 
-image_image_5 = PhotoImage(file="assets\\window2\\image_5.png")
+image_image_5 = PhotoImage(file="assets\\Window2(new)\\Last_name.png")
 image_5 = canvas.create_image(
     485.0,
     180.0,
@@ -332,14 +294,14 @@ image_9 = canvas.create_image(
     image=image_image_9
 )
 # Image Entry FIRST NAME
-image_image_10 = PhotoImage(file="assets\\window2\\image_10.png")
+image_image_10 = PhotoImage(file="assets\\Window2(new)\\lastName.png")
 image_10 = canvas.create_image(
     333.0,
     203.0,
     image=image_image_10
 )
 
-image_image_11 = PhotoImage(file="assets\\window2\\image_11.png")
+image_image_11 = PhotoImage(file="assets\\Window2(new)\\lastName.png")
 image_11 = canvas.create_image(
     548.0,
     203.0,
@@ -354,7 +316,7 @@ image_3 = canvas.create_image(
     450.0,
     image=image_image_3
 )
-image_image_12 = PhotoImage(file="assets\\window2\\image_12.png")
+image_image_12 = PhotoImage(file="assets\\Window2(new)\\SetPass.png")
 
 # image entry SET PASSWORD
 image_12 = canvas.create_image(
@@ -366,7 +328,7 @@ image_12 = canvas.create_image(
 # ============ Confirm password ===========
 
 # image confirm password
-image_image_6 = PhotoImage(file="assets\\window2\\image_6.png")
+image_image_6 = PhotoImage(file="assets\\Window2\\image_6.png")
 image_6 = canvas.create_image(
     500.0,
     450.0,
@@ -374,7 +336,7 @@ image_6 = canvas.create_image(
 )
 
 # Border confirm password
-image_image_14 = PhotoImage(file="assets\\window2\\image_14.png")
+image_image_14 = PhotoImage(file="assets\\Window2(new)\\ConfirmPass.png")
 image_14 = canvas.create_image(
     540.0,
     470.0,
@@ -383,7 +345,7 @@ image_14 = canvas.create_image(
 
 # ======== Whole Mid code =====
 # Image MID
-image_image_17 = PhotoImage(file="assets\\window2\\image_17.png")
+image_image_17 = PhotoImage(file="assets\\Window2(new)\\Middle.png")
 image_17 = canvas.create_image(
     434.0,
     360.0,
@@ -594,14 +556,14 @@ button_logIn = Button(
 )
 canvas.create_window(595, 32, window=button_logIn, width=103, height=31)
 
-image_image_13 =PhotoImage(file="assets\\window2\\image_13.png")
+image_image_13 =PhotoImage(file="assets\\Window2(new)\\Email.png")
 image_13 = canvas.create_image(
     352.0,
     260.0,
     image=image_image_13
 )
 
-image_image_15 = PhotoImage(file="assets\\window2\\image_15.png")
+image_image_15 = PhotoImage(file="assets\\Window2(new)\\ContactNo.png")
 image_15 = canvas.create_image(
     570.0,
     263.0,
