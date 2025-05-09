@@ -4,7 +4,7 @@ from tkinter import ttk
 from openpyxl import *
 from openpyxl import styles
 from openpyxl import utils 
-import qrcode, os, re, subprocess, random
+import qrcode , os, re, subprocess, random
 from PIL import Image, ImageTk
 
 account_set = None
@@ -20,7 +20,7 @@ def in_attendee():
     global account_set
     account_set = "Attendee"
     createExcel()
-    get_pass()
+    get_pass()  
     submit_data()
     return account_set
 
@@ -99,11 +99,27 @@ def submit_data():
     religion = cb_religion.get()
     sex = cb_sex.get()
     civil_status = cb_civil_status.get()
-    age = age_entry.get()
+    age = int(age_entry.get())
     disability = disability_RB.get()
     permanent_address = address_entry.get()
     password = real_pass  
+    
+    # User Restrictions
+    if civil_status == "Married" and age <= 17:
+        messagebox.showerror("Invalid Input", "You must be 18 and about to get married.")
+    
+    if not re.match(r"^[A-Za-z\s]+$", first_name):
+        messagebox.showerror("Invalid First Name", "First Name can only contain letters and spaces.")
+        return
 
+    if not re.match(r"^[A-Za-z\s]+$", last_name):
+        messagebox.showerror("Invalid Last Name", "Last Name can only contain letters and spaces.")
+        return
+    
+    if not re.match(r"^[A-Za-z\s]+$", nationality):
+        messagebox.showerror("Invalid Nationality", "Nationality can only contain letters and spaces.")
+        return
+    
     required_fields = [
         account_id, account_type, first_name, last_name, email,
         contact_num, nationality, religion, sex, civil_status,
