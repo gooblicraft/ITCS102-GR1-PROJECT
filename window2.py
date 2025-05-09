@@ -224,6 +224,7 @@ def submit_data():
             window.withdraw()
             topWindow = Toplevel()
             topWindow.geometry("350x350")
+            topWindow.iconbitmap("assets\\logo.ico")
             topWindow.resizable(False,False)
             topWindow.title("QR Code")
 

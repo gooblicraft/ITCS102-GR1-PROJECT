@@ -186,6 +186,7 @@ class LoginWindow:
 
         reset_window = Toplevel(self.window)
         reset_window.title("Forgot Password")
+        reset_window.iconbitmap("assets\\logo.ico")
         reset_window.geometry("300x180")
         reset_window.resizable(False, False)
 
