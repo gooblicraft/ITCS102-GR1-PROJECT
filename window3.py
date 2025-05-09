@@ -162,6 +162,9 @@ notebook.add(tab3, text="QR Code")
 notebook.add(tab4, text="Attendance")
 notebook.place(x=32, y=120)
 
+# ==================== SECTION FOR TAB 1 (ACCOUNT SUMMARY TAB) =====================================
+# DITO ED :>
+
 canvas = Canvas(tab1, bg="#FFFFFF", height=460, width=600, bd=0, highlightthickness=0, relief="ridge")
 canvas.place(x=0, y=0)
 
@@ -203,6 +206,17 @@ create_label_entry_pair(tab1, permanent_address, 172, 417, 172, 435, 186, 13)
 
 toggle_button = Button(tab1, text="Edit All", command=toggle_all)
 toggle_button.place(x=500, y=10)
+
+# ==================== SECTION FOR TAB 2 (SCAN TAB) =====================================
+# DITO KYLAA :>
+
+
+# ==================== SECTION FOR TAB 3 (QR SHOW TAB) =====================================
+# DITO KYLAA :>
+
+
+# ==================== SECTION FOR TAB 4 (ATTENDANCE TAB) =====================================
+# DITO KYLAA :>
 
 window.resizable(False, False)
 window.mainloop()
