@@ -556,6 +556,12 @@ image_16 = canvas.create_image(
     216.0,
     image=image_image_16
 )
+image_image_18 = PhotoImage(file="assets\\window2\\image_18.png")
+image_18 = canvas.create_image(
+    108.0,
+    316.0,
+    image=image_image_16
+)
 
 # ============== BUTTONS ===============
 

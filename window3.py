@@ -296,13 +296,17 @@ style.map("TNotebook.Tab", background=[("selected", "#0E3269")], foreground=[("s
 # ============ SECTION FOR TABS ============
 notebook = ttk.Notebook(window, style='TNotebook')
 tab1 = Frame(notebook, bg="#FFFFFF", width=600, height=500)
-tab2 = Frame(notebook, bg="#0E3269", width=600, height=460)
-tab3 = Frame(notebook, bg="#0E3269")
-tab4 = Frame(notebook, bg="#0E3269")
+tab3 = Frame(notebook, bg="#0E3269")  # QR Code tab
 notebook.add(tab1, text="Account")
-notebook.add(tab2, text="QR Scan")
 notebook.add(tab3, text="QR Code")
-notebook.add(tab4, text="Attendance")
+
+# Add tabs conditionally
+if accountType and accountType.lower() == "facilitator":
+    tab2 = Frame(notebook, bg="#0E3269", width=600, height=460)
+    tab4 = Frame(notebook, bg="#0E3269", width=600, height=460)
+    notebook.add(tab2, text="QR Scan")
+    notebook.add(tab4, text="Attendance")
+
 notebook.place(x=32, y=120)
 
 # ==================== SECTION FOR TAB 1 (ACCOUNT SUMMARY TAB) =====================================

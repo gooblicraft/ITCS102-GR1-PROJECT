@@ -289,14 +289,7 @@ canvas.place(x = 0, y = 0)
 # canvas.config(yscrollcommand=y_scroll.set)
 # y_scroll.place(x=651, y=0, height=410)
 
-canvas.create_text(
-    76.0,
-    22.0,
-    anchor="nw",
-    text="// Our Logo here",
-    fill="#000716",
-    font=("JetBrainsMono Bold", 12 * -1)
-)
+
 
 # ======== IMAGES =========
 
@@ -337,7 +330,7 @@ image_7 = canvas.create_image(
 
 image_image_8 = PhotoImage(file="assets\\window2\\image_8.png")
 image_8 = canvas.create_image(
-    39.0,
+    99.0,
     33.0,
     image=image_image_8
 )
@@ -397,7 +390,12 @@ image_14 = canvas.create_image(
     470.0,
     image=image_image_14
 )
-
+image_image_18 = PhotoImage(file="assets\\window2\\image_18.png")
+image_18 = canvas.create_image(
+    128.0,
+    456.0,
+    image=image_image_18
+)
 # ======== Whole Mid code =====
 # Image MID
 image_image_17 = PhotoImage(file="assets\\Window2(new)\\Middle.png")
