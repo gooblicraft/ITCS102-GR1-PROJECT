@@ -102,7 +102,7 @@ def create_label_entry_pair(tab, label_text, label_x, label_y, entry_x, entry_y,
                             bg="#EEE9E9", fg="#0E3269", font=("JetBrains Mono", 10)):
 
     label = Label(tab, text=label_text, bg="#EEE9E9", fg=fg, font=font)
-    label.place(x=label_x, y=label_y)
+    label.place(x=label_x, y=label_y, width=width, height=height)
     
     entry = Entry(tab, bg=bg, fg=fg, font=font, bd=0, highlightthickness=0)
     entry.place(x=entry_x, y=entry_y, width=width, height=height)
@@ -209,10 +209,10 @@ button_3.place(x=514.0, y=14.0, width=82.0, height=30.0)
 # Create label-entry fields with original styling and positions
 
 # Each item: (What Tab?, entry_x, label x, label_y, entry_x, entry_y, width, height)
-create_label_entry_pair(tab1, firstName, 169, 70, 169, 88, 190, 13)
-create_label_entry_pair(tab1, lastName, 385, 70, 385, 88, 191, 13)
-create_label_entry_pair(tab1, nationality, 170, 137, 170, 155, 129, 13)
-create_label_entry_pair(tab1, religion, 340, 137, 340, 155, 108, 13)
+create_label_entry_pair(tab1, firstName, 169, 85, 169, 88, 190, 13)
+create_label_entry_pair(tab1, lastName, 385, 85, 385, 88, 191, 13)
+create_label_entry_pair(tab1, nationality, 170, 148, 170, 153, 129, 13)
+create_label_entry_pair(tab1, religion, 340, 147, 340, 155, 108, 13)
 create_label_entry_pair(tab1, age, 485, 137, 485, 155, 78, 13)
 create_label_entry_pair(tab1, sex, 169, 205, 169, 223, 78, 13)
 create_label_entry_pair(tab1, civil_status, 300, 205, 300, 223, 91, 13)

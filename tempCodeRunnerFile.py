@@ -1,0 +1,1 @@
+print(accountID, accountType)
