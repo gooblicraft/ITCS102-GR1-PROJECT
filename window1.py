@@ -12,7 +12,7 @@ class LoginWindow:
         self.window.configure(bg="#FFFFFF")
         self.window.title("Window 1")
         self.password_visible = False
-        self.account_id = None  # Store matched account ID here
+        self.account_id = None
 
         self.setup_ui()
         self.center_window(665, 410)
@@ -35,7 +35,6 @@ class LoginWindow:
         canvas = Canvas(self.window, bg="#FFFFFF", height=410, width=665, bd=0, highlightthickness=0, relief="ridge")
         canvas.place(x=0, y=0)
 
-        # ========== IMAGES ==========
         self.image_1 = PhotoImage(file="assets\\window1\\image_1.png")
         canvas.create_image(519.0, 126.0, image=self.image_1)
 
@@ -45,15 +44,11 @@ class LoginWindow:
         self.image_3 = PhotoImage(file="assets\\window1(new)\\image (2).png")
         canvas.create_image(170.0, 205.0, image=self.image_3)
 
-        # ========== TEXT ==========
-        canvas.create_text(450.0, 286.0, anchor="nw", text="          Forgot Password?",
-                           fill="#757575", font=("JetBrains Mono", 10 * -1))
         canvas.create_text(466.0, 76.0, anchor="nw", text="Sign in your account",
                            fill="#757575", font=("JetBrains Mono", 10 * -1))
         canvas.create_text(419.0, 38.0, anchor="nw", text="ScanTracker",
                             fill="#060606", font=("JetBrains Mono", 24, "bold"))
 
-        # ========== ENTRY FIELDS ==========
         self.username_entry = Entry(bd=0, bg="#AEAEAE", fg="#767676",
                                     highlightthickness=0, font=("JetBrains Mono", 10, "bold"))
         self.username_entry.insert(0, "Username")
@@ -68,7 +63,6 @@ class LoginWindow:
         self.password_entry.bind("<FocusIn>", lambda e: self.on_entry_click(self.password_entry, "Password", True))
         self.password_entry.bind("<FocusOut>", lambda e: self.on_focusout(self.password_entry, "Password", True))
 
-        # ========== BUTTONS ==========
         self.button_image_1 = PhotoImage(file="assets\\window1(new)\\Login.png")
         Button(image=self.button_image_1, borderwidth=0, highlightthickness=0,
             command=self.validate_login, relief="flat", cursor="hand2").place(
@@ -83,6 +77,12 @@ class LoginWindow:
         Button(image=self.button_image_2, borderwidth=0, highlightthickness=0,
             command=self.open_window2, relief="flat", cursor="hand2").place(
             x=402.0, y=325.0, width=234.0, height=57.0)
+
+        # ✅ Forgot Password clickable label
+        forgot_label = Label(self.window, text="Forgot Password?", fg="#9F26C7", cursor="hand2",
+                            bg="#FFFFFF", font=("JetBrains Mono", 8, "underline"))
+        forgot_label.place(x=495, y=284)
+        forgot_label.bind("<Button-1>", lambda e: self.forgot_password())
 
     def toggle_password_button(self):
         if self.password_entry.get() != "Password":
@@ -124,11 +124,9 @@ class LoginWindow:
                 password = str(row[-1]).strip() if row[-1] else ""
 
                 full_name = f"{first_name} {last_name}".strip()
-                print(f"Account ID: '{account_id}' Account Type:'{account_type}' Username: '{full_name}' Password '{password}'")
 
                 if (input_username == account_id or input_username == full_name) and input_password == password:
-                    print(f"DEBUG: Matched Account ID = {account_id}")
-                    self.account_id = account_id  # store matched account ID
+                    self.account_id = account_id
                     messagebox.showinfo("Login", f"Welcome, {account_type.capitalize()} {first_name.capitalize()}!")
                     self.logged_in()
                     self.window.destroy()
@@ -144,11 +142,61 @@ class LoginWindow:
         self.window.destroy()
 
     def logged_in(self):
-        # Pass the account ID to window3.py as an environment variable
         pack = os.environ.copy()
         if self.account_id:
             pack['ACCOUNT_ID'] = self.account_id
         subprocess.Popen(['python', 'window3.py'], env=pack)
+
+    # ✅ FORGOT PASSWORD FEATURE
+    def forgot_password(self):
+        def submit_new_password():
+            target_username = username_entry.get().strip().lower()
+            new_pass = new_password_entry.get().strip()
+
+            if not target_username or not new_pass:
+                messagebox.showwarning("Input Error", "Please provide both username and new password.")
+                return
+
+            try:
+                wb = load_workbook("AccountDatabase.xlsx")
+                ws = wb.active
+
+                updated = False
+                for row in ws.iter_rows(min_row=2):
+                    account_id = str(row[0].value).strip().lower() if row[0].value else ""
+                    first_name = str(row[2].value).strip().lower() if row[2].value else ""
+                    last_name = str(row[3].value).strip().lower() if row[3].value else ""
+                    full_name = f"{first_name} {last_name}".strip()
+
+                    if target_username == account_id or target_username == full_name:
+                        row[-1].value = new_pass
+                        updated = True
+                        break
+
+                if updated:
+                    wb.save("AccountDatabase.xlsx")
+                    messagebox.showinfo("Success", "Password reset successfully.")
+                    reset_window.destroy()
+                else:
+                    messagebox.showerror("Error", "Username not found.")
+
+            except FileNotFoundError:
+                messagebox.showerror("Error", "AccountDatabase.xlsx not found.")
+
+        reset_window = Toplevel(self.window)
+        reset_window.title("Forgot Password")
+        reset_window.geometry("300x180")
+        reset_window.resizable(False, False)
+
+        Label(reset_window, text="Account ID or Full Name:").pack(pady=5)
+        username_entry = Entry(reset_window)
+        username_entry.pack(pady=5)
+
+        Label(reset_window, text="New Password:").pack(pady=5)
+        new_password_entry = Entry(reset_window, show="*")
+        new_password_entry.pack(pady=5)
+
+        Button(reset_window, text="Submit", command=submit_new_password).pack(pady=10)
 
 if __name__ == "__main__":
     LoginWindow()
