@@ -10,6 +10,9 @@ def logOut():
 
 def open_github():
     webbrowser.open("https://github.com/gooblicraft/ITCS102-GR1-PROJECT")
+    
+def open_readme():
+    webbrowser.open("https://github.com/gooblicraft/ITCS102-GR1-PROJECT?tab=readme-ov-file#itcs102-gr1-project")
 
 def save_account_data(account_id):
     try:
@@ -42,11 +45,21 @@ def save_account_data(account_id):
                         cell.value = updated_data[header]
                 wb.save("AccountDatabase.xlsx")
                 print("Account data updated successfully.")
+                
+                # ✅ Update full name label
+                firstName_label.configure(text=updated_data["First Name"])
+                lastName_label.configure(text=updated_data["Last Name"])
+                update_full_name_label()
+                
                 return
         print("Account ID not found.")
 
     except FileNotFoundError:
         print("ERROR: AccountDatabase.xlsx not found.")
+
+def update_full_name_label():
+    full_name = f"{firstName_label.cget('text')} {lastName_label.cget('text')}"
+    fullName_label.configure(text=full_name)
 
 
 def toggle_show():
@@ -308,7 +321,7 @@ image_2 = canvas.create_image(300, 230, image=image_image_2)
 
 # ============ SECTION FOR IMAGE BUTTONS ============
 button_image_1 = PhotoImage(file="assets/window3/account_tab/button_1.png")
-button_about = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=lambda: print("Github readme will be linked here"), relief="flat")
+button_about = Button(window, image=button_image_1, borderwidth=0, highlightthickness=0, command=open_readme, relief="flat")
 button_about.place(x=346.0, y=14.0, width=82.0, height=30.0)
 
 button_image_2 = PhotoImage(file="assets/window3/account_tab/button_2.png")
@@ -318,6 +331,14 @@ button_github.place(x=430.0, y=14.0, width=82.0, height=30.0)
 button_image_3 = PhotoImage(file="assets/window3/account_tab/button_3.png")
 button_logOut = Button(window, image=button_image_3, borderwidth=0, highlightthickness=0, command=logOut, relief="flat")
 button_logOut.place(x=514.0, y=14.0, width=82.0, height=30.0)
+
+toggle_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_edit.png")
+toggle_button = Button(tab1, image=toggle_button_image, borderwidth=0, border=0, highlightthickness=0, relief="flat", command=toggle_edit)
+toggle_button.place(x=380, y=420)
+
+save_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_save.png")
+save_button = Button(tab1, image=save_button_image, borderwidth=0, border=0, highlightthickness=0, relief="flat", command=lambda: save_account_data(account_id))
+save_button.place(x=490, y=420)
 
 # ============ SECTION FOR NEEDED WIDGET ============
 firstName_label = Label(tab1,bd=0,text=firstName,bg="#EEE9E9",fg="#0E3269",font= ("JetBrains Mono", 10),highlightthickness=0,width=23,anchor="w")
@@ -498,14 +519,6 @@ fullName_label = Label(
     width=16
 )
 canvas.create_window(66, 137, window=fullName_label, state="normal")
-
-toggle_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_edit.png")
-toggle_button = Button(tab1, image=toggle_button_image, borderwidth=0, border=0, highlightthickness=0, relief="flat", command=toggle_edit)
-toggle_button.place(x=380, y=420)
-
-save_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_save.png")
-save_button = Button(tab1, image=save_button_image, borderwidth=0, border=0, highlightthickness=0, relief="flat", command=lambda: save_account_data(account_id))
-save_button.place(x=490, y=420)
 
 # ==================== SECTION FOR TAB 2 (SCAN TAB) =====================================
 # DITO KYLAA :>
