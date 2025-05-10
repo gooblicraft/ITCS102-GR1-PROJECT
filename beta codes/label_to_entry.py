@@ -1,30 +1,26 @@
-import tkinter as tk
+def delete_account_data(account_id):
+    confirm = messagebox.askyesno("Confirm Deletion", "Are you sure you want to delete this account?")
+    if not confirm:
+        return
 
-def switch_to_entry():
-    label.pack_forget()
-    entry.delete(0, tk.END)
-    entry.insert(0, label['text'])
-    entry.pack()
-    button.config(text="Save", command=switch_to_label)
+    try:
+        wb = load_workbook("AccountDatabase.xlsx")
+        ws = wb.active
 
-def switch_to_label():
-    entry.pack_forget()
-    label.config(text=entry.get())
-    label.pack()
-    button.config(text="Edit", command=switch_to_entry)
+        for row_idx, row in enumerate(ws.iter_rows(min_row=2), start=2):
+            if str(row[0].value).strip() == account_id:
+                ws.delete_rows(row_idx)
+                wb.save("AccountDatabase.xlsx")
+                messagebox.showinfo("Deleted", "Account has been deleted.")
+                logOut()  # Return to login or main screen
+                return
+        messagebox.showerror("Error", "Account ID not found.")
 
-root = tk.Tk()
-root.title("Label to Entry Toggle")
+    except FileNotFoundError:
+        messagebox.showerror("Error", "AccountDatabase.xlsx not found.")
 
-# Initial label
-label = tk.Label(root, text="Click Edit to modify me")
-label.pack()
 
-# Entry widget, hidden initially
-entry = tk.Entry(root)
-
-# Button to toggle between Edit and Save
-button = tk.Button(root, text="Edit", command=switch_to_entry)
-button.pack()
-
-root.mainloop()
+delete_button_image = PhotoImage(file="assets\\window3\\account_tab\\image_btn_delete.png")
+delete_button = Button(tab1, image=delete_button_image, borderwidth=0, highlightthickness=0,
+                       relief="flat", command=lambda: delete_account_data(account_id))
+delete_button.place(x=32, y=420)
