@@ -688,6 +688,18 @@ def update_frame():
 
 start_scanning()
 
+pic = Frame(tab3, width=300, height=300)
+pic.place(relx=0.5, rely=0.5, anchor="center")
+
+qr_image = Image.open("assets/window3/account_tab/qr_image.png")
+qr_image_resized = qr_image.resize((300, 300))  # Resize to 100x100 pixels
+
+qr_image_tk = ImageTk.PhotoImage(qr_image_resized)
+
+qr_img = Label(pic, image=qr_image_tk)
+qr_img.pack()
+
+qr_img.image = qr_image_tk
 
 
 #==================== SECTION FOR TAB 3 (QR SHOW TAB) =====================================
