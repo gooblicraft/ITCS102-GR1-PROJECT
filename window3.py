@@ -702,40 +702,6 @@ qr_img.pack()
 qr_img.image = qr_image_tk
 
 
-#==================== SECTION FOR TAB 3 (QR SHOW TAB) =====================================
-
-
-# def show_user_data(account_id):
-#     path = "AccountDatabase.xlsx"
-#     workbook = load_workbook(path)
-#     sheet = workbook.active
-    
-#     for row in sheet.iter_rows(min_row=2, values_only=True):
-#         if row[0] == account_id:  
-#             first_name, last_name, email, contact_num, nationality, religion, sex, civil_status, age, disability, address, password = row[2:14]
-#             break
-
-#     user_data = f"ID: {account_id}\nName: {first_name} {last_name}\nEmail: {email}\nContact: {contact_num}\nNationality: {nationality}\nReligion: {religion}\nSex: {sex}\nCivil Status: {civil_status}\nAge: {age}\nDisability: {disability}\nAddress: {address}"
-
-#     qr_path = generate_qr_code(user_data, last_name)
-
-
-#     # Display user data
-#     user_info_label = Label(tab3, text=user_data, justify="left", font=("Arial", 10))
-#     user_info_label.pack(pady=20)
-
-#     if qr_path:
-#         img = Image.open(qr_path)
-#         img = img.resize((150, 150))  # Resize image to fit the window
-#         photo = ImageTk.PhotoImage(img)
-
-#         qr_label = Label(tab3, image=photo)
-#         qr_label.image = photo 
-#         qr_label.pack(pady=20)
-
-
-# ==================== SECTION FOR TAB 4 (ATTENDANCE TAB) =====================================
-# DITO KYLAA :>
 
 window.resizable(False, False)
 window.mainloop()
